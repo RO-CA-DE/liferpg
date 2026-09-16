@@ -2,3449 +2,3559 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIFE RPG : ROLEPLAY</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LIFE RPG : MY LIFE</title>
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+*{box-sizing:border-box}
+:root{
+ --bg:#f4f5f7;
+ --card:#fff;
+ --line:#e6e8ec;
+ --text:#20242b;
+ --sub:#7c838d;
+ --accent:#5b67e8;
+ --accent2:#eef0ff;
+ --green:#28a66f;
+ --red:#e45f70;
+ --yellow:#e8a832;
+ --shadow:0 12px 40px rgba(20,25,40,.08);
 }
-
 body{
-    font-family:Arial,"Noto Sans KR",sans-serif;
-    background:#08090d;
-    color:#f5f5f7;
-    min-height:100vh;
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR",sans-serif;
 }
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
-button,input,textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* ================= START ================= */
-
+/* START */
 #startScreen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-        radial-gradient(circle at 20% 20%,#303657 0,transparent 30%),
-        radial-gradient(circle at 80% 70%,#3b244d 0,transparent 28%),
-        #08090d;
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:30px;
+ background:
+ radial-gradient(circle at 15% 15%,#e7eaff 0,transparent 30%),
+ radial-gradient(circle at 85% 80%,#ffe7ed 0,transparent 28%),
+ #f7f8fb;
 }
-
 .startBox{
-    width:850px;
-    padding:55px;
-    border:1px solid #343746;
-    border-radius:30px;
-    background:rgba(18,20,29,.94);
-    box-shadow:0 30px 100px rgba(0,0,0,.55);
+ width:min(760px,100%);
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:30px;
+ box-shadow:var(--shadow);
+ padding:42px;
 }
-
 .logo{
-    font-size:46px;
-    font-weight:900;
-    letter-spacing:-3px;
+ font-size:13px;
+ letter-spacing:4px;
+ font-weight:800;
+ color:var(--accent);
 }
-
-.logo span{
-    color:#9b8cff;
+.startBox h1{
+ margin:12px 0 5px;
+ font-size:42px;
+ letter-spacing:-2px;
 }
-
-.subtitle{
-    margin-top:10px;
-    color:#a7a9b7;
-    font-size:16px;
+.startBox .intro{
+ color:var(--sub);
+ line-height:1.7;
+ margin-bottom:30px;
 }
-
-.startGrid{
-    margin-top:45px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
+.formGrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:18px;
 }
-
-.field{
-    background:#11131b;
-    border:1px solid #292c39;
-    border-radius:16px;
-    padding:18px;
-}
-
 .field label{
-    display:block;
-    color:#898d9e;
-    font-size:13px;
-    margin-bottom:10px;
+ display:block;
+ font-size:12px;
+ font-weight:800;
+ margin-bottom:8px;
 }
-
-.field input{
-    width:100%;
-    border:0;
-    outline:0;
-    background:transparent;
-    color:white;
-    font-size:18px;
+.field input,.field select{
+ width:100%;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:13px;
+ outline:none;
+ background:#fafbfc;
 }
-
-.choiceRow{
-    display:flex;
-    gap:10px;
+.field input:focus,.field select:focus{
+ border-color:var(--accent);
+ background:#fff;
 }
-
-.birthChoice{
-    flex:1;
-    padding:13px;
-    background:#171923;
-    color:#aaa;
-    border:1px solid #2e3140;
-    border-radius:12px;
+.avatarSetup{
+ grid-column:1/-1;
+ display:flex;
+ align-items:center;
+ gap:18px;
+ padding:18px;
+ background:#fafbfc;
+ border:1px solid var(--line);
+ border-radius:18px;
 }
-
-.birthChoice.selected{
-    background:#7063d8;
-    color:white;
-    border-color:#9489ff;
+.avatarBig{
+ width:76px;
+ height:76px;
+ border-radius:24px;
+ object-fit:cover;
+ background:#eef0f5;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:36px;
+ overflow:hidden;
+ flex:none;
 }
-
+.avatarBig img{width:100%;height:100%;object-fit:cover}
+.uploadBtn{
+ display:inline-block;
+ padding:10px 14px;
+ border-radius:11px;
+ background:#20242b;
+ color:#fff;
+ font-size:12px;
+ font-weight:700;
+ cursor:pointer;
+}
 .startBtn{
-    width:100%;
-    margin-top:25px;
-    padding:18px;
-    border:0;
-    border-radius:16px;
-    background:#fff;
-    color:#08090d;
-    font-size:18px;
-    font-weight:800;
+ width:100%;
+ margin-top:25px;
+ border:0;
+ border-radius:16px;
+ padding:16px;
+ background:var(--accent);
+ color:white;
+ font-weight:800;
+ font-size:16px;
 }
 
-.startBtn:hover{
-    background:#dcd8ff;
+/* APP */
+#app{
+ min-height:100vh;
+ display:grid;
+ grid-template-columns:270px minmax(500px,1fr) 300px;
 }
-
-/* ================= GAME ================= */
-
-#game{
-    width:1500px;
-    max-width:96vw;
-    height:94vh;
-    margin:3vh auto;
-    display:grid;
-    grid-template-columns:280px minmax(600px,1fr) 290px;
-    gap:14px;
+.sidebar{
+ background:#fff;
+ border-right:1px solid var(--line);
+ padding:20px;
+ overflow:auto;
 }
-
-.panel{
-    background:#11131a;
-    border:1px solid #292c37;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-/* LEFT */
-
-.leftPanel{
-    display:flex;
-    flex-direction:column;
-}
-
 .profile{
-    padding:24px;
-    border-bottom:1px solid #292c37;
+ padding-bottom:18px;
+ border-bottom:1px solid var(--line);
 }
-
+.profileTop{
+ display:flex;
+ gap:12px;
+ align-items:center;
+}
 .avatar{
-    width:90px;
-    height:90px;
-    border-radius:25px;
-    background:linear-gradient(135deg,#7166d9,#b19cff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
-    margin-bottom:16px;
+ width:46px;
+ height:46px;
+ border-radius:15px;
+ overflow:hidden;
+ background:#edf0f5;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:22px;
+ flex:none;
 }
-
-.profileName{
-    font-size:23px;
-    font-weight:800;
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profileName{font-weight:850}
+.profileAge{font-size:12px;color:var(--sub);margin-top:3px}
+.sectionTitle{
+ font-size:11px;
+ color:#9aa0a9;
+ font-weight:900;
+ letter-spacing:1px;
+ margin:22px 0 10px;
 }
-
-.profileSub{
-    color:#8d91a2;
-    margin-top:5px;
+.stat{
+ margin:10px 0;
 }
-
-.nav{
-    padding:12px;
+.statHead{
+ display:flex;
+ justify-content:space-between;
+ font-size:11px;
+ font-weight:700;
+ margin-bottom:5px;
 }
-
-.nav button{
-    width:100%;
-    padding:13px;
-    margin-bottom:7px;
-    border:0;
-    border-radius:11px;
-    background:transparent;
-    color:#999dac;
-    text-align:left;
+.bar{
+ height:6px;
+ border-radius:10px;
+ background:#edf0f3;
+ overflow:hidden;
 }
-
-.nav button:hover,
-.nav button.active{
-    background:#202330;
-    color:white;
+.bar i{
+ display:block;
+ height:100%;
+ border-radius:10px;
+ background:var(--accent);
+ transition:.4s;
 }
-
-.npcTitle{
-    padding:15px 20px;
-    color:#777b8b;
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:1px;
+.sideBtn{
+ width:100%;
+ text-align:left;
+ border:1px solid var(--line);
+ background:#fff;
+ padding:11px;
+ border-radius:12px;
+ margin-bottom:7px;
+ font-size:12px;
+ font-weight:700;
 }
+.sideBtn:hover{background:#f7f8fb}
 
-.npcList{
-    overflow:auto;
-    padding:0 12px 15px;
+/* CHAT */
+.chatArea{
+ display:flex;
+ flex-direction:column;
+ min-width:0;
+ height:100vh;
 }
-
-.npc{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:11px;
-    border-radius:12px;
-    margin-bottom:5px;
+.chatHeader{
+ height:76px;
+ background:#fff;
+ border-bottom:1px solid var(--line);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 25px;
+ flex:none;
 }
-
-.npc:hover{
-    background:#1b1e28;
+.headerTitle{
+ font-weight:900;
+ letter-spacing:-.5px;
 }
-
-.npcAvatar{
-    width:42px;
-    height:42px;
-    border-radius:13px;
-    background:#272a38;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
+.headerSub{
+ color:var(--sub);
+ font-size:11px;
+ margin-top:3px;
 }
-
-.npcInfo{
-    min-width:0;
+.headerRight{
+ display:flex;
+ align-items:center;
+ gap:8px;
 }
-
-.npcName{
-    font-weight:bold;
-    font-size:14px;
+.pill{
+ padding:7px 10px;
+ border-radius:20px;
+ background:#f3f4f7;
+ font-size:11px;
+ font-weight:800;
 }
-
-.npcRelation{
-    color:#737789;
-    font-size:11px;
-    margin-top:3px;
+.chatScroll{
+ flex:1;
+ overflow-y:auto;
+ padding:30px max(25px,calc((100% - 850px)/2));
+ scroll-behavior:smooth;
 }
-
-/* CENTER */
-
-.center{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
+.dayDivider{
+ text-align:center;
+ margin:5px 0 25px;
+ color:#9ba0a9;
+ font-size:10px;
+ font-weight:800;
 }
-
-.sceneTop{
-    padding:18px 23px;
-    border-bottom:1px solid #292c37;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.location{
-    font-weight:bold;
-}
-
-.time{
-    color:#858999;
-    font-size:13px;
-}
-
-.story{
-    flex:1;
-    overflow:auto;
-    padding:35px 42px 20px;
-    background:
-        radial-gradient(circle at 50% 0%,rgba(120,108,220,.09),transparent 40%);
-}
-
-.chapter{
-    color:#8983d8;
-    font-size:12px;
-    letter-spacing:1px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
 .sceneTitle{
-    font-size:31px;
-    font-weight:900;
-    letter-spacing:-1.5px;
-    margin-bottom:25px;
+ margin-bottom:20px;
 }
-
-.narration{
-    color:#b9bbc5;
-    line-height:1.9;
-    font-size:15px;
-    margin:16px 0;
+.sceneTitle strong{
+ display:block;
+ font-size:19px;
+ letter-spacing:-.7px;
 }
-
-.dialogue{
-    display:flex;
-    gap:14px;
-    margin:22px 0;
+.sceneTitle span{
+ display:block;
+ font-size:11px;
+ color:var(--sub);
+ margin-top:5px;
 }
-
-.dialogue.me{
-    flex-direction:row-reverse;
+.msg{
+ display:flex;
+ gap:9px;
+ margin:15px 0;
+ animation:msgIn .28s ease;
 }
-
-.dialogueAvatar{
-    width:48px;
-    height:48px;
-    min-width:48px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#282b39;
-    font-size:22px;
+.msg.me{
+ flex-direction:row-reverse;
 }
-
-.dialogueBody{
-    max-width:72%;
+@keyframes msgIn{
+ from{opacity:0;transform:translateY(7px)}
+ to{opacity:1;transform:translateY(0)}
 }
-
-.speaker{
-    color:#9d99e9;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:6px;
+.msgBody{max-width:min(70%,570px)}
+.msgName{
+ font-size:10px;
+ color:#9298a2;
+ margin:0 4px 5px;
+ font-weight:800;
 }
-
+.msg.me .msgName{text-align:right}
 .bubble{
-    background:#1d202b;
-    border:1px solid #2d303d;
-    padding:14px 17px;
-    border-radius:4px 16px 16px 16px;
-    line-height:1.65;
+ padding:12px 15px;
+ border-radius:17px;
+ background:#fff;
+ border:1px solid var(--line);
+ box-shadow:0 3px 12px rgba(0,0,0,.025);
+ line-height:1.6;
+ font-size:13px;
+ white-space:pre-wrap;
+ word-break:keep-all;
 }
-
-.me .bubble{
-    background:#6259ba;
-    border-color:#7066d5;
-    border-radius:16px 4px 16px 16px;
+.msg.me .bubble{
+ background:var(--accent);
+ color:#fff;
+ border-color:var(--accent);
 }
-
 .systemMsg{
-    margin:22px auto;
-    max-width:80%;
-    text-align:center;
-    color:#878b9d;
-    font-size:12px;
-    padding:10px;
-    border-top:1px solid #272a35;
-    border-bottom:1px solid #272a35;
+ margin:15px auto;
+ max-width:600px;
+ padding:10px 14px;
+ border-radius:12px;
+ background:#f0f1f4;
+ color:#777e88;
+ text-align:center;
+ font-size:11px;
+ line-height:1.5;
+}
+.typing{
+ display:flex;
+ gap:4px;
+ align-items:center;
+ width:max-content;
+}
+.typing i{
+ width:5px;height:5px;border-radius:50%;
+ background:#9ba0a8;
+ animation:dot 1s infinite;
+}
+.typing i:nth-child(2){animation-delay:.15s}
+.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{
+ 0%,100%{transform:translateY(0);opacity:.4}
+ 50%{transform:translateY(-4px);opacity:1}
 }
 
-.inputArea{
-    padding:16px;
-    border-top:1px solid #292c37;
-    background:#0f1117;
+/* CONTROLS */
+.control{
+ border-top:1px solid var(--line);
+ background:#fff;
+ padding:14px 20px 18px;
+ flex:none;
 }
-
-.quickChoices{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:10px;
+.choices{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ max-width:1000px;
+ margin:auto;
 }
-
-.choiceBtn{
-    padding:10px 13px;
-    border:1px solid #343746;
-    background:#191c25;
-    color:#c5c7d0;
-    border-radius:10px;
+.choice{
+ flex:1 1 230px;
+ min-height:48px;
+ border:1px solid #dfe2e8;
+ border-radius:14px;
+ background:#fff;
+ text-align:left;
+ padding:11px 14px;
+ font-size:12px;
+ font-weight:700;
+ color:#30343b;
+ transition:.15s;
 }
-
-.choiceBtn:hover{
-    background:#292d3c;
-    color:white;
+.choice:hover{
+ border-color:var(--accent);
+ background:var(--accent2);
+ transform:translateY(-1px);
 }
-
-.inputRow{
-    display:flex;
-    gap:9px;
+.choice b{
+ display:inline-flex;
+ width:22px;height:22px;
+ border-radius:8px;
+ background:#f0f1f5;
+ align-items:center;
+ justify-content:center;
+ margin-right:7px;
+ color:#737986;
 }
-
-#playerInput{
-    flex:1;
-    min-height:48px;
-    resize:none;
-    border:1px solid #323543;
-    outline:none;
-    background:#181a22;
-    color:white;
-    border-radius:13px;
-    padding:13px 15px;
+.freeRow{
+ display:flex;
+ gap:8px;
+ margin:10px auto 0;
+ max-width:1000px;
 }
-
-#sendBtn{
-    width:105px;
-    border:0;
-    border-radius:13px;
-    background:white;
-    color:#111;
-    font-weight:800;
+.freeRow input{
+ flex:1;
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:12px;
+ outline:none;
 }
-
-#sendBtn:hover{
-    background:#d9d5ff;
+.freeRow button{
+ border:0;
+ background:#20242b;
+ color:#fff;
+ padding:0 17px;
+ border-radius:13px;
+ font-weight:800;
 }
 
 /* RIGHT */
-
-.rightPanel{
-    overflow:auto;
+.rightbar{
+ background:#fff;
+ border-left:1px solid var(--line);
+ padding:20px;
+ overflow:auto;
 }
-
-.statusHead{
-    padding:22px;
-    border-bottom:1px solid #292c37;
-    font-weight:bold;
+.card{
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:15px;
+ margin-bottom:12px;
+ background:#fff;
 }
-
-.statBox{
-    padding:20px;
+.card h3{
+ font-size:12px;
+ margin:0 0 12px;
 }
-
-.stat{
-    margin-bottom:18px;
+.npc{
+ display:flex;
+ gap:10px;
+ align-items:center;
+ padding:9px 0;
+ border-bottom:1px solid #f0f1f3;
 }
-
-.statTop{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    margin-bottom:7px;
-    color:#a8aab6;
-}
-
-.bar{
-    height:6px;
-    background:#242733;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.fill{
-    height:100%;
-    background:#8175ed;
-    border-radius:20px;
-}
-
+.npc:last-child{border-bottom:0}
+.npc .avatar{width:38px;height:38px;border-radius:12px;font-size:17px}
+.npcName{font-size:11px;font-weight:800}
+.npcRel{font-size:10px;color:var(--sub);margin-top:3px}
 .memory{
-    margin:15px;
-    padding:14px;
-    background:#191c25;
-    border-radius:13px;
-    color:#a8abb8;
-    font-size:12px;
-    line-height:1.7;
+ font-size:10px;
+ line-height:1.5;
+ padding:8px 0;
+ border-bottom:1px solid #f0f1f3;
+ color:#5e646e;
+}
+.memory:last-child{border:0}
+.badge{
+ display:inline-block;
+ padding:4px 7px;
+ background:#f0f1ff;
+ color:#555fd4;
+ border-radius:7px;
+ font-size:9px;
+ font-weight:900;
 }
 
-.logTitle{
-    padding:15px 20px 8px;
-    color:#777b8b;
-    font-size:11px;
-    letter-spacing:1px;
-}
-
-.log{
-    padding:0 15px 20px;
-}
-
-.logItem{
-    font-size:11px;
-    color:#858997;
-    padding:8px 4px;
-    border-bottom:1px solid #20232d;
-}
-
-/* OVERLAY */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:20;
-}
-
+/* MODALS */
 .modal{
-    width:650px;
-    max-width:90vw;
-    max-height:85vh;
-    overflow:auto;
-    background:#151720;
-    border:1px solid #373a48;
-    border-radius:24px;
-    padding:28px;
+ position:fixed;
+ inset:0;
+ background:rgba(15,18,25,.45);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ z-index:50;
+ padding:20px;
+}
+.modalBox{
+ width:min(620px,100%);
+ max-height:85vh;
+ overflow:auto;
+ background:#fff;
+ border-radius:24px;
+ padding:25px;
+ box-shadow:0 25px 80px rgba(0,0,0,.2);
+}
+.modalHead{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:18px;
+}
+.modalHead h2{font-size:19px;margin:0}
+.close{
+ border:0;
+ background:#f1f2f5;
+ width:32px;height:32px;
+ border-radius:10px;
+}
+.logItem{
+ padding:12px 0;
+ border-bottom:1px solid var(--line);
+ font-size:12px;
+ line-height:1.5;
+}
+.logItem small{display:block;color:#9aa0a8;margin-bottom:3px}
+.achievement{
+ display:flex;
+ gap:10px;
+ padding:11px;
+ border:1px solid var(--line);
+ border-radius:13px;
+ margin-bottom:8px;
+}
+.achievement .icon{font-size:20px}
+.achievement strong{font-size:11px}
+.achievement p{font-size:10px;color:var(--sub);margin:3px 0 0}
+
+/* TOAST */
+#toast{
+ position:fixed;
+ bottom:115px;
+ left:50%;
+ transform:translateX(-50%) translateY(20px);
+ background:#20242b;
+ color:#fff;
+ border-radius:13px;
+ padding:11px 16px;
+ font-size:11px;
+ opacity:0;
+ pointer-events:none;
+ transition:.25s;
+ z-index:100;
+}
+#toast.show{
+ opacity:1;
+ transform:translateX(-50%) translateY(0);
 }
 
-.modal h2{
-    margin-bottom:18px;
+/* END */
+.endScreen{
+ position:fixed;
+ inset:0;
+ background:#111319;
+ color:#fff;
+ z-index:200;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:25px;
 }
-
-.modal p{
-    color:#aeb0bc;
-    line-height:1.8;
+.endBox{
+ width:min(720px,100%);
+ text-align:center;
 }
-
-.modal button{
-    margin-top:20px;
-    width:100%;
-    padding:13px;
-    border:0;
-    border-radius:12px;
-    background:white;
+.endBox .eyebrow{
+ color:#9ba3ff;
+ font-size:11px;
+ letter-spacing:3px;
+ font-weight:900;
 }
-
-/* ending */
-
-.endingBox{
-    text-align:center;
-    width:750px;
-    padding:55px;
-    background:#14161f;
-    border:1px solid #373a48;
-    border-radius:25px;
+.endBox h1{
+ font-size:42px;
+ margin:15px 0;
+ letter-spacing:-2px;
 }
-
-.endingTitle{
-    font-size:40px;
-    font-weight:900;
-    margin:20px 0;
+.endBox p{
+ color:#b8bdc8;
+ line-height:1.8;
+ font-size:14px;
 }
-
-.endingText{
-    color:#b5b7c2;
-    line-height:1.9;
+.endBtns{
+ display:flex;
+ gap:8px;
+ justify-content:center;
+ margin-top:25px;
+}
+.endBtns button{
+ padding:13px 18px;
+ border:0;
+ border-radius:13px;
+ font-weight:800;
 }
 
 @media(max-width:1100px){
-    #game{
-        grid-template-columns:220px 1fr;
-        height:auto;
-    }
-
-    .rightPanel{
-        display:none;
-    }
+ #app{grid-template-columns:230px minmax(450px,1fr)}
+ .rightbar{display:none}
+}
+@media(max-width:760px){
+ #app{display:block}
+ .sidebar{display:none}
+ .chatArea{height:100vh}
+ .chatHeader{padding:0 15px}
+ .chatScroll{padding:20px 13px}
+ .msgBody{max-width:82%}
+ .control{padding:10px}
+ .choice{flex-basis:100%}
+ .formGrid{grid-template-columns:1fr}
+ .startBox{padding:25px}
+ .startBox h1{font-size:32px}
 }
 
-@media(max-width:750px){
-    #game{
-        width:100%;
-        max-width:none;
-        margin:0;
-        display:block;
-    }
-
-    .leftPanel{
-        display:none;
-    }
-
-    .center{
-        height:100vh;
-    }
-
-    .story{
-        padding:25px 20px;
-    }
+/* special event */
+.eventCard{
+ border:1px solid #e2e4ea;
+ background:#fafbfc;
+ border-radius:17px;
+ padding:15px;
+ margin:15px 0;
 }
+.eventCard .eventIcon{font-size:25px}
+.eventCard strong{display:block;font-size:12px;margin:7px 0 3px}
+.eventCard span{font-size:10px;color:var(--sub)}
 </style>
 </head>
 
 <body>
 
-<!-- START -->
-<div id="startScreen">
-    <div class="startBox">
+<!-- ================= START ================= -->
+<section id="startScreen">
+ <div class="startBox">
+  <div class="logo">LIFE RPG / THE WHOLE LIFE</div>
+  <h1>내 인생을 직접 살아보자.</h1>
+  <p class="intro">
+   1살부터 시작해서 80살까지.<br>
+   숫자만 올리는 인생 시뮬레이터가 아니라,<br>
+   <b>사람을 만나고, 말하고, 선택하고, 기억되는 인생</b>을 살아가는 RPG.
+  </p>
 
-        <div class="logo">LIFE <span>RPG</span></div>
-        <div class="subtitle">
-            ROLEPLAY — 네가 직접 살아가는 이야기
-        </div>
+  <div class="formGrid">
 
-        <div class="startGrid">
-
-            <div class="field">
-                <label>이름</label>
-                <input id="nameInput" placeholder="주인공 이름을 입력해줘">
-            </div>
-
-            <div class="field">
-                <label>성격</label>
-                <div class="choiceRow">
-                    <button class="birthChoice selected" data-personality="free">자유로운</button>
-                    <button class="birthChoice" data-personality="calm">차분한</button>
-                    <button class="birthChoice" data-personality="bold">대담한</button>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>가정환경</label>
-                <div class="choiceRow">
-                    <button class="birthChoice selected" data-family="normal">평범한 가족</button>
-                    <button class="birthChoice" data-family="rich">넉넉한 가족</button>
-                    <button class="birthChoice" data-family="poor">검소한 가족</button>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>특성</label>
-                <div class="choiceRow">
-                    <button class="birthChoice selected" data-trait="lucky">운이 좋음</button>
-                    <button class="birthChoice" data-trait="creative">창의적</button>
-                    <button class="birthChoice" data-trait="social">사교적</button>
-                </div>
-            </div>
-
-        </div>
-
-        <button class="startBtn" onclick="startGame()">인생을 시작하기 →</button>
-
+   <div class="avatarSetup">
+    <div class="avatarBig" id="previewAvatar">👶</div>
+    <div>
+     <div style="font-weight:850;font-size:13px">나의 아바타</div>
+     <div style="font-size:10px;color:#888;margin:4px 0 9px">
+      직접 사진을 넣어도 되고 기본 아바타로 시작해도 돼.
+     </div>
+     <label class="uploadBtn">
+      사진 선택
+      <input id="avatarInput" type="file" accept="image/*" hidden>
+     </label>
     </div>
-</div>
+   </div>
 
+   <div class="field">
+    <label>이름</label>
+    <input id="nameInput" maxlength="12" placeholder="예: 서유진">
+   </div>
 
-<!-- GAME -->
-<div id="game" class="hidden">
+   <div class="field">
+    <label>가정 분위기</label>
+    <select id="familyInput">
+     <option value="warm">따뜻하고 화목한 집</option>
+     <option value="normal">평범한 집</option>
+     <option value="strict">규칙이 많은 집</option>
+     <option value="free">자유로운 집</option>
+     <option value="busy">부모님이 바쁜 집</option>
+    </select>
+   </div>
 
-    <!-- LEFT -->
-    <aside class="panel leftPanel">
+   <div class="field">
+    <label>어릴 때의 성향</label>
+    <select id="personalityInput">
+     <option value="curious">호기심이 많음</option>
+     <option value="quiet">조용하고 관찰력이 좋음</option>
+     <option value="active">활동적이고 사고를 많이 침</option>
+     <option value="social">사람을 좋아함</option>
+     <option value="stubborn">고집이 강함</option>
+    </select>
+   </div>
 
-        <div class="profile">
-            <div class="avatar" id="playerAvatar">🙂</div>
-            <div class="profileName" id="profileName">주인공</div>
-            <div class="profileSub" id="profileSub">17세 · 학생</div>
-        </div>
+   <div class="field">
+    <label>기본 아바타</label>
+    <select id="emojiInput">
+     <option>👶</option>
+     <option>🧸</option>
+     <option>🐣</option>
+     <option>🌱</option>
+     <option>⭐</option>
+     <option>🐰</option>
+    </select>
+   </div>
 
-        <div class="nav">
-            <button class="active" onclick="showTab('story')">◉ 이야기</button>
-            <button onclick="showMemories()">▣ 기억</button>
-            <button onclick="showCharacter()">♙ 내 캐릭터</button>
-            <button onclick="saveGame()">↓ 저장</button>
-            <button onclick="loadGame()">↑ 불러오기</button>
-        </div>
+  </div>
 
-        <div class="npcTitle">CURRENT CHARACTERS</div>
-        <div class="npcList" id="npcList"></div>
+  <button class="startBtn" onclick="startGame()">인생 시작하기 →</button>
+ </div>
+</section>
 
-    </aside>
+<!-- ================= APP ================= -->
+<main id="app" class="hidden">
 
+ <aside class="sidebar">
 
-    <!-- CENTER -->
-    <main class="panel center">
-
-        <div class="sceneTop">
-            <div class="location" id="location">서울 ○○고등학교</div>
-            <div class="time" id="time">월요일 · 오전 8:10</div>
-        </div>
-
-        <div class="story" id="story">
-        </div>
-
-        <div class="inputArea">
-
-            <div class="quickChoices" id="quickChoices"></div>
-
-            <div class="inputRow">
-                <textarea
-                    id="playerInput"
-                    placeholder="네가 직접 말하거나 행동을 입력해봐..."
-                ></textarea>
-
-                <button id="sendBtn" onclick="sendPlayerInput()">보내기</button>
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- RIGHT -->
-    <aside class="panel rightPanel">
-
-        <div class="statusHead">CHARACTER STATUS</div>
-
-        <div class="statBox">
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>✨ 매력</span>
-                    <span id="sCharm">72</span>
-                </div>
-                <div class="bar"><div class="fill" id="bCharm"></div></div>
-            </div>
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>🧠 지능</span>
-                    <span id="sInt">65</span>
-                </div>
-                <div class="bar"><div class="fill" id="bInt"></div></div>
-            </div>
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>💪 체력</span>
-                    <span id="sHealth">70</span>
-                </div>
-                <div class="bar"><div class="fill" id="bHealth"></div></div>
-            </div>
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>🎨 창의성</span>
-                    <span id="sCreative">68</span>
-                </div>
-                <div class="bar"><div class="fill" id="bCreative"></div></div>
-            </div>
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>🍀 운</span>
-                    <span id="sLuck">75</span>
-                </div>
-                <div class="bar"><div class="fill" id="bLuck"></div></div>
-            </div>
-
-            <div class="stat">
-                <div class="statTop">
-                    <span>❤️ 행복</span>
-                    <span id="sHappy">70</span>
-                </div>
-                <div class="bar"><div class="fill" id="bHappy"></div></div>
-            </div>
-
-        </div>
-
-        <div class="memory" id="currentMemory">
-            아직 특별한 기억이 없다.
-        </div>
-
-        <div class="logTitle">LIFE LOG</div>
-        <div class="log" id="lifeLog"></div>
-
-    </aside>
-
-</div>
-
-
-<!-- MODAL -->
-<div id="modal" class="overlay hidden">
-    <div class="modal" id="modalContent"></div>
-</div>
-
-
-<!-- ENDING -->
-<div id="endingScreen" class="overlay hidden">
-    <div class="endingBox">
-        <div>✦ LIFE COMPLETE ✦</div>
-        <div class="endingTitle" id="endingTitle"></div>
-        <div class="endingText" id="endingText"></div>
-        <button onclick="location.reload()">새로운 인생 시작</button>
+  <div class="profile">
+   <div class="profileTop">
+    <div class="avatar" id="myAvatar"></div>
+    <div>
+     <div class="profileName" id="myName">이름</div>
+     <div class="profileAge" id="myAge">1살 · 생일 1일 전</div>
     </div>
+   </div>
+  </div>
+
+  <div class="sectionTitle">LIFE STATUS</div>
+
+  <div class="stat">
+   <div class="statHead"><span>🧠 지능</span><b id="sInt">10</b></div>
+   <div class="bar"><i id="bInt"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>🎨 창의력</span><b id="sCre">10</b></div>
+   <div class="bar"><i id="bCre"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>❤️ 공감</span><b id="sEmp">10</b></div>
+   <div class="bar"><i id="bEmp"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>🔥 용기</span><b id="sCou">10</b></div>
+   <div class="bar"><i id="bCou"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>✨ 매력</span><b id="sCha">10</b></div>
+   <div class="bar"><i id="bCha"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>🍀 운</span><b id="sLuc">10</b></div>
+   <div class="bar"><i id="bLuc"></i></div>
+  </div>
+
+  <div class="sectionTitle">CONDITION</div>
+
+  <div class="stat">
+   <div class="statHead"><span>😊 행복</span><b id="sHappy">70</b></div>
+   <div class="bar"><i id="bHappy"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>💪 건강</span><b id="sHealth">80</b></div>
+   <div class="bar"><i id="bHealth"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>💪 자신감</span><b id="sConf">50</b></div>
+   <div class="bar"><i id="bConf"></i></div>
+  </div>
+  <div class="stat">
+   <div class="statHead"><span>😵 스트레스</span><b id="sStress">10</b></div>
+   <div class="bar"><i id="bStress"></i></div>
+  </div>
+
+  <div class="sectionTitle">LIFE</div>
+  <button class="sideBtn" onclick="openModal('memoryModal')">🧠 기억 & 타임라인</button>
+  <button class="sideBtn" onclick="openModal('npcModal')">🧑‍🤝‍🧑 인간관계</button>
+  <button class="sideBtn" onclick="openModal('achievementModal')">🏆 업적</button>
+  <button class="sideBtn" onclick="saveGame();toast('게임이 저장됐어 💾')">💾 지금 저장</button>
+  <button class="sideBtn" onclick="loadGame()">📂 저장 불러오기</button>
+  <button class="sideBtn" onclick="restartGame()">↻ 새 인생</button>
+
+ </aside>
+
+ <section class="chatArea">
+
+  <header class="chatHeader">
+   <div>
+    <div class="headerTitle" id="headerTitle">LIFE RPG</div>
+    <div class="headerSub" id="headerSub">인생의 첫 장</div>
+   </div>
+   <div class="headerRight">
+    <span class="pill" id="datePill">1살 · DAY 1</span>
+    <span class="pill" id="moneyPill">₩0</span>
+   </div>
+  </header>
+
+  <div class="chatScroll" id="chatScroll"></div>
+
+  <div class="control">
+   <div class="choices" id="choices"></div>
+
+   <div class="freeRow">
+    <input id="freeInput" placeholder="직접 말하기... (선택)" onkeydown="if(event.key==='Enter')sendFree()">
+    <button onclick="sendFree()">보내기</button>
+   </div>
+  </div>
+
+ </section>
+
+ <aside class="rightbar">
+
+  <div class="card">
+   <h3>🧑 현재 주변 사람</h3>
+   <div id="npcMini"></div>
+  </div>
+
+  <div class="card">
+   <h3>📝 최근 기억</h3>
+   <div id="memoryMini"></div>
+  </div>
+
+  <div class="card">
+   <h3>🎯 현재 목표</h3>
+   <div id="goalMini">
+    <span class="badge">AGE 1</span>
+    <p style="font-size:11px;line-height:1.6;margin-bottom:0">
+     세상을 알아가고 첫 번째 관계를 만들어 보자.
+    </p>
+   </div>
+  </div>
+
+ </aside>
+</main>
+
+<div id="toast"></div>
+
+<!-- MODALS -->
+<div id="memoryModal" class="modal hidden" onclick="closeModal(event,'memoryModal')">
+ <div class="modalBox">
+  <div class="modalHead">
+   <h2>🧠 기억 & 타임라인</h2>
+   <button class="close" onclick="closeSpecific('memoryModal')">×</button>
+  </div>
+  <div id="memoryList"></div>
+ </div>
 </div>
 
+<div id="npcModal" class="modal hidden" onclick="closeModal(event,'npcModal')">
+ <div class="modalBox">
+  <div class="modalHead">
+   <h2>🧑‍🤝‍🧑 인간관계</h2>
+   <button class="close" onclick="closeSpecific('npcModal')">×</button>
+  </div>
+  <div id="npcList"></div>
+ </div>
+</div>
+
+<div id="achievementModal" class="modal hidden" onclick="closeModal(event,'achievementModal')">
+ <div class="modalBox">
+  <div class="modalHead">
+   <h2>🏆 업적</h2>
+   <button class="close" onclick="closeSpecific('achievementModal')">×</button>
+  </div>
+  <div id="achievementList"></div>
+ </div>
+</div>
+
+<div id="endScreen" class="endScreen hidden">
+ <div class="endBox">
+  <div class="eyebrow">LIFE RPG · FINAL CHAPTER</div>
+  <h1 id="endTitle">인생의 마지막 페이지</h1>
+  <p id="endText"></p>
+  <div class="endBtns">
+   <button onclick="saveGame()">💾 기록 저장</button>
+   <button onclick="restartGame()">↻ 다시 살아보기</button>
+  </div>
+ </div>
+</div>
 
 <script>
-
 /* =========================================================
-   GAME DATA
+   LIFE RPG
+   하나의 HTML 파일로 실행되는 장편 인생 역할놀이 엔진
 ========================================================= */
 
-let game = {
-    name:"",
-    age:17,
-    day:1,
-    month:3,
-    time:"오전 8:10",
+const $ = id => document.getElementById(id);
 
-    personality:"free",
-    family:"normal",
-    trait:"lucky",
+let G = {
+ name:"",
+ avatar:"",
+ emoji:"👶",
+ family:"warm",
+ personality:"curious",
 
-    location:"서울 ○○고등학교",
-    chapter:"고등학교",
+ age:1,
+ day:1,
+ month:1,
+ season:"봄",
+ episode:0,
+ sceneIndex:0,
+ busy:false,
 
-    stats:{
-        charm:72,
-        intelligence:65,
-        health:70,
-        creative:68,
-        luck:75,
-        happiness:70,
-        money:12000,
-        fame:0
-    },
+ stats:{
+  intelligence:10,
+  creativity:10,
+  empathy:10,
+  courage:10,
+  charm:10,
+  luck:10
+ },
 
-    relationships:{
-        minji:{
-            name:"한민지",
-            avatar:"👩🏻",
-            role:"소꿉친구",
-            relation:"친한 친구",
-            affinity:70,
-            trust:65,
-            jealousy:5,
-            mood:"평온",
-            memories:[]
-        },
+ condition:{
+  happiness:70,
+  health:85,
+  confidence:50,
+  stress:10
+ },
 
-        dohyun:{
-            name:"강도현",
-            avatar:"👦🏻",
-            role:"반 친구",
-            relation:"친구",
-            affinity:48,
-            trust:45,
-            jealousy:0,
-            mood:"보통",
-            memories:[]
-        },
+ money:0,
 
-        jiwon:{
-            name:"이준혁",
-            avatar:"🧑🏻",
-            role:"전학생",
-            relation:"아직 모름",
-            affinity:25,
-            trust:20,
-            jealousy:0,
-            mood:"긴장",
-            memories:[]
-        },
-
-        teacher:{
-            name:"박서현",
-            avatar:"👩🏻‍🏫",
-            role:"담임 선생님",
-            relation:"학생",
-            affinity:45,
-            trust:50,
-            jealousy:0,
-            mood:"차분",
-            memories:[]
-        },
-
-        mother:{
-            name:"엄마",
-            avatar:"👩🏻",
-            role:"가족",
-            relation:"엄마",
-            affinity:85,
-            trust:90,
-            jealousy:0,
-            mood:"평온",
-            memories:[]
-        },
-
-        father:{
-            name:"아빠",
-            avatar:"👨🏻",
-            role:"가족",
-            relation:"아빠",
-            affinity:80,
-            trust:80,
-            jealousy:0,
-            mood:"평온",
-            memories:[]
-        }
-    },
-
-    flags:{
-        metTransfer:false,
-        helpedMinji:false,
-        foughtDohyun:false,
-        joinedClub:false,
-        festival:false,
-        secretKnown:false,
-        confession:false,
-        dating:false,
-        brokeUp:false,
-        graduation:false,
-        dreamChosen:false
-    },
-
-    memories:[],
-    log:[],
-    sceneIndex:0,
-    currentScene:null
+ npcs:{},
+ memories:[],
+ achievements:[],
+ flags:{},
+ completedScenes:0,
+ lifeDays:0,
+ ageProgress:0,
+ queue:[]
 };
 
-let selectedPersonality="free";
-let selectedFamily="normal";
-let selectedTrait="lucky";
+const NPC_TEMPLATE = {
+ mom:{
+  name:"엄마",
+  emoji:"👩🏻",
+  relation:"가족",
+  affinity:65,
+  trust:70,
+  jealousy:0,
+  respect:45,
+  memory:[]
+ },
+ dad:{
+  name:"아빠",
+  emoji:"👨🏻",
+  relation:"가족",
+  affinity:60,
+  trust:65,
+  jealousy:0,
+  respect:50,
+  memory:[]
+ },
+ grandma:{
+  name:"할머니",
+  emoji:"👵🏻",
+  relation:"가족",
+  affinity:70,
+  trust:75,
+  jealousy:0,
+  respect:55,
+  memory:[]
+ },
+ neighbor:{
+  name:"옆집 아이 민준",
+  emoji:"🧒🏻",
+  relation:"이웃",
+  affinity:30,
+  trust:20,
+  jealousy:0,
+  respect:20,
+  memory:[]
+ },
+ teacher:{
+  name:"선생님",
+  emoji:"👩🏻‍🏫",
+  relation:"교육",
+  affinity:25,
+  trust:20,
+  jealousy:0,
+  respect:25,
+  memory:[]
+ },
+ friend:{
+  name:"첫 친구 하린",
+  emoji:"👧🏻",
+  relation:"친구",
+  affinity:20,
+  trust:15,
+  jealousy:0,
+  respect:15,
+  memory:[]
+ },
+ rival:{
+  name:"라이벌",
+  emoji:"😼",
+  relation:"경쟁자",
+  affinity:5,
+  trust:5,
+  jealousy:10,
+  respect:10,
+  memory:[]
+ }
+};
 
+function clone(obj){
+ return JSON.parse(JSON.stringify(obj));
+}
 
-/* =========================================================
-   START
-========================================================= */
+/* ================= START ================= */
 
-document.querySelectorAll("[data-personality]").forEach(btn=>{
-    btn.onclick=()=>{
-        document.querySelectorAll("[data-personality]").forEach(b=>b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedPersonality=btn.dataset.personality;
-    };
+let uploadedAvatar="";
+
+$("avatarInput").addEventListener("change",function(){
+ const file=this.files[0];
+ if(!file)return;
+
+ const reader=new FileReader();
+
+ reader.onload=e=>{
+  uploadedAvatar=e.target.result;
+  $("previewAvatar").innerHTML=`<img src="${uploadedAvatar}">`;
+ };
+
+ reader.readAsDataURL(file);
 });
 
-document.querySelectorAll("[data-family]").forEach(btn=>{
-    btn.onclick=()=>{
-        document.querySelectorAll("[data-family]").forEach(b=>b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedFamily=btn.dataset.family;
-    };
+$("emojiInput").addEventListener("change",function(){
+ if(!uploadedAvatar){
+  $("previewAvatar").textContent=this.value;
+ }
 });
-
-document.querySelectorAll("[data-trait]").forEach(btn=>{
-    btn.onclick=()=>{
-        document.querySelectorAll("[data-trait]").forEach(b=>b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedTrait=btn.dataset.trait;
-    };
-});
-
 
 function startGame(){
 
-    const name=document.getElementById("nameInput").value.trim();
+ const name=$("nameInput").value.trim() || "유진";
 
-    if(!name){
-        alert("주인공 이름을 입력해줘!");
-        return;
-    }
+ G={
+  name,
+  avatar:uploadedAvatar,
+  emoji:$("emojiInput").value,
+  family:$("familyInput").value,
+  personality:$("personalityInput").value,
 
-    game.name=name;
-    game.personality=selectedPersonality;
-    game.family=selectedFamily;
-    game.trait=selectedTrait;
+  age:1,
+  day:1,
+  month:1,
+  season:"봄",
+  episode:0,
+  sceneIndex:0,
+  busy:false,
 
-    if(selectedTrait==="creative") game.stats.creative+=12;
-    if(selectedTrait==="social") game.stats.charm+=10;
-    if(selectedTrait==="lucky") game.stats.luck+=15;
+  stats:{
+   intelligence:10,
+   creativity:10,
+   empathy:10,
+   courage:10,
+   charm:10,
+   luck:10
+  },
 
-    if(selectedFamily==="rich"){
-        game.stats.money=50000;
-    }
+  condition:{
+   happiness:70,
+   health:85,
+   confidence:50,
+   stress:10
+  },
 
-    if(selectedFamily==="poor"){
-        game.stats.money=5000;
-        game.stats.happiness-=5;
-    }
+  money:0,
 
-    document.getElementById("startScreen").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
+  npcs:clone(NPC_TEMPLATE),
+  memories:[],
+  achievements:[],
+  flags:{},
+  completedScenes:0,
+  lifeDays:0,
+  ageProgress:0,
+  queue:[]
+ };
 
-    document.getElementById("profileName").textContent=game.name;
+ applyStartingPersonality();
 
-    renderNPCs();
-    updateStats();
-    addLog("인생 RPG가 시작되었다.");
-    loadScene("opening");
+ $("startScreen").classList.add("hidden");
+ $("app").classList.remove("hidden");
 
+ setupProfile();
+ buildAge(G.age);
+ nextScene();
+
+ saveGame();
 }
 
+function applyStartingPersonality(){
 
-/* =========================================================
-   STORY ENGINE
-========================================================= */
+ if(G.personality==="curious"){
+  G.stats.creativity+=4;
+  G.stats.intelligence+=2;
+ }
 
-const scenes={
+ if(G.personality==="quiet"){
+  G.stats.intelligence+=4;
+  G.stats.empathy+=2;
+ }
 
-opening:{
-    chapter:"CHAPTER 01 · 새로운 학기",
-    title:"3월의 첫날",
-    location:"서울 ○○고등학교 · 2학년 교실",
-    time:"월요일 · 오전 8:10",
+ if(G.personality==="active"){
+  G.stats.courage+=4;
+  G.stats.health+=3;
+ }
 
-    content:[
-        {
-            type:"narration",
-            text:`3월의 공기는 이상하게 어색했다.<br><br>
-            같은 학교, 같은 교실인데도 모든 것이 조금씩 달라 보였다.
-            책상 위에는 새 시간표가 놓여 있었고, 창문 너머 운동장에는 아직 겨울의 흔적이 남아 있었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`야. 너 진짜 왔네.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`나 너 오늘 결석할 줄 알았어.`
-        },
-        {
-            type:"narration",
-            text:`민지는 네 책상 옆 의자에 자연스럽게 걸터앉았다.<br>
-            초등학교 때부터 알고 지낸 친구라 그런지, 새 학기의 어색함도 그녀 앞에서는 조금 덜했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`근데 말이야... 오늘 우리 반에 전학생 온대.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`또 시작이네. 민지 너 전학생 온다는 말만 들으면 왜 이렇게 신나냐?`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`재밌잖아! 새로운 사람 오는 거.`
-        },
-        {
-            type:"narration",
-            text:`그때 교실 문이 열렸다.`
-        },
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`자, 자리 앉아. 오늘부터 우리 반에서 지낼 친구가 한 명 있다.`
-        }
-    ],
+ if(G.personality==="social"){
+  G.stats.charm+=4;
+  G.stats.empathy+=3;
+ }
 
-    choices:[
-        {
-            text:"민지에게 '누군데?'라고 묻는다.",
-            action:()=>{
-                changeRelation("minji",5,2);
-                addMemory("새 학기 첫날, 민지와 전학생 이야기를 나눴다.");
-                loadScene("transfer");
-            }
-        },
-        {
-            text:"도현에게 전학생 이야기를 묻는다.",
-            action:()=>{
-                changeRelation("dohyun",4,3);
-                loadScene("transfer");
-            }
-        },
-        {
-            text:"아무 말 없이 전학생을 기다린다.",
-            action:()=>{
-                loadScene("transfer");
-            }
-        }
-    ]
-},
-
-transfer:{
-    chapter:"CHAPTER 01 · 새로운 학기",
-    title:"전학생",
-    location:"서울 ○○고등학교 · 2학년 3반",
-    time:"월요일 · 오전 8:25",
-
-    content:[
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`들어와. 자기소개 간단하게 해.`
-        },
-        {
-            type:"narration",
-            text:`교실 앞에 한 남학생이 섰다.<br><br>
-            교복은 깔끔했고, 표정은 묘하게 무표정했다.
-            그런데 이상하게도 교실 안의 시선이 한꺼번에 그쪽으로 향했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`안녕하세요. 이준혁입니다. 잘 부탁드립니다.`
-        },
-        {
-            type:"narration",
-            text:`짧은 자기소개였다.<br>
-            준혁은 빈자리를 찾아 주변을 둘러봤다.`
-        },
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`준혁이는... 음. 저기 창가 자리. 네 옆으로 가면 되겠다.`
-        },
-        {
-            type:"narration",
-            text:`그리고 준혁이 네 옆자리로 걸어왔다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`...안녕.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"웃으면서 인사한다.",
-            action:()=>{
-                game.flags.metTransfer=true;
-                changeRelation("jiwon",10,8);
-                addMemory("전학생 이준혁과 처음 만났다.");
-                loadScene("lunch");
-            }
-        },
-        {
-            text:"고개만 끄덕인다.",
-            action:()=>{
-                game.flags.metTransfer=true;
-                changeRelation("jiwon",3,2);
-                loadScene("lunch");
-            }
-        },
-        {
-            text:"먼저 말을 걸어본다.",
-            action:()=>{
-                game.flags.metTransfer=true;
-                changeRelation("jiwon",15,12);
-                game.stats.charm+=2;
-                loadScene("lunch");
-            }
-        }
-    ]
-},
-
-lunch:{
-    chapter:"CHAPTER 02 · 점심시간",
-    title:"누구랑 먹을까?",
-    location:"학교 · 급식실",
-    time:"월요일 · 오후 12:15",
-
-    content:[
-        {
-            type:"narration",
-            text:`점심시간이 되자 교실은 순식간에 소란스러워졌다.<br><br>
-            민지는 자연스럽게 네 팔을 잡았다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`가자. 오늘 제육 나온대.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`난 매점 갈 건데.`
-        },
-        {
-            type:"narration",
-            text:`그때 뒤에서 준혁의 목소리가 들렸다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`저... 혹시 같이 먹어도 돼?`
-        },
-        {
-            type:"narration",
-            text:`민지가 네 얼굴을 보았다.<br><br>
-            그리고 아주 의미심장하게 웃었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`음~ 난 괜찮은데?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"준혁도 같이 먹자고 한다.",
-            action:()=>{
-                changeRelation("jiwon",12,8);
-                changeRelation("minji",-2,0);
-                addMemory("점심시간에 준혁과 처음 같이 밥을 먹었다.");
-                loadScene("lunchTogether");
-            }
-        },
-        {
-            text:"민지와 둘이 먹는다.",
-            action:()=>{
-                changeRelation("minji",8,5);
-                loadScene("minjiSecret");
-            }
-        },
-        {
-            text:"도현까지 모두 부른다.",
-            action:()=>{
-                changeRelation("dohyun",10,5);
-                changeRelation("jiwon",7,5);
-                changeRelation("minji",7,4);
-                loadScene("groupLunch");
-            }
-        }
-    ]
-},
-
-lunchTogether:{
-    chapter:"CHAPTER 02 · 점심시간",
-    title:"조금 이상한 첫인상",
-    location:"학교 · 급식실",
-    time:"월요일 · 오후 12:25",
-
-    content:[
-        {
-            type:"narration",
-            text:`네 명이 한 테이블에 앉았다.<br><br>
-            처음에는 조용했다. 하지만 민지가 먼저 입을 열었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`준혁아. 너 원래 어디 살았어?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`부산.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`오. 부산에서 여기까지? 왜 왔는데?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`그냥... 가족 사정 때문에.`
-        },
-        {
-            type:"narration",
-            text:`짧은 대답.<br>
-            준혁은 젓가락을 내려놓았다.<br><br>
-            순간 분위기가 살짝 굳었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"다른 주제로 자연스럽게 넘어간다.",
-            action:()=>{
-                changeRelation("jiwon",8,10);
-                loadScene("afterSchool");
-            }
-        },
-        {
-            text:"왜 부산에서 왔는지 다시 묻는다.",
-            action:()=>{
-                changeRelation("jiwon",-4,-5);
-                loadScene("transferSecret");
-            }
-        },
-        {
-            text:"농담을 해서 분위기를 풀어본다.",
-            action:()=>{
-                game.stats.creative+=2;
-                game.stats.charm+=2;
-                changeRelation("jiwon",10,7);
-                loadScene("afterSchool");
-            }
-        }
-    ]
-},
-
-groupLunch:{
-    chapter:"CHAPTER 02 · 점심시간",
-    title:"어쩌다 보니 넷",
-    location:"학교 · 급식실",
-    time:"월요일 · 오후 12:30",
-
-    content:[
-        {
-            type:"narration",
-            text:`결국 넷이 한 테이블에 앉았다.<br>
-            처음에는 어색했지만 도현이 갑자기 이상한 이야기를 꺼내면서 분위기가 풀리기 시작했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`야 근데 우리 반 담임 진짜 무서운 거 알지?`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`너 어제 숙제 안 했지.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`그건 중요한 게 아니고.`
-        },
-        {
-            type:"narration",
-            text:`준혁도 아주 조금 웃었다.<br><br>
-            오늘 처음 보는 표정이었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"계속 친구들과 장난친다.",
-            action:()=>{
-                game.stats.happiness+=5;
-                loadScene("afterSchool");
-            }
-        },
-        {
-            text:"준혁에게 먼저 말을 건다.",
-            action:()=>{
-                changeRelation("jiwon",10,10);
-                loadScene("afterSchool");
-            }
-        }
-    ]
-},
-
-minjiSecret:{
-    chapter:"CHAPTER 02 · 점심시간",
-    title:"민지의 비밀",
-    location:"학교 · 운동장 벤치",
-    time:"월요일 · 오후 12:35",
-
-    content:[
-        {
-            type:"narration",
-            text:`민지와 둘이 운동장 벤치에 앉았다.<br><br>
-            민지는 평소와 달리 조금 조용했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`나 사실 너한테 할 말 있어.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`근데 아직은 말하기 싫어.`
-        },
-        {
-            type:"narration",
-            text:`민지가 피식 웃었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`그냥... 언젠가 말해줄게.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"기다리겠다고 말한다.",
-            action:()=>{
-                changeRelation("minji",12,15);
-                addMemory("민지가 말하지 못한 비밀이 있다는 것을 알게 되었다.");
-                loadScene("afterSchool");
-            }
-        },
-        {
-            text:"장난스럽게 계속 캐묻는다.",
-            action:()=>{
-                changeRelation("minji",-2,0);
-                loadScene("afterSchool");
-            }
-        }
-    ]
-},
-
-transferSecret:{
-    chapter:"CHAPTER 02 · 점심시간",
-    title:"그가 숨기는 것",
-    location:"학교 · 급식실",
-    time:"월요일 · 오후 12:35",
-
-    content:[
-        {
-            type:"narration",
-            text:`준혁은 잠시 너를 바라봤다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`나중에 말해줄게.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`지금은... 아직 별로 말하고 싶지 않아.`
-        },
-        {
-            type:"narration",
-            text:`그 말에는 단순한 거절보다 조금 더 복잡한 감정이 섞여 있었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"더 묻지 않는다.",
-            action:()=>{
-                changeRelation("jiwon",5,12);
-                loadScene("afterSchool");
-            }
-        },
-        {
-            text:"알겠다고 하고 웃는다.",
-            action:()=>{
-                changeRelation("jiwon",10,15);
-                loadScene("afterSchool");
-            }
-        }
-    ]
-},
-
-afterSchool:{
-    chapter:"CHAPTER 03 · 방과 후",
-    title:"하교 직전",
-    location:"학교 · 교실",
-    time:"월요일 · 오후 4:20",
-
-    content:[
-        {
-            type:"narration",
-            text:`수업이 끝났다.<br><br>
-            친구들은 하나둘씩 교실을 빠져나갔다.<br>
-            그런데 오늘은 이상하게 아무도 바로 집에 가지 않았다.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`야. 우리 오늘 뭐 할 거 없냐?`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`동아리 신청 오늘까지잖아.`
-        },
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`맞다. 너희 아직 동아리 안 정했으면 오늘 안에 신청해.`
-        },
-        {
-            type:"narration",
-            text:`게시판에는 수십 개의 동아리 신청서가 붙어 있었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"영상 제작 동아리를 고른다.",
-            action:()=>{
-                game.flags.joinedClub=true;
-                game.stats.creative+=8;
-                addMemory("영상 제작 동아리에 가입했다.");
-                loadScene("club");
-            }
-        },
-        {
-            text:"밴드 동아리를 고른다.",
-            action:()=>{
-                game.flags.joinedClub=true;
-                game.stats.creative+=6;
-                game.stats.charm+=3;
-                addMemory("밴드 동아리에 가입했다.");
-                loadScene("club");
-            }
-        },
-        {
-            text:"운동 동아리를 고른다.",
-            action:()=>{
-                game.flags.joinedClub=true;
-                game.stats.health+=8;
-                loadScene("club");
-            }
-        },
-        {
-            text:"아무 동아리도 하지 않는다.",
-            action:()=>{
-                loadScene("walkHome");
-            }
-        }
-    ]
-},
-
-club:{
-    chapter:"CHAPTER 03 · 방과 후",
-    title:"첫 동아리",
-    location:"학교 · 동아리실",
-    time:"월요일 · 오후 5:05",
-
-    content:[
-        {
-            type:"narration",
-            text:`새로운 공간에 들어섰다.<br><br>
-            낯선 얼굴들, 낯선 냄새, 낯선 분위기.<br>
-            그런데 이상하게 가슴이 조금 뛰었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`처음에는 다 어색해. 한 달만 지나면 다 친해진다.`
-        },
-        {
-            type:"narration",
-            text:`그 순간 휴대폰이 울렸다.<br><br>
-            민지였다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`너 어디야?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"동아리실이라고 말한다.",
-            action:()=>{
-                changeRelation("minji",3,2);
-                loadScene("evening");
-            }
-        },
-        {
-            text:"사진을 찍어 보내준다.",
-            action:()=>{
-                changeRelation("minji",6,4);
-                game.stats.creative+=1;
-                loadScene("evening");
-            }
-        }
-    ]
-},
-
-walkHome:{
-    chapter:"CHAPTER 03 · 방과 후",
-    title:"집으로 가는 길",
-    location:"학교 앞 골목",
-    time:"월요일 · 오후 5:20",
-
-    content:[
-        {
-            type:"narration",
-            text:`혼자 집으로 향했다.<br><br>
-            해가 조금씩 기울고 있었다.<br>
-            새 학기 첫날치고는 꽤 많은 일이 있었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`어?`
-        },
-        {
-            type:"narration",
-            text:`뒤에서 준혁이 따라왔다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`너 이쪽으로 가?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"같이 가자고 한다.",
-            action:()=>{
-                changeRelation("jiwon",10,8);
-                loadScene("walkTogether");
-            }
-        },
-        {
-            text:"먼저 간다고 한다.",
-            action:()=>{
-                loadScene("evening");
-            }
-        }
-    ]
-},
-
-walkTogether:{
-    chapter:"CHAPTER 03 · 방과 후",
-    title:"둘만의 귀갓길",
-    location:"학교 근처 거리",
-    time:"월요일 · 오후 5:30",
-
-    content:[
-        {
-            type:"narration",
-            text:`둘은 나란히 걸었다.<br><br>
-            이상하게 대화가 많지는 않았다.<br>
-            그런데 침묵이 불편하지도 않았다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`오늘... 고마웠어.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`점심 때도 그렇고.`
-        },
-        {
-            type:"narration",
-            text:`준혁은 잠깐 멈췄다가 다시 걸었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"나도 고맙다고 한다.",
-            action:()=>{
-                changeRelation("jiwon",10,12);
-                addMemory("준혁과 처음으로 둘만 함께 집에 가는 길을 걸었다.");
-                loadScene("evening");
-            }
-        },
-        {
-            text:"장난스럽게 받아친다.",
-            action:()=>{
-                game.stats.charm+=2;
-                changeRelation("jiwon",8,5);
-                loadScene("evening");
-            }
-        }
-    ]
-},
-
-evening:{
-    chapter:"CHAPTER 04 · 집",
-    title:"첫날 밤",
-    location:"집 · 내 방",
-    time:"월요일 · 오후 8:40",
-
-    content:[
-        {
-            type:"narration",
-            text:`집에 돌아왔다.<br><br>
-            가방을 침대 옆에 내려놓자 오늘 하루가 천천히 머릿속을 스쳐갔다.<br>
-            전학생.<br>
-            민지의 비밀.<br>
-            동아리.<br>
-            그리고 이상하게 신경 쓰이는 몇 가지 순간들.`
-        },
-        {
-            type:"dialogue",
-            npc:"mother",
-            text:`왔어? 밥 먹어.`
-        },
-        {
-            type:"dialogue",
-            npc:"father",
-            text:`학교는 어땠어?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"오늘 있었던 일을 가족에게 이야기한다.",
-            action:()=>{
-                changeRelation("mother",5,5);
-                changeRelation("father",5,5);
-                game.stats.happiness+=4;
-                loadScene("nightPhone");
-            }
-        },
-        {
-            text:"별일 없었다고 한다.",
-            action:()=>{
-                loadScene("nightPhone");
-            }
-        },
-        {
-            text:"전학생 이야기를 꺼낸다.",
-            action:()=>{
-                changeRelation("mother",4,4);
-                loadScene("nightPhone");
-            }
-        }
-    ]
-},
-
-nightPhone:{
-    chapter:"CHAPTER 04 · 집",
-    title:"새벽의 메시지",
-    location:"집 · 침실",
-    time:"월요일 · 오후 11:48",
-
-    content:[
-        {
-            type:"narration",
-            text:`불을 끄고 침대에 누웠다.<br><br>
-            휴대폰을 마지막으로 확인했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`[메시지] 아직 안 자?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`[새 메시지] 오늘 고마웠어.`
-        },
-        {
-            type:"narration",
-            text:`두 개의 메시지가 동시에 도착했다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"민지에게 먼저 답장한다.",
-            action:()=>{
-                changeRelation("minji",5,3);
-                advanceDay();
-            }
-        },
-        {
-            text:"준혁에게 먼저 답장한다.",
-            action:()=>{
-                changeRelation("jiwon",8,7);
-                advanceDay();
-            }
-        },
-        {
-            text:"둘 다 답장하고 잔다.",
-            action:()=>{
-                changeRelation("minji",3,2);
-                changeRelation("jiwon",3,2);
-                advanceDay();
-            }
-        },
-        {
-            text:"아무에게도 답장하지 않는다.",
-            action:()=>{
-                game.stats.health+=3;
-                advanceDay();
-            }
-        }
-    ]
+ if(G.personality==="stubborn"){
+  G.stats.courage+=4;
+  G.stats.confidence+=5;
+  G.condition.stress+=3;
 }
 
-};
+ if(G.family==="warm"){
+  G.condition.happiness+=8;
+  G.npcs.mom.affinity+=8;
+  G.npcs.dad.affinity+=8;
+ }
 
+ if(G.family==="strict"){
+  G.stats.intelligence+=2;
+  G.condition.stress+=8;
+  G.npcs.mom.trust+=5;
+ }
 
-/* =========================================================
-   RENDER SCENE
-========================================================= */
+ if(G.family==="free"){
+  G.stats.creativity+=3;
+  G.stats.courage+=2;
+ }
 
-function loadScene(id){
-
-    const scene=scenes[id];
-
-    if(!scene){
-        continueStory();
-        return;
-    }
-
-    game.currentScene=id;
-
-    document.getElementById("location").textContent=scene.location;
-    document.getElementById("time").textContent=scene.time;
-
-    const story=document.getElementById("story");
-    story.innerHTML="";
-
-    const chapter=document.createElement("div");
-    chapter.className="chapter";
-    chapter.textContent=scene.chapter;
-    story.appendChild(chapter);
-
-    const title=document.createElement("div");
-    title.className="sceneTitle";
-    title.textContent=scene.title;
-    story.appendChild(title);
-
-    scene.content.forEach(item=>{
-
-        if(item.type==="narration"){
-
-            const div=document.createElement("div");
-            div.className="narration";
-            div.innerHTML=item.text;
-            story.appendChild(div);
-
-        }
-
-        else if(item.type==="dialogue"){
-
-            const npc=game.relationships[item.npc];
-
-            const box=document.createElement("div");
-            box.className="dialogue";
-
-            box.innerHTML=`
-                <div class="dialogueAvatar">${npc.avatar}</div>
-                <div class="dialogueBody">
-                    <div class="speaker">${npc.name}</div>
-                    <div class="bubble">${item.text}</div>
-                </div>
-            `;
-
-            story.appendChild(box);
-        }
-
-    });
-
-    const choices=document.getElementById("quickChoices");
-    choices.innerHTML="";
-
-    scene.choices.forEach((choice,i)=>{
-
-        const btn=document.createElement("button");
-        btn.className="choiceBtn";
-        btn.textContent=(i+1)+". "+choice.text;
-
-        btn.onclick=()=>{
-            choice.action();
-        };
-
-        choices.appendChild(btn);
-
-    });
-
-    story.scrollTop=story.scrollHeight;
-
-    updateStats();
-    renderNPCs();
+ if(G.family==="busy"){
+  G.stats.empathy+=2;
+  G.npcs.mom.affinity-=5;
+  G.npcs.dad.affinity-=5;
+ }
 }
 
+/* ================= UI ================= */
 
-/* =========================================================
-   PLAYER INPUT
-========================================================= */
+function setupProfile(){
 
-function sendPlayerInput(){
+ $("myName").textContent=G.name;
+ $("myAge").textContent=`${G.age}살 · DAY ${G.day}`;
 
-    const input=document.getElementById("playerInput");
-    const text=input.value.trim();
+ if(G.avatar){
+  $("myAvatar").innerHTML=`<img src="${G.avatar}">`;
+ }else{
+  $("myAvatar").textContent=G.emoji;
+ }
 
-    if(!text) return;
-
-    addPlayerDialogue(text);
-    input.value="";
-
-    reactToInput(text);
+ updateUI();
 }
 
+function updateUI(){
 
-function addPlayerDialogue(text){
+ const S=G.stats;
+ const C=G.condition;
 
-    const story=document.getElementById("story");
+ const stats=[
+  ["Int",S.intelligence],
+  ["Cre",S.creativity],
+  ["Emp",S.empathy],
+  ["Cou",S.courage],
+  ["Cha",S.charm],
+  ["Luc",S.luck]
+ ];
 
-    const box=document.createElement("div");
-    box.className="dialogue me";
+ stats.forEach(([key,val])=>{
+  $("s"+key).textContent=val;
+  $("b"+key).style.width=Math.min(100,val)+"%";
+ });
 
-    box.innerHTML=`
-        <div class="dialogueAvatar">🙂</div>
-        <div class="dialogueBody">
-            <div class="speaker">${game.name}</div>
-            <div class="bubble">${escapeHTML(text)}</div>
-        </div>
-    `;
+ const conditions=[
+  ["Happy",C.happiness],
+  ["Health",C.health],
+  ["Conf",C.confidence],
+  ["Stress",C.stress]
+ ];
 
-    story.appendChild(box);
-    story.scrollTop=story.scrollHeight;
+ conditions.forEach(([key,val])=>{
+  $("s"+key).textContent=val;
+  $("b"+key).style.width=Math.min(100,val)+"%";
+ });
+
+ $("myAge").textContent=`${G.age}살 · DAY ${G.day}`;
+ $("datePill").textContent=`${G.age}살 · DAY ${G.day}`;
+ $("moneyPill").textContent="₩"+G.money.toLocaleString();
+
+ $("headerSub").textContent=
+  `${G.season} · ${G.age}번째 생의 ${G.ageProgress}번째 이야기`;
+
+ renderNpcMini();
+ renderMemoryMini();
+ renderModalLists();
 }
 
+function renderNpcMini(){
 
-function reactToInput(text){
+ const important=["mom","dad","grandma","neighbor","friend","teacher","rival"];
 
-    const lower=text.toLowerCase();
+ $("npcMini").innerHTML=important.map(id=>{
+  const n=G.npcs[id];
 
-    let target="minji";
+  if(!n)return "";
 
-    if(game.currentScene==="transfer" ||
-       game.currentScene==="lunchTogether" ||
-       game.currentScene==="transferSecret" ||
-       game.currentScene==="walkTogether"){
-        target="jiwon";
-    }
+  return `
+   <div class="npc">
+    <div class="avatar">${n.emoji}</div>
+    <div>
+     <div class="npcName">${n.name}</div>
+     <div class="npcRel">친밀도 ${n.affinity} · 신뢰 ${n.trust}</div>
+    </div>
+   </div>
+  `;
+ }).join("");
+}
 
-    if(lower.includes("미안")){
-        changeRelation(target,6,10);
-        npcReply(target,"괜찮아. 네가 그렇게 말해주니까 오히려 좀 마음이 편하다.");
-        return;
-    }
+function renderMemoryMini(){
 
-    if(lower.includes("고마워") || lower.includes("고맙")){
-        changeRelation(target,8,6);
-        npcReply(target,"뭘 그런 걸 가지고 그래.");
-        return;
-    }
+ const arr=G.memories.slice(-5).reverse();
 
-    if(lower.includes("좋아") || lower.includes("좋다")){
-        changeRelation(target,7,4);
-        npcReply(target,"...진짜?");
-        return;
-    }
+ if(!arr.length){
+  $("memoryMini").innerHTML=
+   `<div style="font-size:10px;color:#999">아직 특별한 기억이 없어.</div>`;
+  return;
+ }
 
-    if(lower.includes("싫어") || lower.includes("싫다")){
-        changeRelation(target,-7,-3);
-        npcReply(target,"아... 그래. 알겠어.");
-        return;
-    }
+ $("memoryMini").innerHTML=arr.map(m=>`
+  <div class="memory">
+   <b>${m.title}</b><br>
+   ${m.text}
+  </div>
+ `).join("");
+}
 
-    if(lower.includes("ㅋㅋ") || lower.includes("웃")){
-        game.stats.happiness+=2;
-        game.stats.charm+=1;
-        npcReply(target,"ㅋㅋㅋ 너 진짜 웃기다.");
-        return;
-    }
+/* ================= CHAT ENGINE ================= */
 
-    if(lower.includes("왜")){
-        npcReply(target,"그냥... 설명하기가 좀 어렵네.");
-        return;
-    }
+function addSystem(text){
 
-    if(lower.includes("같이")){
-        changeRelation(target,5,5);
-        npcReply(target,"그래. 같이 가자.");
-        return;
-    }
+ const el=document.createElement("div");
+ el.className="systemMsg";
+ el.textContent=text;
 
-    if(lower.includes("안녕")){
-        changeRelation(target,3,2);
-        npcReply(target,"응. 안녕.");
-        return;
-    }
+ $("chatScroll").appendChild(el);
+ scrollChat();
+}
 
-    npcReply(
-        target,
-        generateReaction(target,text)
+function addScene(title,place){
+
+ const el=document.createElement("div");
+ el.className="sceneTitle";
+
+ el.innerHTML=`
+  <strong>${title}</strong>
+  <span>📍 ${place} · ${G.age}살 · DAY ${G.day}</span>
+ `;
+
+ $("chatScroll").appendChild(el);
+ scrollChat();
+}
+
+function addMessage(npc,text){
+
+ const n=G.npcs[npc] || {
+  name:npc,
+  emoji:"👤"
+ };
+
+ const row=document.createElement("div");
+ row.className="msg";
+
+ row.innerHTML=`
+  <div class="avatar">${n.emoji}</div>
+  <div class="msgBody">
+   <div class="msgName">${n.name}</div>
+   <div class="bubble">${escapeHTML(text)}</div>
+  </div>
+ `;
+
+ $("chatScroll").appendChild(row);
+ scrollChat();
+}
+
+function addMe(text){
+
+ const row=document.createElement("div");
+ row.className="msg me";
+
+ const avatar=G.avatar
+  ? `<img src="${G.avatar}">`
+  : G.emoji;
+
+ row.innerHTML=`
+  <div class="avatar">${avatar}</div>
+  <div class="msgBody">
+   <div class="msgName">${G.name}</div>
+   <div class="bubble">${escapeHTML(text)}</div>
+  </div>
+ `;
+
+ $("chatScroll").appendChild(row);
+ scrollChat();
+}
+
+function typing(){
+
+ const row=document.createElement("div");
+ row.className="msg";
+ row.id="typing";
+
+ row.innerHTML=`
+  <div class="avatar">💬</div>
+  <div class="msgBody">
+   <div class="msgName">...</div>
+   <div class="bubble">
+    <div class="typing">
+     <i></i><i></i><i></i>
+    </div>
+   </div>
+  </div>
+ `;
+
+ $("chatScroll").appendChild(row);
+ scrollChat();
+}
+
+function removeTyping(){
+
+ const el=$("typing");
+ if(el)el.remove();
+}
+
+function scrollChat(){
+
+ requestAnimationFrame(()=>{
+  $("chatScroll").scrollTop=$("chatScroll").scrollHeight;
+ });
+}
+
+/* ================= SCENES ================= */
+
+function N(text){
+ return {type:"n",text};
+}
+
+function D(npc,text){
+ return {type:"d",npc,text};
+}
+
+function C(choices){
+ return {type:"c",choices};
+}
+
+function E(title,text){
+ return {type:"event",title,text};
+}
+
+function CH(text,effects={},flag=null){
+ return {
+  text,
+  effects,
+  flag
+ };
+}
+
+/*
+ effects:
+ {
+   stat:"intelligence", amount:2
+ }
+ 또는
+ {
+   condition:"happiness", amount:5
+ }
+ npc:"mom", affinity:5
+*/
+
+function applyEffects(e){
+
+ if(!e)return;
+
+ if(e.stat){
+  G.stats[e.stat]=Math.max(
+   0,
+   G.stats[e.stat]+(e.amount||0)
+  );
+ }
+
+ if(e.condition){
+  G.condition[e.condition]=Math.max(
+   0,
+   Math.min(100,G.condition[e.condition]+(e.amount||0))
+  );
+ }
+
+ if(e.money){
+  G.money=Math.max(0,G.money+e.money);
+ }
+
+ if(e.npc){
+  const n=G.npcs[e.npc];
+  if(n){
+   n.affinity=Math.max(0,Math.min(100,n.affinity+(e.affinity||0)));
+   n.trust=Math.max(0,Math.min(100,n.trust+(e.trust||0)));
+   n.respect=Math.max(0,Math.min(100,n.respect+(e.respect||0)));
+   n.jealousy=Math.max(0,Math.min(100,n.jealousy+(e.jealousy||0)));
+  }
+ }
+}
+
+function applyChoice(choice){
+
+ if(choice.effects){
+  Object.keys(choice.effects).forEach(key=>{
+   const value=choice.effects[key];
+
+   if(
+    ["intelligence","creativity","empathy",
+     "courage","charm","luck"].includes(key)
+   ){
+    G.stats[key]+=value;
+   }
+
+   if(
+    ["happiness","health","confidence","stress"].includes(key)
+   ){
+    G.condition[key]=Math.max(
+     0,
+     Math.min(100,G.condition[key]+value)
     );
+   }
+
+   if(key==="money"){
+    G.money=Math.max(0,G.money+value);
+   }
+  });
+ }
+
+ if(choice.npc){
+  const n=G.npcs[choice.npc];
+
+  if(n){
+   if(choice.affinity)n.affinity+=choice.affinity;
+   if(choice.trust)n.trust+=choice.trust;
+   if(choice.respect)n.respect+=choice.respect;
+   if(choice.jealousy)n.jealousy+=choice.jealousy;
+  }
+ }
+
+ if(choice.flag){
+  G.flags[choice.flag]=true;
+ }
+
+ if(choice.memory){
+  remember(
+   choice.memory.title,
+   choice.memory.text
+  );
+ }
+
+ updateUI();
 }
 
+/* ================= AGE 1 ================= */
 
-function generateReaction(target,text){
+function buildAge(age){
 
-    const npc=game.relationships[target];
+ G.queue=[];
 
-    if(npc.affinity>=80){
-        return `네가 그런 말을 할 줄은 몰랐네. 그래도... 나는 네 말이 싫지는 않아.`;
-    }
+ if(age===1){
+  buildAgeOne();
+  return;
+ }
 
-    if(npc.affinity>=60){
-        return `음... 네가 그렇게 생각한다면 알겠어.`;
-    }
+ if(age===2){
+  buildAgeTwo();
+  return;
+ }
 
-    if(npc.affinity>=40){
-        return `그럴 수도 있겠다. 조금 더 얘기해볼래?`;
-    }
+ if(age===3){
+  buildAgeThree();
+  return;
+ }
 
-    return `아... 그렇구나.`;
+ if(age<=6){
+  buildPreschool(age);
+  return;
+ }
+
+ if(age<=12){
+  buildElementary(age);
+  return;
+ }
+
+ if(age<=15){
+  buildMiddle(age);
+  return;
+ }
+
+ if(age<=18){
+  buildHigh(age);
+  return;
+ }
+
+ if(age<=22){
+  buildUniversity(age);
+  return;
+ }
+
+ if(age<=30){
+  buildTwenties(age);
+  return;
+ }
+
+ if(age<=45){
+  buildThirties(age);
+  return;
+ }
+
+ if(age<=60){
+  buildForties(age);
+  return;
+ }
+
+ buildLater(age);
 }
 
+/* ---------------------------------------------------------
+ AGE 1
+--------------------------------------------------------- */
 
-function npcReply(target,text){
+function buildAgeOne(){
 
-    setTimeout(()=>{
+ G.queue=[
 
-        const story=document.getElementById("story");
-        const npc=game.relationships[target];
+  {
+   title:"첫 번째 아침",
+   place:"우리 집 · 거실",
+   beats:[
+    N("눈을 떴다. 아직 세상이 어떤 곳인지 모른다. 천장에 달린 조명, 창문 사이로 들어오는 빛, 멀리서 들려오는 익숙한 목소리."),
+    D("mom","어머, 일어났어? 우리 아기 일어났네."),
+    C([
+     CH("엄마를 빤히 바라본다.",{empathy:1,happiness:3},null),
+     CH("손을 뻗어 엄마에게 간다.",{empathy:2,happiness:5},{flag:"first_mom_hug"}),
+     CH("다시 이불 속으로 들어간다.",{creativity:1,happiness:2},{flag:"lazy_baby"})
+    ]),
+    D("mom","어머. 오늘따라 표정이 진짜 이상하게 귀엽네."),
+    N("엄마가 품에 안아 올린다. 세상에서 가장 익숙한 냄새가 난다."),
+    D("mom","오늘은 뭘 해볼까?"),
+    C([
+     CH("창문 쪽을 본다.",{creativity:2},{flag:"likes_window"}),
+     CH("장난감 쪽을 본다.",{courage:1},{flag:"likes_toys"}),
+     CH("엄마 얼굴을 만진다.",{empathy:2},{flag:"touch_mom"})
+    ])
+   ]
+  },
 
-        const box=document.createElement("div");
-        box.className="dialogue";
+  {
+   title:"아침 식탁",
+   place:"주방",
+   beats:[
+    N("식탁 위에 작은 그릇이 놓였다. 색깔도 냄새도 전부 신기하다."),
+    D("mom","오늘은 맛있는 거 먹자."),
+    C([
+     CH("숟가락을 직접 잡으려고 한다.",{courage:2,creativity:1},{flag:"tries_spoon"}),
+     CH("엄마가 먹여주길 기다린다.",{happiness:2},{flag:"likes_help"}),
+     CH("그릇을 손으로 툭 친다.",{courage:1},{flag:"food_chaos"})
+    ]),
+    D("mom","아니, 아니! 그건 먹는 거지 치는 게 아니야. ㅋㅋ"),
+    C([
+     CH("웃는다.",{charm:2,happiness:4}),
+     CH("진지하게 다시 먹는다.",{intelligence:1}),
+     CH("또 친다.",{creativity:2,confidence:1})
+    ]),
+    D("dad","아침부터 난리네."),
+    C([
+     CH("아빠를 보고 웃는다.",{charm:2},{flag:"first_dad_smile"}),
+     CH("아빠에게 손을 뻗는다.",{empathy:1,happiness:3}),
+     CH("관심 없는 척한다.",{confidence:1})
+    ])
+   ]
+  },
 
-        box.innerHTML=`
-            <div class="dialogueAvatar">${npc.avatar}</div>
-            <div class="dialogueBody">
-                <div class="speaker">${npc.name}</div>
-                <div class="bubble">${text}</div>
-            </div>
-        `;
+  {
+   title:"빨간 공",
+   place:"거실",
+   beats:[
+    E("새로운 발견","빨간 공 하나가 바닥을 굴러왔다."),
+    D("dad","이거 잡아볼래?"),
+    C([
+     CH("기어가서 잡는다.",{courage:2,health:1},{flag:"red_ball"}),
+     CH("손으로 밀어본다.",{creativity:2},{flag:"push_ball"}),
+     CH("공보다 아빠를 본다.",{empathy:1})
+    ]),
+    N("공은 조금 굴러가다가 소파 밑으로 들어갔다."),
+    D("dad","어라? 사라졌네."),
+    C([
+     CH("소파 밑을 들여다본다.",{intelligence:2},{flag:"look_under_sofa"}),
+     CH("울음을 터뜨린다.",{happiness:-2},{flag:"cry_ball"}),
+     CH("아빠에게 가져오라고 손짓한다.",{charm:1,confidence:1})
+    ]),
+    D("dad","직접 찾으려고? 우리 애기 탐정이네."),
+    N("아빠가 공을 꺼내 주었다."),
+    C([
+     CH("공을 꼭 안는다.",{happiness:4}),
+     CH("다시 굴린다.",{creativity:1}),
+     CH("아빠에게 준다.",{empathy:2,trust:2})
+    ])
+   ]
+  },
 
-        story.appendChild(box);
-        story.scrollTop=story.scrollHeight;
+  {
+   title:"할머니가 왔다",
+   place:"현관",
+   beats:[
+    N("초인종이 울렸다."),
+    D("grandma","우리 애기! 할머니 왔다!"),
+    C([
+     CH("두 팔을 흔든다.",{charm:2,happiness:4}),
+     CH("엄마 뒤에 숨는다.",{empathy:1,confidence:-1}),
+     CH("할머니를 가만히 관찰한다.",{intelligence:2})
+    ]),
+    D("grandma","어머나, 많이 컸네."),
+    N("할머니가 작은 봉투를 꺼냈다."),
+    D("grandma","이거 네 거야."),
+    C([
+     CH("바로 손을 뻗는다.",{courage:1,charm:1},{flag:"takes_gift"}),
+     CH("엄마를 먼저 본다.",{empathy:2},{flag:"asks_permission"}),
+     CH("봉투를 흔든다.",{creativity:2})
+    ]),
+    D("grandma","하하. 뭐가 들었는지 궁금하지?"),
+    C([
+     CH("계속 봉투를 바라본다.",{intelligence:1}),
+     CH("할머니 얼굴을 본다.",{empathy:2}),
+     CH("봉투를 던진다.",{courage:1,creativity:1})
+    ])
+   ]
+  },
 
-        addLog(`${npc.name}와 대화했다.`);
+  {
+   title:"첫 산책",
+   place:"동네 공원",
+   beats:[
+    N("날씨가 좋았다. 엄마와 함께 집 밖으로 나왔다."),
+    D("mom","밖에 나오니까 좋지?"),
+    C([
+     CH("나뭇잎을 바라본다.",{creativity:2},{flag:"nature_interest"}),
+     CH("지나가는 사람을 구경한다.",{intelligence:1,empathy:1}),
+     CH("엄마 손을 꽉 잡는다.",{happiness:3},{flag:"holds_mom"})
+    ]),
+    N("그때 멀리서 또래 아이 하나가 공을 굴리고 있었다."),
+    D("neighbor","어?"),
+    C([
+     CH("그 아이에게 다가간다.",{courage:2,charm:1},{flag:"first_approach"}),
+     CH("엄마 뒤에서 바라본다.",{intelligence:1}),
+     CH("공을 가리킨다.",{creativity:1,courage:1})
+    ]),
+    D("neighbor","이거 갖고 놀래?"),
+    C([
+     CH("고개를 끄덕인다.",{charm:1},{flag:"accepts_ball"}),
+     CH("공을 가져간다.",{courage:1}),
+     CH("엄마를 바라본다.",{empathy:1})
+    ])
+   ]
+  },
 
-        updateStats();
+  {
+   title:"첫 번째 다툼",
+   place:"공원 놀이터",
+   beats:[
+    N("같이 놀던 아이가 갑자기 네가 가지고 있던 장난감을 가져갔다."),
+    D("neighbor","내 거야."),
+    C([
+     CH("그냥 준다.",{empathy:2},{flag:"gives_toy"}),
+     CH("다시 가져온다.",{courage:2},{flag:"takes_back_toy"}),
+     CH("엄마를 바라본다.",{confidence:1})
+    ]),
+    D("mom","괜찮아. 네가 어떻게 하고 싶은지 생각해봐."),
+    C([
+     CH("같이 놀자고 한다.",{empathy:3,charm:2},{flag:"shares"}),
+     CH("싫다고 한다.",{courage:2,confidence:2},{flag:"says_no"}),
+     CH("그냥 다른 장난감을 찾는다.",{creativity:2})
+    ]),
+    D("neighbor","같이 놀아도 돼?"),
+    C([
+     CH("고개를 끄덕인다.",{empathy:2,happiness:3}),
+     CH("장난감을 하나 건넨다.",{charm:2,empathy:2},{flag:"shares_first"}),
+     CH("아직 싫다.",{confidence:2})
+    ])
+   ]
+  },
 
-    },450);
+  {
+   title:"비 오는 오후",
+   place:"집 · 창가",
+   beats:[
+    N("갑자기 빗소리가 들리기 시작했다."),
+    D("mom","오늘은 밖에 못 나가겠다."),
+    C([
+     CH("창문에 붙어서 비를 본다.",{creativity:2},{flag:"rain_memory"}),
+     CH("장난감을 꺼내 달라고 한다.",{charm:1}),
+     CH("엄마 품에 안긴다.",{happiness:3})
+    ]),
+    N("창문에 빗방울이 하나씩 흘러내린다."),
+    D("mom","비가 왜 오는 것 같아?"),
+    C([
+     CH("하늘이 울어서.",{creativity:3},{flag:"poetic_baby"}),
+     CH("몰라.",{intelligence:1}),
+     CH("물이 떨어지는 거야.",{intelligence:2})
+    ]),
+    D("mom","그럴 수도 있겠네."),
+    N("그날의 빗소리는 이상하게 오래 기억에 남았다."),
+    C([
+     CH("비 소리를 듣다가 잠든다.",{happiness:3},{flag:"rain_sleep"}),
+     CH("계속 창밖을 본다.",{creativity:2}),
+     CH("엄마에게 웃어준다.",{charm:2,empathy:1})
+    ])
+   ]
+  },
+
+  {
+   title:"처음으로 화를 냈다",
+   place:"거실",
+   beats:[
+    N("엄마가 위험한 물건을 치워버렸다."),
+    D("mom","이건 안 돼. 위험해."),
+    C([
+     CH("울음을 터뜨린다.",{stress:5,happiness:-3},{flag:"tantrum"}),
+     CH("왜 안 되는지 쳐다본다.",{intelligence:2},{flag:"asks_why"}),
+     CH("다른 장난감을 찾는다.",{creativity:2})
+    ]),
+    D("mom","화나는 건 괜찮아. 그래도 엄마한테 알려줘."),
+    C([
+     CH("엄마에게 손을 뻗는다.",{empathy:2,confidence:1}),
+     CH("계속 운다.",{stress:3}),
+     CH("장난감을 다시 가리킨다.",{courage:1})
+    ]),
+    D("mom","속상했구나."),
+    N("처음으로 감정을 어떻게 다뤄야 하는지 조금 배웠다.")
+   ]
+  },
+
+  {
+   title:"첫 단어",
+   place:"저녁 식탁",
+   beats:[
+    N("엄마와 아빠가 식탁에 앉아 있었다."),
+    D("dad","오늘 하루 어땠어?"),
+    D("mom","우리 애기 오늘 엄청 돌아다녔지."),
+    N("입에서 무언가 말이 나오려고 했다."),
+    C([
+     CH("엄마를 부른다.",{empathy:3,charm:2},{flag:"first_word_mom",memory:{title:"첫 단어",text:"처음으로 엄마를 불렀다."}}),
+     CH("아빠를 부른다.",{empathy:3,charm:2},{flag:"first_word_dad",memory:{title:"첫 단어",text:"처음으로 아빠를 불렀다."}}),
+     CH("전혀 다른 소리를 낸다.",{creativity:3},{flag:"mysterious_first_word",memory:{title:"이상한 첫 단어",text:"아무도 예상하지 못한 소리를 냈다."}})
+    ]),
+    D("mom","방금 뭐라고 했어?"),
+    C([
+     CH("다시 말한다.",{confidence:3,charm:2}),
+     CH("웃는다.",{happiness:5}),
+     CH("모르는 척한다.",{creativity:1})
+    ]),
+    D("dad","들었지? 우리 애기 말했어."),
+    N("두 사람은 한참 동안 웃었다.")
+   ]
+  },
+
+  {
+   title:"첫 생일 준비",
+   place:"집",
+   beats:[
+    N("집 안이 평소보다 조금 부산스럽다."),
+    D("mom","곧 네 첫 생일이네."),
+    C([
+     CH("풍선을 잡는다.",{creativity:2}),
+     CH("케이크를 본다.",{charm:1,happiness:3}),
+     CH("사람들을 구경한다.",{intelligence:1,empathy:1})
+    ]),
+    D("grandma","뭐 갖고 싶어?"),
+    C([
+     CH("책을 고른다.",{intelligence:3},{flag:"birthday_book"}),
+     CH("공을 고른다.",{courage:2},{flag:"birthday_ball"}),
+     CH("인형을 고른다.",{empathy:2,charm:1},{flag:"birthday_doll"}),
+     CH("아무거나 좋다.",{happiness:3},{flag:"birthday_simple"})
+    ]),
+    D("mom","정말 그걸 고를 거야?"),
+    C([
+     CH("고개를 끄덕인다.",{confidence:2}),
+     CH("다른 것도 가리킨다.",{creativity:2}),
+     CH("케이크를 가리킨다.",{happiness:4})
+    ])
+   ]
+  },
+
+  {
+   title:"첫 생일",
+   place:"집 · 생일 파티",
+   beats:[
+    E("BIRTHDAY","드디어 첫 번째 생일이다."),
+    D("mom","생일 축하해, 우리 아기."),
+    D("dad","벌써 한 살이라니."),
+    D("grandma","시간 참 빠르다."),
+    C([
+     CH("케이크를 손으로 찍는다.",{creativity:3,happiness:5},{flag:"cake_attack"}),
+     CH("촛불을 바라본다.",{intelligence:2},{flag:"candle_focus"}),
+     CH("가족에게 웃는다.",{charm:3,empathy:2},{flag:"birthday_smile"})
+    ]),
+    N("사람들이 박수를 쳤다."),
+    D("mom","앞으로 어떤 사람이 될까?"),
+    C([
+     CH("가족을 바라본다.",{empathy:3},{flag:"family_first"}),
+     CH("케이크를 바라본다.",{happiness:4}),
+     CH("방 안을 둘러본다.",{curiosity:1,creativity:2})
+    ]),
+    N("아직 아무도 모른다."),
+    N("하지만 오늘의 선택 하나하나가 아주 먼 미래의 너에게 남을지도 모른다.")
+   ]
+  },
+
+  {
+   title:"첫 번째 밤",
+   place:"침실",
+   beats:[
+    N("생일 파티가 끝났다. 집이 조용해졌다."),
+    D("mom","오늘 재미있었어?"),
+    C([
+     CH("엄마 품에 안긴다.",{happiness:5,empathy:2}),
+     CH("장난감을 꼭 쥔다.",{confidence:1}),
+     CH("졸린 눈으로 웃는다.",{charm:2})
+    ]),
+    D("mom","잘 자."),
+    N("눈을 감는다."),
+    N("첫 번째 생이 끝나간다."),
+    N("아직 세상은 작고, 가족이 곧 전부다."),
+    E("AGE CLEAR","첫 번째 생의 기억이 저장되었습니다.")
+   ]
+  }
+
+ ];
+
+ G.ageProgress=G.queue.length;
 }
 
+/* ================= AGE 2 ================= */
 
-/* =========================================================
-   RELATION
-========================================================= */
+function buildAgeTwo(){
 
-function changeRelation(id,affinity,trust){
+ G.queue=[
+  {
+   title:"두 살의 아침",
+   place:"집",
+   beats:[
+    N("이제 걸어다닐 수 있다. 세상이 갑자기 넓어졌다."),
+    D("mom","혼자 걸어볼래?"),
+    C([
+     CH("혼자 걸어간다.",{courage:2,confidence:2}),
+     CH("엄마 손을 잡는다.",{happiness:3,empathy:1}),
+     CH("반대 방향으로 도망간다.",{creativity:2,courage:2})
+    ]),
+    D("mom","잡아라~!"),
+    C([
+     CH("깔깔 웃는다.",{happiness:5,charm:2}),
+     CH("숨는다.",{creativity:2}),
+     CH("다시 돌아온다.",{empathy:2})
+    ])
+   ]
+  },
 
-    const npc=game.relationships[id];
+  {
+   title:"말이 늘었다",
+   place:"거실",
+   beats:[
+    N("하루 사이에 할 수 있는 말이 늘어난 것 같다."),
+    D("dad","이거 뭐야?"),
+    C([
+     CH("정확하게 이름을 말한다.",{intelligence:3}),
+     CH("내가 만든 이름을 말한다.",{creativity:4},{flag:"invented_word"}),
+     CH("엉뚱한 소리를 한다.",{charm:3})
+    ]),
+    D("dad","그런 단어는 세상에 없는데?"),
+    C([
+     CH("진짜 있다고 주장한다.",{confidence:2,courage:1}),
+     CH("웃는다.",{charm:2}),
+     CH("다시 설명한다.",{intelligence:2})
+    ])
+   ]
+  },
 
-    if(!npc) return;
+  {
+   title:"마트 대모험",
+   place:"동네 마트",
+   beats:[
+    N("엄마와 장을 보러 갔다."),
+    D("mom","절대 혼자 멀리 가면 안 돼."),
+    C([
+     CH("엄마 손을 잡는다.",{empathy:2}),
+     CH("주변을 구경한다.",{intelligence:2}),
+     CH("몰래 다른 통로를 본다.",{courage:2,creativity:2})
+    ]),
+    N("그런데 눈앞에 엄청나게 큰 풍선이 보였다."),
+    C([
+     CH("풍선을 가리킨다.",{charm:2,happiness:3}),
+     CH("풍선을 달라고 한다.",{confidence:2}),
+     CH("그냥 지나간다.",{intelligence:1})
+    ])
+   ]
+  },
 
-    npc.affinity=Math.max(0,Math.min(100,npc.affinity+affinity));
-    npc.trust=Math.max(0,Math.min(100,npc.trust+trust));
+  {
+   title:"민준과 다시 만나다",
+   place:"놀이터",
+   beats:[
+    D("neighbor","너 전에 봤던 애 맞지?"),
+    C([
+     CH("다가간다.",{charm:2,courage:1}),
+     CH("기억하는 척한다.",{creativity:1}),
+     CH("공을 먼저 본다.",{happiness:2})
+    ]),
+    D("neighbor","우리 같이 놀자."),
+    C([
+     CH("같이 논다.",{empathy:2,happiness:4},{flag:"friendship_2"}),
+     CH("내 방식대로 하자고 한다.",{confidence:2,courage:2}),
+     CH("새 놀이를 만든다.",{creativity:4})
+    ]),
+    N("작은 친구가 생겼다.")
+   ]
+  },
 
-    updateRelationName(id);
+  {
+   title:"두 번째 생일",
+   place:"집",
+   beats:[
+    E("AGE 2 BIRTHDAY","두 번째 생일."),
+    D("mom","이번엔 네가 고르고 싶은 걸 골라."),
+    C([
+     CH("책.",{intelligence:3}),
+     CH("장난감 자동차.",{courage:2}),
+     CH("인형.",{empathy:2}),
+     CH("아무것도 필요 없어.",{confidence:2,happiness:2})
+    ]),
+    N("두 번째 생의 마지막 밤."),
+    E("AGE CLEAR","두 살의 기억이 저장되었습니다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
 }
 
+/* ================= AGE 3 ================= */
 
-function updateRelationName(id){
+function buildAgeThree(){
 
-    const npc=game.relationships[id];
+ G.queue=[
+  {
+   title:"내가 할 거야",
+   place:"집",
+   beats:[
+    D("mom","엄마가 해줄까?"),
+    C([
+     CH("내가 할 거야!",{confidence:4,courage:2},{flag:"independent"}),
+     CH("엄마가 해줘.",{happiness:2}),
+     CH("같이 하자.",{empathy:3})
+    ]),
+    D("mom","그래. 한번 해봐."),
+    N("작은 일 하나를 혼자 해냈다.")
+   ]
+  },
+  {
+   title:"유치원 첫날",
+   place:"유치원",
+   beats:[
+    N("처음 보는 아이들이 많다."),
+    D("teacher","안녕! 선생님이야."),
+    C([
+     CH("인사한다.",{charm:2,courage:2}),
+     CH("엄마에게 붙어 있는다.",{happiness:1}),
+     CH("교실을 구경한다.",{intelligence:2,creativity:1})
+    ]),
+    D("friend","너 이름 뭐야?"),
+    C([
+     CH(G.name+"라고 말한다.",{confidence:3,charm:2},{flag:"kindergarten_intro"}),
+     CH("손가락으로 나를 가리킨다.",{creativity:1}),
+     CH("대답하지 않는다.",{intelligence:1})
+    ])
+   ]
+  },
+  {
+   title:"내 자리",
+   place:"유치원 교실",
+   beats:[
+    N("자리에 앉아 있는데 옆자리 아이가 네 색연필을 가져갔다."),
+    C([
+     CH("돌려달라고 말한다.",{courage:2,confidence:2}),
+     CH("같이 쓰자고 한다.",{empathy:3,charm:1}),
+     CH("선생님에게 말한다.",{intelligence:1})
+    ]),
+    D("teacher","서로 이야기해서 해결해볼까?"),
+    C([
+     CH("같이 쓰기로 한다.",{empathy:3}),
+     CH("내가 먼저 쓰겠다고 한다.",{confidence:2}),
+     CH("새 색연필을 찾는다.",{creativity:2})
+    ])
+   ]
+  },
+  {
+   title:"첫 그림",
+   place:"유치원 미술 시간",
+   beats:[
+    D("teacher","오늘은 자유롭게 그림을 그려보자."),
+    C([
+     CH("가족을 그린다.",{empathy:3}),
+     CH("상상 속 동물을 그린다.",{creativity:5}),
+     CH("엄청 큰 집을 그린다.",{creativity:2,confidence:2}),
+     CH("아무것도 안 그린다.",{confidence:-1})
+    ]),
+    D("teacher","이건 무슨 그림이야?"),
+    C([
+     CH("내가 만든 세계야.",{creativity:4},{flag:"artist_seed"}),
+     CH("그냥 그린 거야.",{confidence:1}),
+     CH("설명해준다.",{intelligence:2,charm:1})
+    ])
+   ]
+  },
+  {
+   title:"세 번째 생일",
+   place:"집",
+   beats:[
+    E("AGE 3 BIRTHDAY","세 번째 생일. 이제 말도, 생각도 점점 많아진다."),
+    D("dad","커서 뭐가 되고 싶어?"),
+    C([
+     CH("아직 모르겠어.",{creativity:2}),
+     CH("멋있는 사람이 될 거야.",{confidence:3}),
+     CH("사람들을 웃게 할 거야.",{charm:3,empathy:2}),
+     CH("내가 좋아하는 걸 할 거야.",{courage:3})
+    ]),
+    N("아직은 장난처럼 한 말이었다."),
+    N("하지만 그 말은 언젠가 다시 돌아오게 된다.")
+   ]
+  }
+ ];
 
-    if(npc.affinity>=90) npc.relation="가장 소중한 사람";
-    else if(npc.affinity>=80) npc.relation="절친";
-    else if(npc.affinity>=70) npc.relation="친한 친구";
-    else if(npc.affinity>=55) npc.relation="친구";
-    else if(npc.affinity>=40) npc.relation="아는 사이";
-    else if(npc.affinity>=25) npc.relation="어색한 사이";
-    else npc.relation="거리감 있음";
+ G.ageProgress=G.queue.length;
 }
 
+/* ================= PRESCHOOL ================= */
 
-/* =========================================================
-   NPC RENDER
-========================================================= */
+function buildPreschool(age){
 
-function renderNPCs(){
+ G.queue=[
+  {
+   title:`${age}살의 새로운 반`,
+   place:"유치원",
+   beats:[
+    N("한 살 더 먹었다. 교실도, 친구도 조금씩 달라진다."),
+    D("teacher","이번 학기에는 새로운 친구들도 많이 만날 거야."),
+    C([
+     CH("먼저 친구에게 말을 건다.",{charm:2,courage:2}),
+     CH("선생님 옆에서 지켜본다.",{intelligence:2}),
+     CH("장난부터 친다.",{creativity:2,charm:1})
+    ]),
+    D("friend","우리 오늘 뭐 하고 놀아?"),
+    C([
+     CH("내가 놀이를 정한다.",{confidence:2}),
+     CH("친구가 정하게 한다.",{empathy:2}),
+     CH("새 놀이를 만든다.",{creativity:3})
+    ])
+   ]
+  },
+  {
+   title:"친구가 울었다",
+   place:"유치원",
+   beats:[
+    N("친구 하린이 구석에서 울고 있다."),
+    D("friend","나 속상해..."),
+    C([
+     CH("옆에 앉아준다.",{empathy:4},{flag:"comfort_friend"}),
+     CH("왜 우는지 물어본다.",{empathy:2,intelligence:1}),
+     CH("선생님을 부른다.",{courage:1})
+    ]),
+    D("friend","고마워."),
+    C([
+     CH("괜찮아.",{empathy:3}),
+     CH("같이 놀자.",{charm:3,happiness:2}),
+     CH("웃긴 표정을 한다.",{charm:4,creativity:1})
+    ])
+   ]
+  },
+  {
+   title:"첫 경쟁",
+   place:"유치원 운동장",
+   beats:[
+    D("teacher","누가 먼저 저기까지 달려볼까?"),
+    C([
+     CH("무조건 이기려고 한다.",{courage:3,confidence:2}),
+     CH("재미있게 달린다.",{happiness:3}),
+     CH("친구와 같이 달린다.",{empathy:2,charm:1})
+    ]),
+    N("결과는 중요했지만, 이상하게 결과보다 다른 것이 기억에 남았다.")
+   ]
+  },
+  {
+   title:"가족과의 저녁",
+   place:"집",
+   beats:[
+    D("mom","오늘 유치원에서 뭐 했어?"),
+    C([
+     CH("하루를 전부 설명한다.",{intelligence:1,charm:2}),
+     CH("친구 얘기를 한다.",{empathy:2}),
+     CH("아무 말도 안 한다.",{intelligence:1})
+    ]),
+    D("dad","요즘 네가 많이 컸네."),
+    C([
+     CH("나 안 컸어.",{charm:2}),
+     CH("나 이제 다 할 수 있어.",{confidence:3}),
+     CH("아빠도 컸어?",{creativity:3})
+    ])
+   ]
+  },
+  {
+   title:`${age}살 마지막 날`,
+   place:"침실",
+   beats:[
+    N("한 살이 또 끝났다."),
+    C([
+     CH("내일도 재밌었으면 좋겠다.",{happiness:3}),
+     CH("더 강해지고 싶다.",{courage:2}),
+     CH("더 많이 알고 싶다.",{intelligence:2}),
+     CH("친구가 많았으면 좋겠다.",{charm:2,empathy:2})
+    ]),
+    E("AGE CLEAR",`${age}번째 생의 기록이 저장되었습니다.`)
+   ]
+  }
+ ];
 
-    const list=document.getElementById("npcList");
-    list.innerHTML="";
-
-    Object.entries(game.relationships).forEach(([id,npc])=>{
-
-        const div=document.createElement("div");
-        div.className="npc";
-
-        div.innerHTML=`
-            <div class="npcAvatar">${npc.avatar}</div>
-            <div class="npcInfo">
-                <div class="npcName">${npc.name}</div>
-                <div class="npcRelation">${npc.relation} · ${npc.affinity}</div>
-            </div>
-        `;
-
-        div.onclick=()=>{
-            showNPC(id);
-        };
-
-        list.appendChild(div);
-    });
+ G.ageProgress=G.queue.length;
 }
 
+/* ================= ELEMENTARY ================= */
 
-/* =========================================================
-   DAY / STORY PROGRESSION
-========================================================= */
+function buildElementary(age){
+
+ G.queue=[
+  {
+   title:`초등학교 ${age-6}학년의 아침`,
+   place:"집",
+   beats:[
+    D("mom","학교 갈 준비했어?"),
+    C([
+     CH("완벽하게 준비했다.",{intelligence:1,confidence:2}),
+     CH("급하게 준비한다.",{luck:1}),
+     CH("아직 침대다.",{creativity:1,happiness:1})
+    ]),
+    D("mom","오늘도 좋은 하루 보내."),
+    N("학교라는 작은 사회가 시작됐다.")
+   ]
+  },
+  {
+   title:"새로운 친구",
+   place:"교실",
+   beats:[
+    D("teacher","오늘부터 옆자리가 바뀌었어요."),
+    D("friend","안녕."),
+    C([
+     CH("먼저 이름을 묻는다.",{charm:3,courage:2}),
+     CH("웃으며 인사한다.",{charm:2}),
+     CH("조용히 고개를 끄덕인다.",{intelligence:1})
+    ]),
+    D("friend","쉬는 시간에 같이 놀래?"),
+    C([
+     CH("좋아.",{happiness:3,charm:2}),
+     CH("뭐 하고 놀 건데?",{intelligence:1}),
+     CH("친구도 더 부르자.",{empathy:2})
+    ])
+   ]
+  },
+  {
+   title:"시험 전날",
+   place:"방",
+   beats:[
+    N("내일은 중요한 시험이다."),
+    C([
+     CH("끝까지 공부한다.",{intelligence:4,stress:5}),
+     CH("적당히 공부하고 잔다.",{intelligence:2,health:2}),
+     CH("친구와 같이 공부한다.",{intelligence:2,empathy:2}),
+     CH("아예 놀아버린다.",{happiness:4,luck:1})
+    ]),
+    D("mom","너무 무리하지는 마."),
+    C([
+     CH("조금만 더 할게.",{intelligence:2}),
+     CH("알겠어. 잘게.",{health:3,stress:-4}),
+     CH("같이 문제 풀어줘.",{empathy:2})
+    ])
+   ]
+  },
+  {
+   title:"시험 결과",
+   place:"교실",
+   beats:[
+    D("teacher","시험지를 나눠줄게."),
+    N("종이를 뒤집었다."),
+    C([
+     CH("바로 확인한다.",{courage:2}),
+     CH("친구 점수를 먼저 본다.",{empathy:1}),
+     CH("천천히 확인한다.",{intelligence:1})
+    ]),
+    N("점수는 지금의 너를 정의하지 않는다. 하지만 네 반응은 너를 조금씩 만든다."),
+    C([
+     CH("다음엔 더 잘해본다.",{confidence:3,intelligence:1}),
+     CH("친구와 비교하지 않는다.",{empathy:3}),
+     CH("속상해서 한동안 신경 쓴다.",{stress:5})
+    ])
+   ]
+  },
+  {
+   title:"학교 축제",
+   place:"학교 운동장",
+   beats:[
+    D("friend","축제에서 뭐 할래?"),
+    C([
+     CH("무대에 나가자.",{courage:3,charm:3},{flag:"stage_seed"}),
+     CH("부스 만들자.",{creativity:3}),
+     CH("구경만 하자.",{happiness:3}),
+     CH("내가 기획할게.",{intelligence:2,confidence:3})
+    ]),
+    N("작은 선택이었지만 앞으로의 취미와 재능에 영향을 줄 수도 있다.")
+   ]
+  },
+  {
+   title:"방과 후",
+   place:"학교 운동장",
+   beats:[
+    N("친구들이 하나둘 집으로 돌아갔다."),
+    D("friend","너는 안 가?"),
+    C([
+     CH("조금 더 같이 놀자.",{happiness:4,charm:2}),
+     CH("혼자 남아서 생각한다.",{creativity:3}),
+     CH("집에 간다.",{health:2})
+    ])
+   ]
+  },
+  {
+   title:`${age}살의 마지막`,
+   place:"집",
+   beats:[
+    N("학년의 마지막 날."),
+    C([
+     CH("친구들과 추억을 만든다.",{happiness:5,empathy:2}),
+     CH("내 실력을 돌아본다.",{intelligence:2,confidence:2}),
+     CH("새로운 목표를 세운다.",{courage:3})
+    ]),
+    E("AGE CLEAR","한 장의 학년이 끝났다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= MIDDLE ================= */
+
+function buildMiddle(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 새로운 교실`,
+   place:"중학교",
+   beats:[
+    N("초등학교와는 공기가 조금 다르다."),
+    D("teacher","자기소개부터 해볼까요?"),
+    C([
+     CH("당당하게 말한다.",{confidence:3,charm:2}),
+     CH("짧게 말한다.",{intelligence:1}),
+     CH("웃긴 말로 분위기를 푼다.",{charm:4,creativity:2})
+    ])
+   ]
+  },
+  {
+   title:"친구 관계가 복잡해졌다",
+   place:"교실",
+   beats:[
+    D("friend","나 사실 너한테 서운한 거 있어."),
+    C([
+     CH("왜 그런지 물어본다.",{empathy:4}),
+     CH("나도 할 말 있다고 한다.",{courage:3}),
+     CH("일단 사과한다.",{empathy:2}),
+     CH("대화를 피한다.",{stress:2})
+    ]),
+    D("friend","네가 그렇게 생각하는 줄 몰랐어."),
+    C([
+     CH("서로 이야기하자.",{empathy:3,confidence:2}),
+     CH("다음부터 조심할게.",{trust:2}),
+     CH("괜찮아.",{happiness:1})
+    ])
+   ]
+  },
+  {
+   title:"나만의 관심사",
+   place:"방",
+   beats:[
+    N("어느 날부터 특정한 것에 계속 관심이 간다."),
+    C([
+     CH("음악.",{creativity:3,charm:1},{flag:"interest_music"}),
+     CH("공부.",{intelligence:3},{flag:"interest_study"}),
+     CH("운동.",{courage:3,health:2},{flag:"interest_sport"}),
+     CH("그림/디자인.",{creativity:4},{flag:"interest_art"}),
+     CH("사람과 이야기.",{empathy:3,charm:3},{flag:"interest_people"})
+    ]),
+    D("mom","요즘 그거 좋아하나 보네."),
+    C([
+     CH("응. 더 해보고 싶어.",{confidence:3}),
+     CH("그냥 재미있어.",{happiness:2}),
+     CH("나중에 뭐가 될지는 모르겠어.",{creativity:2})
+    ])
+   ]
+  },
+  {
+   title:"첫 번째 라이벌",
+   place:"학교",
+   beats:[
+    D("rival","너 잘한다는 얘기 들었어."),
+    C([
+     CH("너도 잘하던데?",{respect:3,charm:2}),
+     CH("그래? 한번 해볼래?",{courage:3,confidence:2}),
+     CH("관심 없어.",{confidence:2})
+    ]),
+    D("rival","다음에는 내가 이길 거야."),
+    C([
+     CH("기다리고 있을게.",{courage:3,respect:2}),
+     CH("같이 성장하자.",{empathy:3}),
+     CH("웃는다.",{charm:2})
+    ])
+   ]
+  },
+  {
+   title:"첫 번째 비밀",
+   place:"학교 뒤편",
+   beats:[
+    D("friend","나 사실 아무한테도 말 안 했는데..."),
+    C([
+     CH("말해도 괜찮아.",{empathy:3,trust:3}),
+     CH("말하고 싶을 때 해.",{empathy:4}),
+     CH("나한테 말해줘.",{trust:2})
+    ]),
+    N("누군가의 비밀을 알게 되었다."),
+    C([
+     CH("절대 말하지 않는다.",{trust:5},{flag:"keeps_secret"}),
+     CH("필요하면 도움을 주겠다고 한다.",{empathy:4}),
+     CH("조심스럽게 거리를 둔다.",{intelligence:2})
+    ])
+   ]
+  },
+  {
+   title:`${age}살 마지막`,
+   place:"집",
+   beats:[
+    N("어린 시절과 어른 사이에 서 있는 느낌이 든다."),
+    D("dad","요즘 무슨 생각해?"),
+    C([
+     CH("내가 뭘 좋아하는지 찾고 있어.",{creativity:3}),
+     CH("잘 모르겠어.",{happiness:1}),
+     CH("내가 하고 싶은 게 있어.",{confidence:3,courage:2})
+    ]),
+    E("AGE CLEAR","한 해의 기억이 저장되었다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= HIGH ================= */
+
+function buildHigh(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 고등학교`,
+   place:"교실",
+   beats:[
+    N("이제 선택 하나가 미래와 연결되기 시작한다."),
+    D("friend","너 진짜 뭐 하고 싶어?"),
+    C([
+     CH("아티스트/크리에이터.",{creativity:3,charm:2},{flag:"dream_creator"}),
+     CH("전문직.",{intelligence:3},{flag:"dream_professional"}),
+     CH("사업.",{intelligence:2,courage:3},{flag:"dream_business"}),
+     CH("아직 모르겠어.",{creativity:2})
+    ])
+   ]
+  },
+  {
+   title:"동아리 모집",
+   place:"학교 복도",
+   beats:[
+    D("teacher","동아리 신청 기간입니다."),
+    C([
+     CH("음악 동아리.",{creativity:3,charm:2},{flag:"club_music"}),
+     CH("방송/영상.",{creativity:4,charm:1},{flag:"club_media"}),
+     CH("운동.",{health:3,courage:2},{flag:"club_sport"}),
+     CH("학생회.",{confidence:3,empathy:2},{flag:"club_student"}),
+     CH("아무것도 안 한다.",{happiness:2})
+    ])
+   ]
+  },
+  {
+   title:"친구가 고백했다",
+   place:"방과 후 학교",
+   beats:[
+    D("friend","나 할 말 있어."),
+    N("잠시 침묵이 이어졌다."),
+    D("friend","나 너 좋아해."),
+    C([
+     CH("나도 좋아해.",{happiness:6,charm:3},{flag:"first_love_yes"}),
+     CH("고마워. 하지만 친구로 지내고 싶어.",{empathy:4,confidence:2},{flag:"first_love_no"}),
+     CH("조금 생각할 시간을 줘.",{intelligence:2,confidence:2},{flag:"first_love_wait"})
+    ]),
+    N("이 순간의 선택은 앞으로의 관계에 큰 흔적을 남길 수 있다.")
+   ]
+  },
+  {
+   title:"중요한 시험",
+   place:"도서관",
+   beats:[
+    N("미래를 결정하는 시험이 가까워졌다."),
+    C([
+     CH("모든 시간을 공부에 투자한다.",{intelligence:6,stress:10,happiness:-4}),
+     CH("공부와 생활의 균형을 잡는다.",{intelligence:3,health:2,confidence:2}),
+     CH("내가 좋아하는 분야에 집중한다.",{creativity:4,charm:2}),
+     CH("시험보다 경험을 선택한다.",{courage:4,happiness:3})
+    ])
+   ]
+  },
+  {
+   title:"졸업식",
+   place:"학교 강당",
+   beats:[
+    D("friend","우리 진짜 졸업하네."),
+    C([
+     CH("울컥한다.",{empathy:3,happiness:3}),
+     CH("다음에 또 만나자.",{charm:2}),
+     CH("이제 시작이야.",{confidence:4,courage:2})
+    ]),
+    N("교문을 나섰다."),
+    N("다음부터는 선택지가 훨씬 많아진다."),
+    E("AGE CLEAR","청소년기의 한 장이 닫혔다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= UNIVERSITY ================= */
+
+function buildUniversity(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 새로운 도시`,
+   place:"대학교",
+   beats:[
+    N("집을 떠나거나 새로운 환경으로 들어왔다."),
+    C([
+     CH("새 사람들에게 먼저 말을 건다.",{charm:3,courage:2}),
+     CH("천천히 적응한다.",{intelligence:2}),
+     CH("동아리를 찾는다.",{creativity:2})
+    ]),
+    D("friend","같이 밥 먹을래?"),
+    C([
+     CH("좋아.",{happiness:3,charm:1}),
+     CH("오늘은 혼자 있고 싶어.",{confidence:2}),
+     CH("다른 친구도 부르자.",{empathy:2})
+    ])
+   ]
+  },
+  {
+   title:"첫 아르바이트",
+   place:"카페",
+   beats:[
+    D("manager","처음이지? 천천히 배워."),
+    C([
+     CH("빠르게 배우려고 한다.",{intelligence:3,confidence:2}),
+     CH("손님에게 먼저 인사한다.",{charm:3,empathy:2}),
+     CH("실수해도 웃는다.",{confidence:3})
+    ]),
+    N("첫 월급을 받았다."),
+    C([
+     CH("저축한다.",{intelligence:2,money:300000}),
+     CH("가족에게 선물을 산다.",{empathy:3,money:100000}),
+     CH("친구들과 맛있는 걸 먹는다.",{happiness:5,money:50000})
+    ])
+   ]
+  },
+  {
+   title:"진로의 갈림길",
+   place:"학교 도서관",
+   beats:[
+    N("졸업 후 무엇을 할지 진지하게 고민하게 된다."),
+    C([
+     CH("안정적인 길을 선택한다.",{intelligence:3,confidence:2},{flag:"stable_path"}),
+     CH("내 꿈을 선택한다.",{courage:5,creativity:3},{flag:"dream_path"}),
+     CH("일단 여러 경험을 한다.",{luck:2,creativity:3},{flag:"explore_path"})
+    ]),
+    D("friend","후회 안 할 자신 있어?"),
+    C([
+     CH("후회해도 내 선택이야.",{confidence:4}),
+     CH("솔직히 무서워.",{empathy:2}),
+     CH("아직 모르겠어.",{intelligence:2})
+    ])
+   ]
+  },
+  {
+   title:"큰 기회",
+   place:"휴대폰",
+   beats:[
+    N("예상하지 못한 연락이 왔다."),
+    D("unknown","안녕하세요. 당신의 작업을 보고 연락드렸습니다."),
+    C([
+     CH("바로 답장한다.",{courage:3,charm:2},{flag:"big_opportunity"}),
+     CH("일단 자세히 확인한다.",{intelligence:3}),
+     CH("친구에게 먼저 보여준다.",{empathy:2})
+    ]),
+    N("작은 선택 하나가 인생의 방향을 바꿀 수도 있다.")
+   ]
+  },
+  {
+   title:"졸업",
+   place:"대학교",
+   beats:[
+    N("몇 년이 지나고, 졸업을 앞두게 되었다."),
+    C([
+     CH("취업한다.",{confidence:3},{flag:"career_start"}),
+     CH("창업을 준비한다.",{courage:4,intelligence:3},{flag:"business_seed"}),
+     CH("계속 공부한다.",{intelligence:4}),
+     CH("여행을 떠난다.",{happiness:5,luck:2})
+    ]),
+    E("AGE CLEAR","청년기의 첫 장이 끝났다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= 20s ================= */
+
+function buildTwenties(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 첫 직장`,
+   place:"회사",
+   beats:[
+    D("boss","처음에는 누구나 서툴러."),
+    C([
+     CH("최대한 빨리 배우겠습니다.",{intelligence:3,confidence:2}),
+     CH("제가 먼저 해볼게요.",{courage:3}),
+     CH("팀과 같이 해보겠습니다.",{empathy:3})
+    ]),
+    N("첫 번째 직장생활이 시작됐다.")
+   ]
+  },
+  {
+   title:"월급날",
+   place:"집",
+   beats:[
+    N("통장에 첫 월급이 들어왔다."),
+    C([
+     CH("절반 이상 저축한다.",{intelligence:3,money:1000000}),
+     CH("가족에게 쓴다.",{empathy:3,money:500000}),
+     CH("내 꿈에 투자한다.",{creativity:3,courage:2,money:700000}),
+     CH("신나게 써버린다.",{happiness:6,money:200000})
+    ])
+   ]
+  },
+  {
+   title:"사랑과 현실",
+   place:"카페",
+   beats:[
+    D("friend","우리 앞으로 어떻게 하고 싶어?"),
+    C([
+     CH("진지하게 미래를 생각해보자.",{confidence:3,empathy:3},{flag:"serious_relationship"}),
+     CH("지금이 좋으면 됐지.",{happiness:3}),
+     CH("각자 꿈부터 이루자.",{courage:3})
+    ])
+   ]
+  },
+  {
+   title:"퇴사 고민",
+   place:"회사",
+   beats:[
+    N("계속 이 일을 해야 하는지 고민이 생겼다."),
+    C([
+     CH("버티면서 배운다.",{intelligence:3,confidence:2}),
+     CH("새로운 곳을 찾는다.",{courage:4,luck:2}),
+     CH("내 사업을 준비한다.",{courage:5,intelligence:2,creativity:2},{flag:"entrepreneur"}),
+     CH("일을 줄이고 삶을 챙긴다.",{happiness:5,health:3})
+    ])
+   ]
+  },
+  {
+   title:"내 이름으로 만든 것",
+   place:"작업실",
+   beats:[
+    N("처음으로 누군가가 네 이름을 보고 찾아왔다."),
+    C([
+     CH("더 크게 해본다.",{courage:4,charm:2,money:500000}),
+     CH("천천히 성장한다.",{intelligence:3,creativity:2,money:200000}),
+     CH("다른 사람과 협업한다.",{empathy:3,charm:3,money:300000})
+    ]),
+    E("LIFE TURN","20대의 선택이 앞으로의 직업과 인간관계를 결정하기 시작했다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= 30s ================= */
+
+function buildThirties(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 선택의 결과`,
+   place:"일터",
+   beats:[
+    N("20대에 했던 선택들이 조금씩 결과로 나타나기 시작했다."),
+    C([
+     CH("더 큰 목표를 잡는다.",{confidence:4,courage:3}),
+     CH("현재의 삶을 지킨다.",{happiness:4,health:3}),
+     CH("완전히 새로운 걸 시작한다.",{creativity:4,luck:2})
+    ])
+   ]
+  },
+  {
+   title:"가족의 변화",
+   place:"집",
+   beats:[
+    D("mom","요즘 네가 정말 바빠 보인다."),
+    C([
+     CH("시간을 더 내겠다.",{empathy:4,happiness:3}),
+     CH("내 상황도 설명한다.",{confidence:2,empathy:2}),
+     CH("선물을 준비한다.",{charm:2,money:-200000})
+    ])
+   ]
+  },
+  {
+   title:"큰돈을 벌 기회",
+   place:"회의실",
+   beats:[
+    N("높은 수익을 기대할 수 있지만 위험도 큰 기회가 들어왔다."),
+    C([
+     CH("도전한다.",{courage:5,luck:3,money:3000000},{flag:"risk_taken"}),
+     CH("자료부터 분석한다.",{intelligence:5,luck:1},{flag:"careful_investor"}),
+     CH("거절한다.",{confidence:2,health:2})
+    ])
+   ]
+  },
+  {
+   title:"오래된 친구",
+   place:"술집이 아닌 작은 식당",
+   beats:[
+    D("friend","우리 예전엔 진짜 아무것도 몰랐는데."),
+    C([
+     CH("그래도 지금도 비슷해.",{happiness:4}),
+     CH("우리가 진짜 많이 변했지.",{intelligence:2}),
+     CH("앞으로도 같이 보자.",{empathy:4})
+    ]),
+    N("어릴 때 만든 관계가 수십 년 뒤에도 남아 있다는 사실을 깨닫는다.")
+   ]
+  },
+  {
+   title:"내가 원하는 삶",
+   place:"집",
+   beats:[
+    N("어느 날 문득 생각한다."),
+    D("unknown","요즘 행복해?"),
+    C([
+     CH("응. 내가 원하는 삶을 살고 있어.",{happiness:8,confidence:3},{flag:"fulfilled"}),
+     CH("아직 더 하고 싶은 게 있어.",{courage:3,creativity:3}),
+     CH("잘 모르겠어.",{intelligence:2})
+    ]),
+    E("AGE CLEAR","30대의 중요한 기억이 저장되었다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= 40s ================= */
+
+function buildForties(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 새로운 책임`,
+   place:"일터",
+   beats:[
+    N("사람들이 네게 조언을 구하기 시작했다."),
+    C([
+     CH("내 경험을 나눈다.",{empathy:4,respect:3}),
+     CH("스스로 답을 찾게 한다.",{intelligence:3}),
+     CH("내가 먼저 배우겠다고 한다.",{humility:2,creativity:2})
+    ])
+   ]
+  },
+  {
+   title:"부모님과의 시간",
+   place:"가족의 집",
+   beats:[
+    D("grandma","예전에는 네가 내 손을 잡고 다녔는데."),
+    C([
+     CH("이제는 내가 손을 잡아줄게.",{empathy:6,happiness:5}),
+     CH("그때 얘기 더 해줘.",{intelligence:2,empathy:3}),
+     CH("웃으며 옛날 이야기를 한다.",{happiness:5})
+    ])
+   ]
+  },
+  {
+   title:"새로운 꿈",
+   place:"작업실",
+   beats:[
+    N("나이가 들어도 하고 싶은 일은 생긴다."),
+    C([
+     CH("새로운 사업을 시작한다.",{courage:4,intelligence:3,money:-1000000}),
+     CH("취미로 즐긴다.",{happiness:6,creativity:3}),
+     CH("다른 사람을 가르친다.",{empathy:5,respect:4})
+    ])
+   ]
+  },
+  {
+   title:"인생 중간 점검",
+   place:"집",
+   beats:[
+    D("dad","다시 태어나도 지금처럼 살 것 같아?"),
+    C([
+     CH("응.",{happiness:7,confidence:3},{flag:"no_regret"}),
+     CH("몇 가지는 바꾸고 싶어.",{intelligence:3}),
+     CH("모르겠어. 그래도 지금은 좋아.",{happiness:5})
+    ]),
+    E("AGE CLEAR","인생의 중반을 지나고 있다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= LATER ================= */
+
+function buildLater(age){
+
+ G.queue=[
+  {
+   title:`${age}살 · 느려진 하루`,
+   place:"집",
+   beats:[
+    N("예전보다 하루가 천천히 흘러간다."),
+    C([
+     CH("아침 산책을 한다.",{health:4,happiness:4}),
+     CH("오래된 사진을 본다.",{empathy:3,happiness:5}),
+     CH("새로운 것을 배운다.",{intelligence:3,creativity:3})
+    ])
+   ]
+  },
+  {
+   title:"오래된 사진",
+   place:"거실",
+   beats:[
+    N("사진 속에는 어린 시절의 네가 있다."),
+    C([
+     CH("첫 생일 사진을 본다.",{happiness:6},{flag:"remember_first_birthday"}),
+     CH("친구들과 찍은 사진을 본다.",{happiness:6,empathy:3}),
+     CH("가족 사진을 본다.",{empathy:5,happiness:6})
+    ]),
+    N("시간은 너무 빨리 지나간 것 같기도 하고, 아주 길었던 것 같기도 하다.")
+   ]
+  },
+  {
+   title:"마지막으로 만난 친구",
+   place:"공원",
+   beats:[
+    D("friend","우리 처음 만난 게 언제였더라?"),
+    C([
+     CH("아주 어릴 때.",{happiness:5}),
+     CH("정확히 기억해.",{intelligence:2,happiness:4}),
+     CH("그때부터 계속 친구였지.",{empathy:5})
+    ]),
+    N("수십 년 전의 작은 만남이 지금까지 이어져 있었다.")
+   ]
+  },
+  {
+   title:"마지막 생일",
+   place:"집",
+   beats:[
+    E("FINAL BIRTHDAY","80번째 생일."),
+    D("family","생일 축하해."),
+    C([
+     CH("고맙다고 말한다.",{empathy:5,happiness:5}),
+     CH("웃으며 케이크를 자른다.",{happiness:7}),
+     CH("내 인생 이야기를 들려준다.",{creativity:4,empathy:4})
+    ]),
+    N("한 사람의 인생은 수많은 선택의 합이었다."),
+    N("그리고 이제 마지막 페이지가 가까워진다."),
+    E("LIFE COMPLETE","인생의 마지막 장으로 이동합니다.")
+   ]
+  }
+ ];
+
+ G.ageProgress=G.queue.length;
+}
+
+/* ================= SCENE FLOW ================= */
+
+function nextScene(){
+
+ if(G.sceneIndex>=G.queue.length){
+
+  ageUp();
+  return;
+ }
+
+ const scene=G.queue[G.sceneIndex];
+
+ G.currentScene=scene;
+ G.beat=0;
+
+ addScene(scene.title,scene.place);
+
+ addSystem(
+  `${G.age}살 · DAY ${G.day} · ${G.season}`
+ );
+
+ processBeat();
+}
+
+function processBeat(){
+
+ const scene=G.currentScene;
+
+ if(!scene){
+  nextScene();
+  return;
+ }
+
+ if(G.beat>=scene.beats.length){
+
+  finishScene();
+  return;
+ }
+
+ const beat=scene.beats[G.beat];
+
+ if(beat.type==="n"){
+
+  G.beat++;
+
+  setTimeout(()=>{
+   addSystem(beat.text);
+   processBeat();
+  },350);
+
+  return;
+ }
+
+ if(beat.type==="event"){
+
+  G.beat++;
+
+  setTimeout(()=>{
+   const el=document.createElement("div");
+   el.className="eventCard";
+
+   el.innerHTML=`
+    <div class="eventIcon">✨</div>
+    <strong>${escapeHTML(beat.title)}</strong>
+    <span>${escapeHTML(beat.text)}</span>
+   `;
+
+   $("chatScroll").appendChild(el);
+   scrollChat();
+
+   processBeat();
+  },350);
+
+  return;
+ }
+
+ if(beat.type==="d"){
+
+  G.beat++;
+
+  setTimeout(()=>{
+   addMessage(beat.npc,beat.text);
+   processBeat();
+  },450);
+
+  return;
+ }
+
+ if(beat.type==="c"){
+
+  showChoices(beat.choices);
+  return;
+ }
+}
+
+function showChoices(choices){
+
+ const box=$("choices");
+
+ box.innerHTML="";
+
+ choices.forEach((choice,index)=>{
+
+  const btn=document.createElement("button");
+  btn.className="choice";
+
+  btn.innerHTML=
+   `<b>${index+1}</b>${escapeHTML(choice.text)}`;
+
+  btn.onclick=()=>chooseChoice(choice);
+
+  box.appendChild(btn);
+ });
+
+ G.busy=false;
+}
+
+function chooseChoice(choice){
+
+ if(G.busy)return;
+
+ G.busy=true;
+
+ $("choices").innerHTML="";
+
+ addMe(choice.text);
+
+ applyChoice(choice);
+
+ G.memories.push({
+  age:G.age,
+  day:G.day,
+  title:"선택",
+  text:choice.text
+ });
+
+ G.beat++;
+
+ setTimeout(()=>{
+
+  typing();
+
+  setTimeout(()=>{
+
+   removeTyping();
+
+   reactToChoice(choice);
+
+   processBeat();
+
+  },500);
+
+ },500);
+}
+
+function reactToChoice(choice){
+
+ let response="";
+
+ const text=choice.text;
+
+ if(text.includes("같이")){
+  response="좋아. 같이 해보자.";
+ }else if(text.includes("싫")){
+  response="알겠어. 네가 그렇게 느낄 수도 있지.";
+ }else if(text.includes("고마")){
+  response="나도 고마워.";
+ }else if(text.includes("공부")){
+  response="무리하지 말고 네 페이스대로 해.";
+ }else if(text.includes("도전")){
+  response="그럼 한번 제대로 해보자.";
+ }else if(text.includes("친구")){
+  response="그 사람이랑 정말 잘 지내고 있구나.";
+ }else if(text.includes("가족")){
+  response="가족을 생각하는 마음이 느껴진다.";
+ }else if(text.includes("꿈")){
+  response="네가 원하는 걸 직접 선택하는 게 중요하지.";
+ }else if(text.includes("모르")){
+  response="모를 수도 있어. 천천히 알아가면 돼.";
+ }else{
+  response=random([
+   "그래.",
+   "그렇게 생각했구나.",
+   "좋아. 그 선택 기억해둘게.",
+   "재미있는 선택인데?",
+   "알겠어.",
+   "그럼 그렇게 해보자."
+  ]);
+ }
+
+ const npc=guessReactionNPC();
+
+ addMessage(npc,response);
+}
+
+function guessReactionNPC(){
+
+ if(G.currentScene && G.currentScene.beats){
+
+  for(let i=G.beat;i>=0;i--){
+
+   const b=G.currentScene.beats[i];
+
+   if(b && b.npc)return b.npc;
+  }
+ }
+
+ return "mom";
+}
+
+/* ================= FREE TEXT ================= */
+
+function sendFree(){
+
+ if(G.busy)return;
+
+ const input=$("freeInput");
+ const text=input.value.trim();
+
+ if(!text)return;
+
+ input.value="";
+ G.busy=true;
+ $("choices").innerHTML="";
+
+ addMe(text);
+
+ remember(
+  "내가 직접 한 말",
+  text
+ );
+
+ setTimeout(()=>{
+
+  typing();
+
+  setTimeout(()=>{
+
+   removeTyping();
+
+   let response="";
+
+   if(
+    text.includes("엄마") ||
+    text.includes("엄마한테")
+   ){
+    response="엄마가 네 말을 듣고 잠깐 웃었다.";
+    G.npcs.mom.affinity+=2;
+   }
+   else if(
+    text.includes("친구")
+   ){
+    response="친구가 네 말을 곰곰이 생각한다.";
+    G.npcs.friend.trust+=2;
+   }
+   else if(
+    text.includes("좋아")
+   ){
+    response="그 말을 듣고 분위기가 조금 밝아졌다.";
+    G.condition.happiness+=2;
+   }
+   else if(
+    text.includes("싫어") ||
+    text.includes("화")
+   ){
+    response="주변 사람들이 네 표정을 살핀다.";
+    G.condition.stress+=2;
+   }
+   else{
+    response=random([
+     "상대방이 네 말을 잠시 생각했다.",
+     "그 말을 들은 사람이 고개를 끄덕였다.",
+     "그건 예상하지 못한 대답이었다.",
+     "주변의 분위기가 조금 달라졌다.",
+     "그 말을 기억해두기로 했다."
+    ]);
+   }
+
+   addMessage(
+    guessReactionNPC(),
+    response
+   );
+
+   G.beat++;
+
+   updateUI();
+
+   setTimeout(processBeat,350);
+
+  },500);
+
+ },500);
+}
+
+/* ================= SCENE FINISH ================= */
+
+function finishScene(){
+
+ G.completedScenes++;
+ G.ageProgress++;
+
+ G.lifeDays++;
+
+ advanceDay();
+
+ checkAchievements();
+
+ updateUI();
+ saveGame();
+
+ setTimeout(()=>{
+
+  G.sceneIndex++;
+
+  if(G.sceneIndex<G.queue.length){
+
+   addSystem("다음 이야기로 넘어간다...");
+
+   setTimeout(nextScene,500);
+
+  }else{
+
+   ageUp();
+
+  }
+
+ },500);
+}
 
 function advanceDay(){
 
-    game.day++;
+ G.day++;
 
-    if(game.day>30){
-        game.day=1;
-        game.month++;
+ if(G.day>30){
+  G.day=1;
+  G.month++;
 
-        if(game.month>12){
-            game.month=1;
-            game.age++;
-        }
-    }
+  if(G.month>12){
+   G.month=1;
+  }
 
-    game.time="오전 8:00";
-
-    addLog(`${game.age}세 · 새로운 하루가 시작되었다.`);
-
-    randomLifeEvent();
+  setSeason();
+ }
 }
 
+function setSeason(){
 
-function randomLifeEvent(){
-
-    const r=Math.random();
-
-    if(r<0.15){
-        loadRandomEvent();
-        return;
-    }
-
-    if(r<0.28){
-        game.stats.happiness+=4;
-        loadScene("newMorning");
-        return;
-    }
-
-    if(r<0.40){
-        loadScene("schoolMorning");
-        return;
-    }
-
-    loadScene("newMorning");
+ if([3,4,5].includes(G.month))G.season="봄";
+ else if([6,7,8].includes(G.month))G.season="여름";
+ else if([9,10,11].includes(G.month))G.season="가을";
+ else G.season="겨울";
 }
 
+/* ================= AGE UP ================= */
 
-/* =========================================================
-   EXTRA SCENES
-========================================================= */
+function ageUp(){
 
-scenes.newMorning={
-    chapter:"CHAPTER · 일상",
-    title:"평범한 아침",
-    location:"집",
-    time:"오전 7:30",
+ if(G.age>=80){
+  finishLife();
+  return;
+ }
 
-    content:[
-        {
-            type:"narration",
-            text:`눈을 떴다.<br><br>
-            특별한 사건은 없었다.<br>
-            그런데 이상하게 오늘은 무언가 좋은 일이 생길 것 같은 기분이 들었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"mother",
-            text:`일어나. 늦겠다.`
-        }
-    ],
+ const old=G.age;
 
-    choices:[
-        {
-            text:"바로 일어난다.",
-            action:()=>{
-                game.stats.health+=2;
-                loadScene("schoolMorning");
-            }
-        },
-        {
-            text:"5분만 더 잔다.",
-            action:()=>{
-                game.stats.health+=3;
-                loadScene("schoolMorning");
-            }
-        },
-        {
-            text:"휴대폰부터 확인한다.",
-            action:()=>{
-                loadScene("phoneMorning");
-            }
-        }
-    ]
-};
+ G.age++;
+ G.day=1;
+ G.month=1;
+ G.season="봄";
+ G.sceneIndex=0;
+ G.ageProgress=0;
 
+ G.condition.happiness+=3;
+ G.condition.stress=Math.max(0,G.condition.stress-5);
 
-scenes.schoolMorning={
-    chapter:"CHAPTER · 학교생활",
-    title:"아침의 교실",
-    location:"학교 · 교실",
-    time:"오전 8:20",
+ addSystem(
+  `🎂 생일! ${old}살 → ${G.age}살`
+ );
 
-    content:[
-        {
-            type:"narration",
-            text:`교실에 들어서자 익숙한 얼굴들이 보였다.<br><br>
-            매일 똑같은 공간인데도 사람들의 표정에 따라 분위기가 달라진다.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`야. 오늘 점심 뭐 먹을 거냐?`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`아침부터 밥 얘기냐?`
-        }
-    ],
+ remember(
+  `${old}살의 마지막`,
+  `${old}살의 이야기를 모두 마쳤다.`
+ );
 
-    choices:[
-        {
-            text:"친구들과 장난친다.",
-            action:()=>{
-                game.stats.happiness+=3;
-                changeRelation("dohyun",4,2);
-                loadScene("schoolEvent");
-            }
-        },
-        {
-            text:"준혁을 찾는다.",
-            action:()=>{
-                if(game.flags.metTransfer){
-                    changeRelation("jiwon",4,2);
-                }
-                loadScene("schoolEvent");
-            }
-        }
-    ]
-};
+ updateUI();
 
+ setTimeout(()=>{
 
-scenes.phoneMorning={
-    chapter:"CHAPTER · 일상",
-    title:"알림 세 개",
-    location:"침실",
-    time:"오전 7:34",
+  buildAge(G.age);
 
-    content:[
-        {
-            type:"narration",
-            text:`휴대폰에는 알림이 세 개 떠 있었다.<br><br>
-            단체 채팅방 하나.<br>
-            민지의 메시지 하나.<br>
-            그리고... 이름을 보자마자 잠이 조금 깼다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`[메시지] 오늘 학교 오지?`
-        }
-    ],
+  addScene(
+   `${G.age}살의 새로운 시작`,
+   "새로운 날"
+  );
 
-    choices:[
-        {
-            text:"'당연하지ㅋㅋ'라고 답한다.",
-            action:()=>{
-                changeRelation("jiwon",5,3);
-                loadScene("schoolMorning");
-            }
-        },
-        {
-            text:"'왜?'라고 답한다.",
-            action:()=>{
-                loadScene("schoolMorning");
-            }
-        },
-        {
-            text:"답장하지 않는다.",
-            action:()=>{
-                loadScene("schoolMorning");
-            }
-        }
-    ]
-};
+  addSystem(
+   "새로운 한 해가 시작됐다."
+  );
 
+  setTimeout(nextScene,700);
 
-scenes.schoolEvent={
-    chapter:"CHAPTER · 학교생활",
-    title:"갑자기 찾아온 사건",
-    location:"학교 · 복도",
-    time:"오후 2:40",
-
-    content:[
-        {
-            type:"narration",
-            text:`쉬는 시간이었다.<br><br>
-            복도 쪽에서 갑자기 웅성거리는 소리가 들렸다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`뭐야? 무슨 일이지?`
-        },
-        {
-            type:"narration",
-            text:`학생들이 게시판 앞에 몰려 있었다.<br><br>
-            다음 달 학교 축제에 관한 공지가 올라온 모양이었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"축제 준비에 참여한다.",
-            action:()=>{
-                game.flags.festival=true;
-                game.stats.charm+=4;
-                game.stats.creative+=5;
-                addMemory("학교 축제 준비에 참여하기로 했다.");
-                loadScene("festivalPrepare");
-            }
-        },
-        {
-            text:"친구들과 구경만 한다.",
-            action:()=>{
-                loadScene("festivalPrepare");
-            }
-        }
-    ]
-};
-
-
-scenes.festivalPrepare={
-    chapter:"CHAPTER · 학교 축제",
-    title:"무대에 설 사람?",
-    location:"학교 · 강당",
-    time:"금요일 · 오후 4:10",
-
-    content:[
-        {
-            type:"narration",
-            text:`축제 준비가 본격적으로 시작됐다.<br><br>
-            무대에 설 사람을 정해야 했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`너 해.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`맞아. 너 하면 재밌을 것 같은데?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`...나도 그렇게 생각해.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"무대에 도전한다.",
-            action:()=>{
-                game.stats.charm+=8;
-                game.stats.creative+=8;
-                game.stats.fame+=10;
-                addMemory("학교 축제 무대에 도전하기로 했다.");
-                loadScene("festivalStage");
-            }
-        },
-        {
-            text:"친구들 뒤에서 돕는다.",
-            action:()=>{
-                game.stats.creative+=5;
-                loadScene("festivalBackstage");
-            }
-        },
-        {
-            text:"거절한다.",
-            action:()=>{
-                loadScene("festivalBackstage");
-            }
-        }
-    ]
-};
-
-
-scenes.festivalStage={
-    chapter:"CHAPTER · 학교 축제",
-    title:"무대 직전",
-    location:"학교 · 강당 뒤편",
-    time:"축제 당일 · 오후 6:50",
-
-    content:[
-        {
-            type:"narration",
-            text:`무대 뒤.<br><br>
-            심장이 평소보다 빠르게 뛰고 있었다.<br>
-            관객들의 소리가 커졌다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`긴장돼?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`괜찮아. 네가 하면 잘할 것 같아.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"웃으면서 무대로 나간다.",
-            action:()=>{
-                game.stats.happiness+=10;
-                game.stats.fame+=15;
-                addMemory("학교 축제 무대에 올랐다.");
-                loadScene("festivalAfter");
-            }
-        },
-        {
-            text:"마지막까지 연습한다.",
-            action:()=>{
-                game.stats.creative+=4;
-                game.stats.fame+=8;
-                loadScene("festivalAfter");
-            }
-        }
-    ]
-};
-
-
-scenes.festivalAfter={
-    chapter:"CHAPTER · 학교 축제",
-    title:"공연이 끝난 뒤",
-    location:"학교 · 운동장",
-    time:"오후 8:20",
-
-    content:[
-        {
-            type:"narration",
-            text:`공연이 끝났다.<br><br>
-            예상보다 훨씬 많은 사람들이 너에게 말을 걸었다.<br>
-            그런데 그중 가장 먼저 찾아온 사람은 의외였다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`잘했어. 진짜로.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`봤지? 내가 잘한다고 했잖아.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"준혁에게 고맙다고 한다.",
-            action:()=>{
-                changeRelation("jiwon",12,8);
-                loadScene("festivalNight");
-            }
-        },
-        {
-            text:"민지에게 장난친다.",
-            action:()=>{
-                changeRelation("minji",8,4);
-                loadScene("festivalNight");
-            }
-        },
-        {
-            text:"둘 다 안아준다.",
-            action:()=>{
-                changeRelation("minji",5,3);
-                changeRelation("jiwon",7,5);
-                game.stats.happiness+=5;
-                loadScene("festivalNight");
-            }
-        }
-    ]
-};
-
-
-scenes.festivalBackstage={
-    chapter:"CHAPTER · 학교 축제",
-    title:"무대 뒤의 밤",
-    location:"학교 · 무대 뒤",
-    time:"오후 7:40",
-
-    content:[
-        {
-            type:"narration",
-            text:`무대 뒤에서 친구들을 도왔다.<br><br>
-            화려한 무대보다 뒤에서 움직이는 사람들이 더 많다는 걸 처음 알았다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`너 없었으면 진짜 망했을걸.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"별거 아니라고 한다.",
-            action:()=>{
-                changeRelation("minji",7,7);
-                loadScene("festivalNight");
-            }
-        },
-        {
-            text:"다음에는 내가 무대에 서겠다고 한다.",
-            action:()=>{
-                game.stats.charm+=3;
-                game.stats.creative+=3;
-                loadScene("festivalNight");
-            }
-        }
-    ]
-};
-
-
-scenes.festivalNight={
-    chapter:"CHAPTER · 학교 축제",
-    title:"집으로 돌아가는 길",
-    location:"학교 앞",
-    time:"오후 9:15",
-
-    content:[
-        {
-            type:"narration",
-            text:`축제가 끝났다.<br><br>
-            사람들이 하나둘 집으로 돌아갔다.<br>
-            밤공기가 차가웠다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`오늘... 재밌었다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"나도 재밌었다고 한다.",
-            action:()=>{
-                changeRelation("jiwon",7,6);
-                maybeConfession();
-            }
-        },
-        {
-            text:"다음 축제도 같이 하자고 한다.",
-            action:()=>{
-                changeRelation("jiwon",10,10);
-                maybeConfession();
-            }
-        }
-    ]
-};
-
-
-/* =========================================================
-   CONFESSION
-========================================================= */
-
-function maybeConfession(){
-
-    if(game.relationships.jiwon.affinity>=75 &&
-       !game.flags.confession){
-
-        game.flags.confession=true;
-
-        setTimeout(()=>{
-            loadScene("confessionChance");
-        },700);
-
-    }else{
-        advanceDay();
-    }
+ },800);
 }
 
+/* ================= MEMORY ================= */
 
-scenes.confessionChance={
-    chapter:"CHAPTER · 관계",
-    title:"말하지 못한 말",
-    location:"학교 앞 거리",
-    time:"오후 9:30",
+function remember(title,text){
 
-    content:[
-        {
-            type:"narration",
-            text:`준혁이 갑자기 걸음을 멈췄다.<br><br>
-            평소보다 진지한 표정이었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`나 사실... 너한테 할 말 있어.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`근데 오늘은 말 안 할래.`
-        },
-        {
-            type:"narration",
-            text:`준혁이 작게 웃었다.`
-        }
-    ],
+ G.memories.push({
+  age:G.age,
+  day:G.day,
+  title,
+  text
+ });
 
-    choices:[
-        {
-            text:"왜 말을 안 하냐고 묻는다.",
-            action:()=>{
-                changeRelation("jiwon",8,8);
-                game.flags.dating=true;
-                loadScene("relationshipStart");
-            }
-        },
-        {
-            text:"언젠가 듣겠다고 한다.",
-            action:()=>{
-                changeRelation("jiwon",10,12);
-                loadScene("relationshipStart");
-            }
-        },
-        {
-            text:"장난스럽게 넘긴다.",
-            action:()=>{
-                changeRelation("jiwon",3,2);
-                loadScene("relationshipStart");
-            }
-        }
-    ]
-};
+ if(G.memories.length>200){
+  G.memories.shift();
+ }
 
-
-scenes.relationshipStart={
-    chapter:"CHAPTER · 관계",
-    title:"조금 달라진 사이",
-    location:"학교",
-    time:"며칠 뒤",
-
-    content:[
-        {
-            type:"narration",
-            text:`며칠이 지나자 준혁과의 관계가 미묘하게 달라졌다.<br><br>
-            서로를 보는 시간이 길어지고,<br>
-            아무렇지 않은 메시지가 하루의 중요한 부분이 되어갔다.`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`오늘 같이 갈래?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"같이 간다.",
-            action:()=>{
-                game.flags.dating=true;
-                changeRelation("jiwon",10,8);
-                addMemory("준혁과 특별한 관계가 시작되었다.");
-                continueStory();
-            }
-        },
-        {
-            text:"친구들이랑 같이 간다.",
-            action:()=>{
-                continueStory();
-            }
-        }
-    ]
-};
-
-
-/* =========================================================
-   RANDOM EVENTS
-========================================================= */
-
-const randomEvents=[
-
-{
-    title:"갑작스러운 비",
-    text:"하교하려는데 갑자기 비가 쏟아졌다. 우산은 하나뿐이었다.",
-    target:"jiwon"
-},
-
-{
-    title:"잃어버린 지갑",
-    text:"복도에서 누군가의 지갑을 발견했다.",
-    target:"teacher"
-},
-
-{
-    title:"SNS 알림",
-    text:"학교에서 찍힌 네 사진이 갑자기 SNS에서 퍼지고 있었다.",
-    target:"minji"
-},
-
-{
-    title:"친구와의 다툼",
-    text:"도현이 평소와 다르게 날카로운 표정으로 너를 불렀다.",
-    target:"dohyun"
-},
-
-{
-    title:"야간 산책",
-    text:"밤에 잠이 오지 않아 집 근처를 걷다가 익숙한 사람을 만났다.",
-    target:"jiwon"
+ renderMemoryMini();
 }
 
-];
+function renderModalLists(){
 
+ if($("memoryList")){
 
-function loadRandomEvent(){
+  $("memoryList").innerHTML=
+   G.memories
+   .slice()
+   .reverse()
+   .map(m=>`
+    <div class="logItem">
+     <small>${m.age}살 · DAY ${m.day}</small>
+     <b>${escapeHTML(m.title)}</b><br>
+     ${escapeHTML(m.text)}
+    </div>
+   `).join("");
+ }
 
-    const event=randomEvents[Math.floor(Math.random()*randomEvents.length)];
+ if($("npcList")){
 
-    const npc=game.relationships[event.target];
+  $("npcList").innerHTML=
+   Object.values(G.npcs)
+   .map(n=>`
+    <div class="achievement">
+     <div class="icon">${n.emoji}</div>
+     <div style="flex:1">
+      <strong>${n.name}</strong>
+      <p>${n.relation} · 친밀도 ${n.affinity} · 신뢰 ${n.trust} · 존중 ${n.respect}</p>
+     </div>
+    </div>
+   `).join("");
+ }
 
-    document.getElementById("location").textContent="SPECIAL EVENT";
-    document.getElementById("time").textContent="예상하지 못한 사건";
+ if($("achievementList")){
 
-    const story=document.getElementById("story");
+  const allAchievements=[
+   ["🌱","첫 걸음","인생의 첫 장을 시작했다.","first"],
+   ["❤️","가족의 품","가족과 특별한 기억을 만들었다.","first_mom_hug"],
+   ["⚽","빨간 공","첫 장난감을 발견했다.","red_ball"],
+   ["🤝","첫 친구","누군가와 친구가 되었다.","friendship_2"],
+   ["🎨","작은 예술가","창작에 관심을 보였다.","artist_seed"],
+   ["🤫","비밀의 수호자","친구의 비밀을 지켰다.","keeps_secret"],
+   ["🎤","무대의 씨앗","사람들 앞에 서는 선택을 했다.","stage_seed"],
+   ["💘","첫 사랑","청소년기의 중요한 관계를 만들었다.","first_love_yes"],
+   ["💼","사회생활","첫 직장생활을 시작했다.","career_start"],
+   ["🚀","도전","안전한 길 대신 새로운 길을 택했다.","dream_path"],
+   ["🏢","사업가의 씨앗","내 사업을 생각하기 시작했다.","entrepreneur"],
+   ["🌳","인생을 돌아보다","삶의 중간에서 자신을 돌아봤다.","no_regret"],
+   ["📸","기억하는 사람","어린 시절을 떠올렸다.","remember_first_birthday"],
+   ["⭐","인생 완주","80번째 생일까지 도달했다.","life_complete"]
+  ];
 
-    story.innerHTML=`
-        <div class="chapter">SPECIAL EVENT</div>
-        <div class="sceneTitle">${event.title}</div>
+  $("achievementList").innerHTML=
+   allAchievements.map(a=>{
 
-        <div class="narration">
-            ${event.text}
-        </div>
+    const unlocked=
+     a[3]==="first" ||
+     G.flags[a[3]] ||
+     (a[3]==="life_complete" && G.age>=80);
 
-        <div class="dialogue">
-            <div class="dialogueAvatar">${npc.avatar}</div>
-            <div class="dialogueBody">
-                <div class="speaker">${npc.name}</div>
-                <div class="bubble">
-                    어떻게 할 거야?
-                </div>
-            </div>
-        </div>
+    return `
+     <div class="achievement" style="opacity:${unlocked?1:.35}">
+      <div class="icon">${a[0]}</div>
+      <div>
+       <strong>${unlocked?"✓ ":""}${a[1]}</strong>
+       <p>${a[2]}</p>
+      </div>
+     </div>
     `;
-
-    document.getElementById("quickChoices").innerHTML="";
-
-    const options=[
-        ["도와준다",5,6],
-        ["상황을 지켜본다",1,2],
-        ["장난스럽게 넘긴다",3,1]
-    ];
-
-    options.forEach(option=>{
-
-        const btn=document.createElement("button");
-        btn.className="choiceBtn";
-        btn.textContent=option[0];
-
-        btn.onclick=()=>{
-
-            changeRelation(event.target,option[1],option[2]);
-
-            if(option[0]==="도와준다"){
-                game.stats.happiness+=4;
-            }
-
-            addMemory(`${event.title} 사건에서 ${npc.name}과 상호작용했다.`);
-
-            advanceDay();
-        };
-
-        document.getElementById("quickChoices").appendChild(btn);
-    });
+   }).join("");
+ }
 }
 
+function checkAchievements(){
 
-/* =========================================================
-   CONTINUE
-========================================================= */
+ const checks=[
+  ["first_mom_hug","엄마와 첫 포옹"],
+  ["red_ball","빨간 공"],
+  ["friendship_2","첫 친구"],
+  ["artist_seed","작은 예술가"],
+  ["keeps_secret","비밀의 수호자"],
+  ["stage_seed","무대의 씨앗"],
+  ["first_love_yes","첫 사랑"],
+  ["career_start","사회생활"],
+  ["entrepreneur","사업가의 씨앗"],
+  ["dream_path","꿈의 길"],
+  ["no_regret","후회 없는 선택"]
+ ];
 
-function continueStory(){
-
-    if(game.age>=80){
-        finishLife();
-        return;
-    }
-
-    if(game.age>=18 && !game.flags.graduation){
-        game.flags.graduation=true;
-        loadScene("graduation");
-        return;
-    }
-
-    if(game.age>=25){
-        adultLife();
-        return;
-    }
-
-    advanceDay();
+ checks.forEach(([flag,name])=>{
+  if(G.flags[flag] && !G.achievements.includes(name)){
+   G.achievements.push(name);
+   toast("🏆 업적 해금 · "+name);
+  }
+ });
 }
 
-
-scenes.graduation={
-    chapter:"CHAPTER · 졸업",
-    title:"마지막 교실",
-    location:"학교 · 교실",
-    time:"졸업식 전날",
-
-    content:[
-        {
-            type:"narration",
-            text:`시간은 생각보다 빠르게 흘렀다.<br><br>
-            처음 전학생을 보던 날도,<br>
-            축제에서 무대에 섰던 날도,<br>
-            친구들과 싸웠던 날도,<br>
-            웃었던 날도 모두 기억 속으로 들어갔다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`우리 진짜 졸업하네.`
-        },
-        {
-            type:"dialogue",
-            npc:"dohyun",
-            text:`이제 다들 뿔뿔이 흩어지는 거냐?`
-        },
-        {
-            type:"dialogue",
-            npc:"jiwon",
-            text:`...계속 연락하면 되지.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"친구들과 사진을 찍는다.",
-            action:()=>{
-                game.stats.happiness+=10;
-                addMemory("친구들과 졸업 전 마지막 사진을 찍었다.");
-                game.age=18;
-                adultLife();
-            }
-        },
-        {
-            text:"준혁과 둘만 이야기한다.",
-            action:()=>{
-                changeRelation("jiwon",10,8);
-                game.stats.happiness+=5;
-                game.age=18;
-                adultLife();
-            }
-        },
-        {
-            text:"혼자 교실을 바라본다.",
-            action:()=>{
-                game.stats.creative+=3;
-                game.age=18;
-                adultLife();
-            }
-        }
-    ]
-};
-
-
-function adultLife(){
-
-    const scenesAdult=[
-        "adultCollege",
-        "adultPartTime",
-        "adultDream",
-        "adultJob",
-        "adultChoice"
-    ];
-
-    const id=scenesAdult[Math.floor(Math.random()*scenesAdult.length)];
-
-    if(!scenes[id]) return;
-
-    loadScene(id);
-}
-
-
-/* =========================================================
-   ADULT SCENES
-========================================================= */
-
-scenes.adultCollege={
-    chapter:"CHAPTER · 성인",
-    title:"새로운 시작",
-    location:"대학교 캠퍼스",
-    time:"오전 10:20",
-
-    content:[
-        {
-            type:"narration",
-            text:`학교가 바뀌었다.<br><br>
-            이번에는 아무도 네 과거를 모른다.<br>
-            완전히 새로운 인간관계를 만들 수 있는 순간이었다.`
-        },
-        {
-            type:"dialogue",
-            npc:"minji",
-            text:`우리 같은 학교라서 다행이다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"새로운 사람들에게 먼저 다가간다.",
-            action:()=>{
-                game.stats.charm+=6;
-                game.stats.happiness+=5;
-                game.stats.fame+=3;
-                advanceDay();
-            }
-        },
-        {
-            text:"조용히 적응한다.",
-            action:()=>{
-                game.stats.intelligence+=4;
-                advanceDay();
-            }
-        }
-    ]
-};
-
-
-scenes.adultPartTime={
-    chapter:"CHAPTER · 성인",
-    title:"첫 월급",
-    location:"카페",
-    time:"오후 6:30",
-
-    content:[
-        {
-            type:"narration",
-            text:`첫 아르바이트 월급이 들어왔다.<br><br>
-            금액은 크지 않았다.<br>
-            하지만 직접 번 돈이라는 사실이 이상하게 뿌듯했다.`
-        },
-        {
-            type:"dialogue",
-            npc:"mother",
-            text:`첫 월급 받았어?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"저축한다.",
-            action:()=>{
-                game.stats.money+=120000;
-                game.stats.intelligence+=2;
-                advanceDay();
-            }
-        },
-        {
-            text:"가족에게 선물을 산다.",
-            action:()=>{
-                game.stats.money+=50000;
-                game.stats.happiness+=8;
-                changeRelation("mother",8,10);
-                advanceDay();
-            }
-        },
-        {
-            text:"친구들과 맛있는 걸 먹는다.",
-            action:()=>{
-                game.stats.money+=70000;
-                game.stats.happiness+=10;
-                advanceDay();
-            }
-        }
-    ]
-};
-
-
-scenes.adultDream={
-    chapter:"CHAPTER · 성인",
-    title:"내가 뭘 하고 싶지?",
-    location:"대학교 · 도서관",
-    time:"오후 9:10",
-
-    content:[
-        {
-            type:"narration",
-            text:`어느 날 문득 생각했다.<br><br>
-            지금까지 남들이 정해준 길을 따라온 것 같다는 생각.<br>
-            그렇다면 나는 앞으로 뭘 하고 싶은 걸까?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"창작하는 사람이 되고 싶다.",
-            action:()=>{
-                game.stats.creative+=15;
-                game.flags.dreamChosen=true;
-                addMemory("창작자가 되고 싶다는 꿈을 처음으로 확실하게 생각했다.");
-                advanceDay();
-            }
-        },
-        {
-            text:"안정적인 직업을 갖고 싶다.",
-            action:()=>{
-                game.stats.intelligence+=12;
-                game.flags.dreamChosen=true;
-                advanceDay();
-            }
-        },
-        {
-            text:"사업을 해보고 싶다.",
-            action:()=>{
-                game.stats.intelligence+=7;
-                game.stats.charm+=7;
-                game.flags.dreamChosen=true;
-                advanceDay();
-            }
-        },
-        {
-            text:"아직 모르겠다.",
-            action:()=>{
-                game.stats.happiness+=3;
-                advanceDay();
-            }
-        }
-    ]
-};
-
-
-scenes.adultJob={
-    chapter:"CHAPTER · 사회생활",
-    title:"첫 직장",
-    location:"회사",
-    time:"오전 8:45",
-
-    content:[
-        {
-            type:"narration",
-            text:`첫 출근 날.<br><br>
-            사무실에는 수많은 사람들이 있었다.<br>
-            아무도 네 인생을 대신 살아주지 않는다.<br>
-            이제부터는 네가 선택해야 한다.`
-        },
-        {
-            type:"dialogue",
-            npc:"teacher",
-            text:`잘 지내고 있지?`
-        }
-    ],
-
-    choices:[
-        {
-            text:"열심히 배우기로 한다.",
-            action:()=>{
-                game.stats.intelligence+=8;
-                game.stats.money+=150000;
-                advanceDay();
-            }
-        },
-        {
-            text:"내 사업을 준비하기 시작한다.",
-            action:()=>{
-                game.stats.creative+=7;
-                game.stats.charm+=5;
-                game.flags.dreamChosen=true;
-                advanceDay();
-            }
-        }
-    ]
-};
-
-
-scenes.adultChoice={
-    chapter:"CHAPTER · 사회생활",
-    title:"인생의 갈림길",
-    location:"퇴근길",
-    time:"오후 7:40",
-
-    content:[
-        {
-            type:"narration",
-            text:`퇴근길 지하철 창문에 비친 자신의 얼굴을 바라봤다.<br><br>
-            문득 어린 시절이 떠올랐다.<br>
-            그때는 인생이 아주 길게 느껴졌는데.<br>
-            지금은 선택 하나가 다음 10년을 바꿀 수도 있다는 걸 알게 됐다.`
-        }
-    ],
-
-    choices:[
-        {
-            text:"지금 가진 것을 지키기로 한다.",
-            action:()=>{
-                game.stats.happiness+=8;
-                advanceDay();
-            }
-        },
-        {
-            text:"완전히 새로운 길을 선택한다.",
-            action:()=>{
-                game.stats.creative+=10;
-                game.stats.charm+=5;
-                advanceDay();
-            }
-        }
-    ]
-};
-
-
-/* =========================================================
-   STATS / MEMORY
-========================================================= */
-
-function updateStats(){
-
-    const map={
-        Charm:"charm",
-        Int:"intelligence",
-        Health:"health",
-        Creative:"creative",
-        Luck:"luck",
-        Happy:"happiness"
-    };
-
-    Object.keys(map).forEach(prefix=>{
-
-        const key=map[prefix];
-
-        const value=Math.max(0,Math.min(100,game.stats[key]));
-
-        document.getElementById("s"+prefix).textContent=value;
-        document.getElementById("b"+prefix).style.width=value+"%";
-
-    });
-
-    document.getElementById("profileSub").textContent=
-        `${game.age}세 · ${getOccupation()}`;
-
-    const latest=game.memories[game.memories.length-1];
-
-    document.getElementById("currentMemory").textContent=
-        latest || "아직 특별한 기억이 없다.";
-}
-
-
-function getOccupation(){
-
-    if(game.age<19) return "학생";
-    if(game.age<25) return "대학생";
-    if(game.stats.creative>85) return "창작자";
-    if(game.stats.intelligence>85) return "전문직";
-    return "직장인";
-}
-
-
-function addMemory(text){
-
-    game.memories.push(text);
-
-    if(game.memories.length>30){
-        game.memories.shift();
-    }
-
-    addLog(text);
-    updateStats();
-}
-
-
-function addLog(text){
-
-    game.log.unshift(text);
-
-    if(game.log.length>30){
-        game.log.pop();
-    }
-
-    const log=document.getElementById("lifeLog");
-
-    if(!log) return;
-
-    log.innerHTML=game.log.map(x=>
-        `<div class="logItem">${escapeHTML(x)}</div>`
-    ).join("");
-}
-
-
-/* =========================================================
-   TABS / MODALS
-========================================================= */
-
-function showTab(tab){
-
-    if(tab==="story"){
-        closeModal();
-        return;
-    }
-
-    if(tab==="memories"){
-        showMemories();
-        return;
-    }
-
-    if(tab==="character"){
-        showCharacter();
-        return;
-    }
-}
-
-
-function showMemories(){
-
-    const memories=game.memories.length
-        ? game.memories.map((m,i)=>`<p>• ${escapeHTML(m)}</p>`).join("")
-        : "<p>아직 기억이 없어.</p>";
-
-    openModal(`
-        <h2>▣ LIFE MEMORY</h2>
-        ${memories}
-        <button onclick="closeModal()">닫기</button>
-    `);
-}
-
-
-function showCharacter(){
-
-    openModal(`
-        <h2>♙ ${escapeHTML(game.name)}</h2>
-
-        <p>
-        나이 : ${game.age}세<br>
-        성격 : ${getPersonalityName()}<br>
-        가정환경 : ${getFamilyName()}<br>
-        특성 : ${getTraitName()}<br><br>
-
-        매력 ${game.stats.charm}<br>
-        지능 ${game.stats.intelligence}<br>
-        체력 ${game.stats.health}<br>
-        창의성 ${game.stats.creative}<br>
-        운 ${game.stats.luck}<br>
-        행복 ${game.stats.happiness}<br>
-        돈 ₩${game.stats.money.toLocaleString()}
-        </p>
-
-        <button onclick="closeModal()">닫기</button>
-    `);
-}
-
-
-function showNPC(id){
-
-    const npc=game.relationships[id];
-
-    openModal(`
-        <h2>${npc.avatar} ${npc.name}</h2>
-
-        <p>
-        역할 : ${npc.role}<br>
-        현재 관계 : ${npc.relation}<br>
-        호감도 : ${npc.affinity}/100<br>
-        신뢰도 : ${npc.trust}/100<br>
-        기분 : ${npc.mood}
-        </p>
-
-        <button onclick="closeModal()">닫기</button>
-    `);
-}
-
-
-function openModal(html){
-
-    document.getElementById("modalContent").innerHTML=html;
-    document.getElementById("modal").classList.remove("hidden");
-}
-
-
-function closeModal(){
-
-    document.getElementById("modal").classList.add("hidden");
-}
-
-
-function getPersonalityName(){
-    return {
-        free:"자유로운",
-        calm:"차분한",
-        bold:"대담한"
-    }[game.personality];
-}
-
-
-function getFamilyName(){
-    return {
-        normal:"평범한 가족",
-        rich:"넉넉한 가족",
-        poor:"검소한 가족"
-    }[game.family];
-}
-
-
-function getTraitName(){
-    return {
-        lucky:"운이 좋음",
-        creative:"창의적",
-        social:"사교적"
-    }[game.trait];
-}
-
-
-/* =========================================================
-   SAVE / LOAD
-========================================================= */
-
-function saveGame(){
-
-    localStorage.setItem(
-        "LIFE_RPG_ROLEPLAY_SAVE",
-        JSON.stringify(game)
-    );
-
-    addLog("게임을 저장했다.");
-
-    alert("저장 완료! 💾");
-}
-
-
-function loadGame(){
-
-    const saved=localStorage.getItem("LIFE_RPG_ROLEPLAY_SAVE");
-
-    if(!saved){
-        alert("저장된 게임이 없어!");
-        return;
-    }
-
-    game=JSON.parse(saved);
-
-    document.getElementById("startScreen").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
-
-    document.getElementById("profileName").textContent=game.name;
-
-    renderNPCs();
-    updateStats();
-
-    if(game.currentScene){
-        loadScene(game.currentScene);
-    }
-
-    alert("불러오기 완료! 🎮");
-}
-
-
-/* =========================================================
-   ENDINGS
-========================================================= */
+/* ================= ENDINGS ================= */
 
 function finishLife(){
 
-    let title="";
-    let text="";
+ let title="";
+ let text="";
 
-    const s=game.stats;
+ const s=G.stats;
+ const c=G.condition;
 
-    if(s.fame>=90 && s.creative>=85){
-        title="전설의 크리에이터";
-        text="네가 만든 것들은 수많은 사람들에게 기억되었다. 유명해지는 것이 목적은 아니었지만, 결국 네 이름 자체가 하나의 브랜드가 되었다.";
-    }
+ if(
+  c.happiness>=85 &&
+  c.health>=65 &&
+  s.empathy>=35 &&
+  s.charm>=35
+ ){
+  title="사람으로 가득 찬 인생";
+  text=
+   "네 인생에서 가장 오래 남은 것은 숫자나 물건이 아니었다. " +
+   "사람이었다. 함께 웃었던 사람, 네가 도와준 사람, " +
+   "그리고 끝까지 곁에 남은 사람들이 마지막 순간까지 네 이야기를 이어갔다.";
+ }
+ else if(
+  s.intelligence>=45 &&
+  s.creativity>=40
+ ){
+  title="무언가를 남긴 사람";
+  text=
+   "네가 만든 것들은 네가 떠난 뒤에도 남았다. " +
+   "책, 작품, 사업, 아이디어, 혹은 누군가에게 건넨 한마디. " +
+   "너의 인생은 하나의 결과물이 되어 세상에 흔적을 남겼다.";
+ }
+ else if(
+  s.courage>=45 &&
+  s.luck>=30
+ ){
+  title="끝없이 도전한 사람";
+  text=
+   "안전한 길만 골랐다면 만나지 못했을 순간들이 있었다. " +
+   "너는 수없이 넘어졌지만 다시 일어났다. " +
+   "돌아보니 네 인생은 예상보다 훨씬 많은 모험으로 채워져 있었다.";
+ }
+ else if(
+  G.money>=50000000 &&
+  s.intelligence>=30
+ ){
+  title="스스로 길을 만든 사람";
+  text=
+   "돈을 버는 것에서 끝나지 않았다. " +
+   "네가 원하는 방식으로 삶을 설계할 수 있을 만큼의 자유를 얻었다. " +
+   "마지막에는 돈보다 그 자유가 더 소중하게 느껴졌다.";
+ }
+ else if(
+  c.happiness>=75
+ ){
+  title="평범해서 아름다운 인생";
+  text=
+   "엄청난 전설이 되지는 않았을지도 모른다. " +
+   "하지만 맛있는 음식을 먹고, 좋아하는 사람과 웃고, " +
+   "계절이 바뀌는 것을 보며 살아갔다. 그것만으로도 충분히 긴 이야기였다.";
+ }
+ else if(
+  c.stress>=70
+ ){
+  title="늦게 찾아온 평온";
+  text=
+   "인생에는 힘든 시기도 있었다. " +
+   "하지만 마지막에는 결국 속도를 늦추는 법을 배웠다. " +
+   "모든 것을 완벽하게 만들지는 못했지만, 스스로를 조금 더 이해하게 되었다.";
+ }
+ else{
+  title="아직 끝나지 않은 이야기";
+  text=
+   "수많은 선택과 우연이 겹쳐 하나의 인생이 만들어졌다. " +
+   "완벽하지도, 단순하지도 않았다. " +
+   "하지만 그것이 바로 네가 직접 살아온 인생이었다.";
+ }
 
-    else if(s.money>=1000000000){
-        title="거대한 성공";
-        text="수많은 선택과 실패를 지나 엄청난 부를 이루었다. 하지만 네 인생에서 가장 값진 것은 숫자로 표현할 수 없는 사람들이었다.";
-    }
+ $("endTitle").textContent=title;
+ $("endText").textContent=text;
 
-    else if(s.happiness>=90 && game.relationships.minji.affinity>=85){
-        title="평범해서 더 행복한 삶";
-        text="엄청난 명예도, 상상할 수 없는 부도 없었다. 대신 매일 돌아갈 곳이 있었고, 웃을 사람이 있었다.";
-    }
+ $("endScreen").classList.remove("hidden");
 
-    else if(game.flags.dating && game.relationships.jiwon.affinity>=90){
-        title="끝까지 이어진 사랑";
-        text="수많은 계절이 지나도 그 사람과의 첫 만남은 잊히지 않았다.";
-    }
+ G.flags.life_complete=true;
 
-    else if(s.intelligence>=90){
-        title="전문가의 삶";
-        text="한 분야를 끝까지 파고든 끝에 누구나 인정하는 전문가가 되었다.";
-    }
-
-    else if(s.creative>=90){
-        title="창작자의 삶";
-        text="남들이 가지 않은 길을 선택했고, 자신만의 세계를 만들어냈다.";
-    }
-
-    else if(s.health>=90){
-        title="건강한 인생";
-        text="무엇보다 자신의 삶을 제대로 즐길 수 있는 몸과 마음을 지켜냈다.";
-    }
-
-    else{
-        title="나만의 엔딩";
-        text="완벽하지 않았다. 수없이 후회했고, 예상하지 못한 일도 많았다. 하지만 그것이 바로 네가 직접 살아온 인생이었다.";
-    }
-
-    document.getElementById("endingTitle").textContent=title;
-    document.getElementById("endingText").textContent=text;
-
-    document.getElementById("endingScreen").classList.remove("hidden");
+ saveGame();
 }
 
+/* ================= SAVE / LOAD ================= */
 
-/* =========================================================
-   KEYBOARD
-========================================================= */
+const SAVE_KEY="LIFE_RPG_COMPLETE_V5";
 
-document.addEventListener("keydown",e=>{
+function saveGame(){
 
-    if(e.key==="Enter" && !e.shiftKey){
+ try{
+  localStorage.setItem(
+   SAVE_KEY,
+   JSON.stringify(G)
+  );
+ }catch(e){
+  console.log("save failed",e);
+ }
+}
 
-        const active=document.activeElement;
+function loadGame(){
 
-        if(active===document.getElementById("playerInput")){
-            e.preventDefault();
-            sendPlayerInput();
-        }
+ const raw=localStorage.getItem(SAVE_KEY);
 
-    }
+ if(!raw){
+  toast("저장된 인생이 없어.");
+  return;
+ }
 
-    const number=parseInt(e.key);
+ try{
 
-    if(number>=1 && number<=9){
+  G=JSON.parse(raw);
 
-        const buttons=document.querySelectorAll(".choiceBtn");
+  if(!G.npcs){
+   G.npcs=clone(NPC_TEMPLATE);
+  }
 
-        if(buttons[number-1]){
-            buttons[number-1].click();
-        }
-    }
-});
+  $("startScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
 
+  $("chatScroll").innerHTML="";
 
-/* =========================================================
-   ESCAPE
-========================================================= */
+  setupProfile();
+  buildAge(G.age);
+
+  /*
+   저장 시점의 sceneIndex까지
+   이미 끝난 장면으로 처리하고
+   현재 장면부터 다시 시작
+  */
+
+  G.sceneIndex=Math.min(
+   G.sceneIndex||0,
+   G.queue.length
+  );
+
+  addSystem("💾 저장된 인생을 불러왔어.");
+
+  nextScene();
+
+  toast("저장된 인생을 불러왔어.");
+
+ }catch(e){
+  toast("저장 파일을 읽을 수 없어.");
+ }
+}
+
+/* ================= MODAL ================= */
+
+function openModal(id){
+
+ renderModalLists();
+ $(id).classList.remove("hidden");
+}
+
+function closeSpecific(id){
+ $(id).classList.add("hidden");
+}
+
+function closeModal(e,id){
+
+ if(e.target.id===id){
+  closeSpecific(id);
+ }
+}
+
+/* ================= HELPERS ================= */
+
+function random(arr){
+ return arr[Math.floor(Math.random()*arr.length)];
+}
 
 function escapeHTML(str){
 
-    return str
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+ return String(str)
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 }
 
+let toastTimer;
 
-/* =========================================================
-   INITIAL
-========================================================= */
+function toast(text){
 
-updateStats();
+ const t=$("toast");
 
+ t.textContent=text;
+ t.classList.add("show");
+
+ clearTimeout(toastTimer);
+
+ toastTimer=setTimeout(()=>{
+  t.classList.remove("show");
+ },2200);
+}
+
+function restartGame(){
+
+ if(!confirm("현재 인생 기록을 버리고 새로운 인생을 시작할까?")){
+  return;
+ }
+
+ localStorage.removeItem(SAVE_KEY);
+ location.reload();
+}
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener("keydown",e=>{
+
+ if(G.busy)return;
+
+ if(
+  e.target.tagName==="INPUT" ||
+  e.target.tagName==="TEXTAREA"
+ )return;
+
+ const buttons=
+  [...document.querySelectorAll("#choices .choice")];
+
+ if(e.key>="1" && e.key<="9"){
+
+  const index=Number(e.key)-1;
+
+  if(buttons[index]){
+   buttons[index].click();
+  }
+ }
+});
+
+/* ================= AUTO SAVE ================= */
+
+setInterval(()=>{
+
+ if(!$("app").classList.contains("hidden")){
+  saveGame();
+ }
+
+},15000);
+
+/* ================= RESTORE CHECK ================= */
+
+window.addEventListener("beforeunload",()=>{
+ if(G.name){
+  saveGame();
+ }
+});
 </script>
 
 </body>
