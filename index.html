@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIFE RPG</title>
+<title>LIFE RPG — THE WHOLE LIFE</title>
 
 <style>
 *{
@@ -13,19 +13,15 @@
 html,body{
     margin:0;
     padding:0;
+    width:100%;
     min-height:100%;
     font-family:Arial,"Malgun Gothic",sans-serif;
-    background:#0d0f14;
-    color:#f4f4f5;
+    background:#090b10;
+    color:#f4f5f7;
 }
 
-body{
-    padding:28px;
-}
-
-button,
-input{
-    font-family:inherit;
+button,input{
+    font:inherit;
 }
 
 button{
@@ -33,703 +29,680 @@ button{
 }
 
 #app{
-    width:min(1450px,100%);
-    min-height:calc(100vh - 56px);
-    margin:auto;
-    background:#151820;
-    border:1px solid #2c303a;
-    border-radius:24px;
+    width:min(1500px,96vw);
+    min-height:94vh;
+    margin:25px auto;
+    background:#11141b;
+    border:1px solid #282d38;
+    border-radius:22px;
     overflow:hidden;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
 }
 
-/* ================= START ================= */
-
-.screen{
-    display:none;
-}
-
-.screen.active{
-    display:block;
-}
+/* START */
 
 #startScreen{
-    min-height:calc(100vh - 56px);
+    min-height:94vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:60px;
+    background:
+        radial-gradient(circle at 20% 20%,#27304b 0,transparent 35%),
+        radial-gradient(circle at 80% 70%,#2b2138 0,transparent 35%),
+        #0b0d12;
 }
 
 .startBox{
     width:760px;
+    max-width:100%;
     text-align:center;
 }
 
 .logo{
-    font-size:72px;
+    font-size:70px;
     font-weight:900;
     letter-spacing:-5px;
-    margin-bottom:8px;
 }
 
-.logoSub{
-    color:#9da3b0;
-    font-size:16px;
-    margin-bottom:50px;
+.subtitle{
+    color:#8f97a8;
+    margin:12px 0 45px;
+    font-size:17px;
 }
 
 .startCard{
-    background:#1b1f28;
-    border:1px solid #303540;
-    border-radius:22px;
-    padding:38px;
+    background:#141820;
+    border:1px solid #303744;
+    border-radius:20px;
+    padding:30px;
     text-align:left;
 }
 
-.label{
+.startCard label{
     display:block;
-    color:#aeb4c0;
+    color:#aeb5c3;
     font-size:13px;
-    margin-bottom:10px;
+    margin-bottom:9px;
 }
 
-#nameInput{
+.startCard input{
     width:100%;
-    height:58px;
-    background:#11141a;
-    border:1px solid #383e4a;
-    border-radius:12px;
+    background:#0b0e13;
     color:white;
-    padding:0 18px;
-    font-size:17px;
+    border:1px solid #343b49;
+    border-radius:10px;
+    padding:15px;
     outline:none;
 }
 
-#nameInput:focus{
-    border-color:#7c82ff;
+.startCard input:focus{
+    border-color:#7788ff;
 }
 
-.primaryBtn{
+.primary{
+    margin-top:20px;
     width:100%;
-    height:58px;
     border:0;
     border-radius:12px;
-    background:#f4f4f5;
-    color:#111;
-    font-size:16px;
+    padding:16px;
+    color:white;
+    background:linear-gradient(135deg,#6274ff,#915fff);
     font-weight:800;
-    margin-top:20px;
+    font-size:16px;
 }
 
-.primaryBtn:hover{
-    background:#fff;
-    transform:translateY(-1px);
+.primary:hover{
+    filter:brightness(1.12);
 }
 
-.infoRow{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:18px;
-}
-
-.info{
-    padding:17px;
-    border:1px solid #303540;
-    border-radius:14px;
-    background:#171a21;
-    text-align:center;
-}
-
-.info strong{
-    display:block;
-    font-size:18px;
-    margin-bottom:5px;
-}
-
-.info span{
-    font-size:12px;
-    color:#8f96a3;
-}
-
-/* ================= ALLOCATION ================= */
+/* ALLOCATION */
 
 #allocationScreen{
-    padding:55px;
+    display:none;
+    min-height:94vh;
+    padding:45px;
 }
 
-.allocHeader{
+.allocTitle{
+    font-size:36px;
+    font-weight:900;
+}
+
+.allocSub{
+    color:#8992a3;
+    margin:8px 0 30px;
+}
+
+.allocLayout{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:25px;
+}
+
+.allocStats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.allocStat{
+    background:#161a22;
+    border:1px solid #2d3340;
+    padding:20px;
+    border-radius:15px;
+}
+
+.allocStatTop{
     display:flex;
     justify-content:space-between;
-    align-items:flex-end;
-    margin-bottom:35px;
 }
 
-.allocHeader h1{
-    margin:0 0 8px;
-    font-size:38px;
+.allocStatName{
+    font-weight:800;
 }
 
-.allocHeader p{
-    margin:0;
-    color:#9299a6;
+.allocValue{
+    color:#8c9cff;
+    font-weight:900;
 }
 
-.pointsBox{
-    min-width:170px;
-    text-align:center;
-    background:#1d222c;
-    border:1px solid #363c48;
-    padding:18px;
-    border-radius:16px;
+.allocButtons{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
 }
 
-.pointsBox strong{
-    font-size:32px;
+.allocButtons button{
+    flex:1;
+    border:1px solid #363d4b;
+    background:#0e1117;
+    color:white;
+    padding:10px;
+    border-radius:8px;
 }
 
-.pointsBox span{
-    display:block;
-    color:#939aa7;
-    font-size:12px;
+.allocButtons button:hover{
+    background:#252b38;
 }
 
-.statGrid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-}
-
-.statCard{
-    background:#1a1e26;
-    border:1px solid #303540;
-    border-radius:18px;
+.birthPreview{
+    background:#151921;
+    border:1px solid #303643;
+    border-radius:15px;
     padding:22px;
 }
 
-.statTop{
+.birthPreview h3{
+    margin-top:0;
+}
+
+.previewLine{
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    padding:10px 0;
+    border-bottom:1px solid #272c36;
+    color:#aeb5c1;
 }
 
-.statName{
-    font-weight:800;
-}
-
-.statDesc{
-    color:#858c98;
-    font-size:12px;
-    margin-top:7px;
-    min-height:30px;
-}
-
-.statControls{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-top:18px;
-}
-
-.statControls button{
-    width:38px;
-    height:38px;
-    border:1px solid #3a404c;
-    background:#222731;
+.previewLine b{
     color:white;
-    border-radius:9px;
-    font-size:20px;
 }
 
-.statControls button:hover{
-    background:#2d3340;
-}
-
-.statValue{
-    min-width:45px;
-    text-align:center;
-    font-size:22px;
-    font-weight:900;
-}
-
-.allocBottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:28px;
-}
-
-.resetBtn{
-    background:transparent;
-    border:1px solid #383e4a;
-    color:#aeb4bf;
-    padding:13px 18px;
-    border-radius:10px;
-}
-
-.startGameBtn{
-    padding:16px 32px;
-    border:0;
-    border-radius:11px;
-    background:#f4f4f5;
-    color:#111;
-    font-weight:900;
-    font-size:15px;
-}
-
-.startGameBtn:disabled{
-    opacity:.35;
-    cursor:not-allowed;
-}
-
-/* ================= GAME ================= */
+/* GAME */
 
 #gameScreen{
-    min-height:calc(100vh - 56px);
-}
-
-.gameHeader{
-    height:76px;
-    border-bottom:1px solid #2b3039;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 30px;
-    background:#171a21;
-}
-
-.gameTitle{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.gameTitle strong{
-    font-size:20px;
-}
-
-.gameTitle span{
-    color:#858c99;
-    font-size:13px;
-}
-
-.headerButtons{
-    display:flex;
-    gap:8px;
-}
-
-.headerButtons button{
-    border:1px solid #343a46;
-    background:#20242d;
-    color:#c9ced7;
-    padding:9px 13px;
-    border-radius:8px;
-    font-size:12px;
+    display:none;
+    min-height:94vh;
 }
 
 .gameLayout{
     display:grid;
-    grid-template-columns:330px minmax(0,1fr);
-    min-height:calc(100vh - 132px);
+    grid-template-columns:340px 1fr;
+    min-height:94vh;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-    border-right:1px solid #2b3039;
-    background:#11141a;
-    padding:25px;
+    border-right:1px solid #292f39;
+    background:#0e1117;
+    padding:22px;
 }
 
 .profile{
-    display:flex;
-    gap:14px;
-    align-items:center;
-    padding-bottom:22px;
-    border-bottom:1px solid #292e38;
-}
-
-.avatar{
-    width:58px;
-    height:58px;
-    border-radius:15px;
-    background:#252a34;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
+    padding-bottom:20px;
+    border-bottom:1px solid #292f39;
 }
 
 .profileName{
+    font-size:25px;
     font-weight:900;
-    font-size:18px;
 }
 
-.ageText{
-    color:#8f96a3;
-    font-size:12px;
-    margin-top:4px;
+.profileAge{
+    color:#81899a;
+    margin-top:5px;
 }
 
-.moneyBox{
-    margin:22px 0;
-    padding:18px;
-    background:#191d25;
-    border:1px solid #303540;
-    border-radius:14px;
+.lifeMeter{
+    margin-top:18px;
 }
 
-.moneyLabel{
-    color:#858c98;
-    font-size:11px;
-}
-
-.money{
-    font-size:26px;
-    font-weight:900;
-    margin-top:4px;
-}
-
-.barStat{
-    margin:17px 0;
-}
-
-.barHeader{
+.meterTitle{
     display:flex;
     justify-content:space-between;
-    margin-bottom:7px;
     font-size:12px;
+    color:#8f97a6;
 }
 
-.barHeader span:first-child{
-    color:#aeb4c0;
-}
-
-.barHeader span:last-child{
-    font-weight:900;
-}
-
-.bar{
-    height:7px;
-    background:#252a33;
-    border-radius:99px;
+.meter{
+    height:8px;
+    background:#242934;
+    border-radius:20px;
     overflow:hidden;
+    margin-top:7px;
 }
 
-.fill{
+.meterFill{
     height:100%;
-    width:0%;
-    background:#f4f4f5;
-    border-radius:99px;
-    transition:.3s;
+    background:linear-gradient(90deg,#6d7cff,#a467ff);
 }
 
-.miniStats{
-    margin-top:25px;
+.statList{
+    margin-top:20px;
+}
+
+.statRow{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    font-size:13px;
+    border-bottom:1px solid #1e232c;
+}
+
+.statRow span{
+    color:#858e9e;
+}
+
+.statRow b{
+    color:#f1f2f5;
+}
+
+.sideNav{
+    margin-top:22px;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
+    gap:7px;
 }
 
-.mini{
-    padding:13px;
-    background:#191d25;
-    border:1px solid #292e37;
-    border-radius:11px;
+.sideNav button{
+    border:1px solid transparent;
+    background:transparent;
+    color:#9da5b5;
+    text-align:left;
+    padding:11px 12px;
+    border-radius:9px;
 }
 
-.mini span{
-    color:#777f8c;
-    font-size:10px;
-    display:block;
+.sideNav button:hover,
+.sideNav button.active{
+    background:#1a1f29;
+    color:white;
+    border-color:#2e3542;
 }
 
-.mini strong{
-    font-size:17px;
-    display:block;
-    margin-top:4px;
+.saveButtons{
+    margin-top:20px;
+    display:grid;
+    gap:7px;
+}
+
+.saveButtons button{
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #303744;
+    background:#151922;
+    color:#b9c0cc;
 }
 
 /* MAIN */
 
 .main{
-    padding:38px;
     min-width:0;
+    background:#12151c;
 }
 
-.ageBanner{
+.topbar{
+    height:76px;
+    border-bottom:1px solid #292f39;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:24px;
+    justify-content:space-between;
+    padding:0 28px;
 }
 
-.ageBanner h1{
-    margin:0;
-    font-size:30px;
+.yearTitle{
+    font-size:22px;
+    font-weight:900;
 }
 
-.lifeStage{
-    color:#9299a6;
+.yearTitle small{
+    color:#777f90;
+    font-size:12px;
+    font-weight:400;
+    margin-left:8px;
+}
+
+.actionBox{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.actionText{
+    color:#8f98a9;
     font-size:13px;
 }
 
-.storyCard{
-    background:#1a1e26;
-    border:1px solid #303540;
-    border-radius:20px;
-    padding:34px;
+.actionCount{
+    background:#242a35;
+    border-radius:8px;
+    padding:8px 12px;
+    font-weight:900;
+}
+
+.content{
+    padding:28px;
+}
+
+/* DASH */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:20px;
+}
+
+.panel{
+    background:#171b23;
+    border:1px solid #2a303b;
+    border-radius:15px;
+    padding:20px;
+}
+
+.panelTitle{
+    font-weight:900;
+    font-size:17px;
+    margin-bottom:15px;
+}
+
+.bigEvent{
     min-height:250px;
 }
 
 .eventTag{
     display:inline-block;
-    font-size:11px;
-    padding:7px 10px;
+    background:#262d3a;
+    color:#9eabff;
+    padding:6px 9px;
     border-radius:7px;
-    background:#252a34;
-    color:#aeb5c1;
-    margin-bottom:18px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:15px;
 }
 
-.storyTitle{
-    font-size:29px;
+.eventTitle{
+    font-size:28px;
     font-weight:900;
-    margin-bottom:14px;
+    line-height:1.2;
 }
 
-.storyText{
-    color:#b4bac5;
-    font-size:15px;
-    line-height:1.8;
-    max-width:850px;
+.eventText{
+    color:#aeb5c2;
+    line-height:1.75;
+    margin-top:15px;
     white-space:pre-line;
 }
 
-.choiceTitle{
-    margin:30px 0 13px;
-    font-size:14px;
-    color:#8f96a3;
+.choiceGrid{
+    display:grid;
+    gap:10px;
+    margin-top:22px;
 }
 
-.choices{
+.choiceBtn{
+    width:100%;
+    text-align:left;
+    background:#10131a;
+    color:#dfe3ea;
+    border:1px solid #303744;
+    border-radius:11px;
+    padding:14px;
+    transition:.15s;
+}
+
+.choiceBtn:hover{
+    border-color:#6977ff;
+    background:#1a1f2a;
+    transform:translateY(-1px);
+}
+
+.choiceBtn strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.choiceBtn small{
+    color:#7f8899;
+}
+
+/* ACTIONS */
+
+.actionGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.actionCard{
+    border:1px solid #303744;
+    background:#11151c;
+    border-radius:11px;
+    padding:15px;
+    text-align:left;
+    color:white;
+}
+
+.actionCard:hover{
+    background:#1b2029;
+    border-color:#6876ff;
+}
+
+.actionCard b{
+    display:block;
+    margin-bottom:6px;
+}
+
+.actionCard span{
+    font-size:12px;
+    color:#818a9a;
+    line-height:1.5;
+}
+
+/* NEWS */
+
+.newsList{
+    display:grid;
+    gap:8px;
+    max-height:360px;
+    overflow:auto;
+}
+
+.newsItem{
+    border-left:3px solid #5665e8;
+    background:#11151b;
+    padding:12px 14px;
+    border-radius:7px;
+}
+
+.newsItem small{
+    color:#737d8e;
+}
+
+.newsItem div{
+    margin-top:5px;
+    line-height:1.5;
+}
+
+/* NPC */
+
+.npcGrid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
 }
 
-.choice{
-    text-align:left;
-    padding:20px;
-    background:#191d25;
-    border:1px solid #303540;
-    border-radius:14px;
-    color:white;
-    transition:.18s;
+.npcCard{
+    background:#11151a;
+    border:1px solid #2d3440;
+    padding:15px;
+    border-radius:12px;
 }
 
-.choice:hover{
-    border-color:#666d7a;
-    background:#20252f;
-    transform:translateY(-2px);
+.npcHeader{
+    display:flex;
+    justify-content:space-between;
 }
 
-.choiceNumber{
-    display:inline-flex;
-    width:27px;
-    height:27px;
-    border-radius:8px;
+.npcName{
+    font-weight:900;
+}
+
+.npcRole{
+    color:#747e8f;
+    font-size:12px;
+}
+
+.relationshipBar{
+    height:6px;
+    background:#272d37;
+    margin-top:12px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.relationshipFill{
+    height:100%;
+    background:#7280ff;
+}
+
+/* RECORD */
+
+.timeline{
+    border-left:2px solid #303744;
+    padding-left:20px;
+}
+
+.timelineItem{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.timelineItem:before{
+    content:"";
+    width:9px;
+    height:9px;
+    background:#7180ff;
+    border-radius:50%;
+    position:absolute;
+    left:-26px;
+    top:5px;
+}
+
+.timelineYear{
+    font-size:12px;
+    color:#788293;
+}
+
+.timelineText{
+    margin-top:5px;
+    line-height:1.5;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    display:none;
     align-items:center;
     justify-content:center;
-    background:#292e38;
-    font-size:12px;
-    margin-right:8px;
+    z-index:50;
+    padding:20px;
 }
 
-.choiceText{
-    font-weight:800;
+.modalBox{
+    width:800px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    background:#171b23;
+    border:1px solid #3a4250;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,.6);
 }
 
-.choiceEffect{
-    display:block;
-    color:#747c89;
-    font-size:11px;
-    margin-top:10px;
-    padding-left:36px;
+.modalTitle{
+    font-size:25px;
+    font-weight:900;
 }
 
-.logPanel{
-    margin-top:24px;
-    background:#11141a;
-    border:1px solid #2b3039;
-    border-radius:15px;
-    padding:18px;
-}
-
-.logTitle{
-    font-size:12px;
-    color:#818895;
-    margin-bottom:12px;
-}
-
-#log{
-    max-height:130px;
-    overflow-y:auto;
-    font-size:11px;
-    color:#8e95a2;
+.modalText{
+    color:#aeb6c5;
     line-height:1.7;
+    margin-top:12px;
+    white-space:pre-line;
 }
 
-.logLine{
-    padding:3px 0;
-    border-bottom:1px solid #1d2128;
+.closeBtn{
+    float:right;
+    border:0;
+    background:#252b35;
+    color:#c8ced8;
+    border-radius:8px;
+    padding:7px 11px;
 }
 
 /* END */
 
 #endingScreen{
-    min-height:calc(100vh - 56px);
     display:none;
-    align-items:center;
-    justify-content:center;
+    min-height:94vh;
     padding:50px;
 }
 
-#endingScreen.active{
-    display:flex;
-}
-
 .endingBox{
-    width:850px;
-    text-align:center;
-}
-
-.endingSmall{
-    color:#858c98;
-    font-size:13px;
-    letter-spacing:2px;
+    max-width:1000px;
+    margin:auto;
 }
 
 .endingTitle{
-    font-size:62px;
+    font-size:55px;
     font-weight:900;
-    margin:15px 0;
     letter-spacing:-3px;
 }
 
-.endingDesc{
-    color:#aeb5c1;
-    line-height:1.8;
-    font-size:15px;
+.endingSubtitle{
+    color:#8d96a7;
+    margin:10px 0 30px;
 }
 
-.finalStats{
-    margin-top:30px;
+.endingGrid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
 }
 
-.finalStat{
-    background:#191d25;
-    border:1px solid #303540;
-    border-radius:12px;
-    padding:15px;
+.endingCard{
+    background:#171b23;
+    border:1px solid #303743;
+    padding:20px;
+    border-radius:13px;
 }
 
-.finalStat span{
-    display:block;
-    color:#7e8693;
-    font-size:10px;
+.endingCard h3{
+    margin-top:0;
 }
 
-.finalStat strong{
-    display:block;
-    margin-top:6px;
-    font-size:19px;
+.endingCard p{
+    color:#aab2c0;
+    line-height:1.7;
 }
 
 .restart{
-    margin-top:30px;
-    background:#f4f4f5;
-    color:#111;
-    border:0;
-    padding:16px 35px;
-    border-radius:10px;
-    font-weight:900;
+    margin-top:25px;
 }
 
-/* TOAST */
+/* MOBILE FALLBACK */
 
-#toast{
-    position:fixed;
-    left:50%;
-    bottom:28px;
-    transform:translate(-50%,20px);
-    opacity:0;
-    pointer-events:none;
-    background:#f4f4f5;
-    color:#111;
-    padding:13px 20px;
-    border-radius:10px;
-    font-size:13px;
-    font-weight:800;
-    transition:.25s;
-    z-index:100;
-}
-
-#toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:950px){
-    body{
-        padding:10px;
-    }
-
+@media(max-width:1000px){
     .gameLayout{
         grid-template-columns:1fr;
     }
 
     .sidebar{
         border-right:0;
-        border-bottom:1px solid #2b3039;
+        border-bottom:1px solid #292f39;
     }
 
-    .statGrid{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:650px){
-    .main,
-    #allocationScreen,
-    #startScreen{
-        padding:22px;
-    }
-
-    .logo{
-        font-size:48px;
-    }
-
-    .statGrid,
-    .choices,
-    .infoRow{
+    .dashboard{
         grid-template-columns:1fr;
     }
 
-    .allocHeader{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:20px;
-    }
-
-    .finalStats{
-        grid-template-columns:1fr 1fr;
+    .allocLayout{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -739,1844 +712,2595 @@ button{
 
 <div id="app">
 
-    <!-- START -->
-    <section id="startScreen" class="screen active">
-        <div class="startBox">
+<!-- START -->
+<section id="startScreen">
 
-            <div class="logo">LIFE RPG</div>
-            <div class="logoSub">
-                당신의 인생은 지금부터 시작된다.
-            </div>
+<div class="startBox">
 
-            <div class="startCard">
+<div class="logo">LIFE RPG</div>
+<div class="subtitle">
+한 사람의 인생을 직접 선택하고 만들어가는 장기 인생 시뮬레이션
+</div>
 
-                <label class="label">캐릭터 이름</label>
+<div class="startCard">
 
-                <input
-                    id="nameInput"
-                    type="text"
-                    maxlength="12"
-                    placeholder="이름을 입력하세요"
-                    autocomplete="off"
-                >
+<label>이름</label>
+<input id="nameInput" maxlength="12" placeholder="주인공의 이름을 입력하세요">
 
-                <button class="primaryBtn" id="nameNextBtn">
-                    다음 →
-                </button>
-
-                <div class="infoRow">
-                    <div class="info">
-                        <strong>30+</strong>
-                        <span>다양한 엔딩</span>
-                    </div>
-
-                    <div class="info">
-                        <strong>0 → 80</strong>
-                        <span>인생 진행</span>
-                    </div>
-
-                    <div class="info">
-                        <strong>∞</strong>
-                        <span>가능한 인생</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ALLOCATION -->
-    <section id="allocationScreen" class="screen">
-
-        <div class="allocHeader">
-            <div>
-                <h1>🎲 태어날 때의 능력</h1>
-                <p id="allocName">캐릭터</p>
-            </div>
-
-            <div class="pointsBox">
-                <strong id="remainingPoints">100</strong>
-                <span>남은 포인트</span>
-            </div>
-        </div>
-
-        <div class="statGrid" id="statGrid"></div>
-
-        <div class="allocBottom">
-            <button class="resetBtn" id="resetStatsBtn">
-                ↺ 초기화
-            </button>
-
-            <button class="startGameBtn" id="startGameBtn" disabled>
-                인생 시작하기 🚀
-            </button>
-        </div>
-
-    </section>
-
-
-    <!-- GAME -->
-    <section id="gameScreen" class="screen">
-
-        <header class="gameHeader">
-
-            <div class="gameTitle">
-                <strong>🎮 LIFE RPG</strong>
-                <span id="headerAge">AGE 0</span>
-            </div>
-
-            <div class="headerButtons">
-                <button id="saveBtn">💾 저장</button>
-                <button id="loadBtn">↩ 불러오기</button>
-                <button id="restartBtn">↻ 새 인생</button>
-            </div>
-
-        </header>
-
-        <div class="gameLayout">
-
-            <aside class="sidebar">
-
-                <div class="profile">
-                    <div class="avatar">👤</div>
-
-                    <div>
-                        <div class="profileName" id="profileName">-</div>
-                        <div class="ageText" id="profileAge">AGE 0</div>
-                    </div>
-                </div>
-
-                <div class="moneyBox">
-                    <div class="moneyLabel">보유 자산</div>
-                    <div class="money" id="money">₩0</div>
-                </div>
-
-                <div class="barStat">
-                    <div class="barHeader">
-                        <span>😊 행복</span>
-                        <span id="happinessValue">50</span>
-                    </div>
-                    <div class="bar">
-                        <div class="fill" id="happinessBar"></div>
-                    </div>
-                </div>
-
-                <div class="barStat">
-                    <div class="barHeader">
-                        <span>🧠 지능</span>
-                        <span id="intelligenceValue">0</span>
-                    </div>
-                    <div class="bar">
-                        <div class="fill" id="intelligenceBar"></div>
-                    </div>
-                </div>
-
-                <div class="barStat">
-                    <div class="barHeader">
-                        <span>✨ 외모</span>
-                        <span id="beautyValue">0</span>
-                    </div>
-                    <div class="bar">
-                        <div class="fill" id="beautyBar"></div>
-                    </div>
-                </div>
-
-                <div class="barStat">
-                    <div class="barHeader">
-                        <span>💪 건강</span>
-                        <span id="healthValue">0</span>
-                    </div>
-                    <div class="bar">
-                        <div class="fill" id="healthBar"></div>
-                    </div>
-                </div>
-
-                <div class="miniStats">
-
-                    <div class="mini">
-                        <span>💕 관계</span>
-                        <strong id="relationship">0</strong>
-                    </div>
-
-                    <div class="mini">
-                        <span>⭐ 명성</span>
-                        <strong id="fame">0</strong>
-                    </div>
-
-                    <div class="mini">
-                        <span>🎨 창의력</span>
-                        <strong id="creative">0</strong>
-                    </div>
-
-                    <div class="mini">
-                        <span>🍀 행운</span>
-                        <strong id="luck">0</strong>
-                    </div>
-
-                    <div class="mini">
-                        <span>🔥 스트레스</span>
-                        <strong id="stress">0</strong>
-                    </div>
-
-                    <div class="mini">
-                        <span>🎓 교육</span>
-                        <strong id="education">0</strong>
-                    </div>
-
-                </div>
-
-            </aside>
-
-
-            <main class="main">
-
-                <div class="ageBanner">
-
-                    <div>
-                        <h1 id="ageTitle">AGE 0</h1>
-                    </div>
-
-                    <div class="lifeStage" id="lifeStage">
-                        출생
-                    </div>
-
-                </div>
-
-
-                <div class="storyCard">
-
-                    <div class="eventTag" id="eventTag">
-                        NEW LIFE
-                    </div>
-
-                    <div class="storyTitle" id="storyTitle">
-                        새로운 인생
-                    </div>
-
-                    <div class="storyText" id="storyText">
-                        이야기가 시작된다.
-                    </div>
-
-                </div>
-
-
-                <div class="choiceTitle">
-                    선택지를 골라주세요 · 숫자키 1~4 사용 가능
-                </div>
-
-                <div class="choices" id="choices"></div>
-
-
-                <div class="logPanel">
-
-                    <div class="logTitle">
-                        📜 LIFE LOG
-                    </div>
-
-                    <div id="log"></div>
-
-                </div>
-
-            </main>
-
-        </div>
-
-    </section>
-
-
-    <!-- ENDING -->
-    <section id="endingScreen" class="screen">
-
-        <div class="endingBox">
-
-            <div class="endingSmall">
-                LIFE RPG · FINAL ENDING
-            </div>
-
-            <div class="endingTitle" id="endingTitle">
-                -
-            </div>
-
-            <div class="endingDesc" id="endingDesc">
-                -
-            </div>
-
-            <div class="finalStats">
-
-                <div class="finalStat">
-                    <span>나이</span>
-                    <strong id="finalAge">-</strong>
-                </div>
-
-                <div class="finalStat">
-                    <span>자산</span>
-                    <strong id="finalMoney">-</strong>
-                </div>
-
-                <div class="finalStat">
-                    <span>행복</span>
-                    <strong id="finalHappy">-</strong>
-                </div>
-
-                <div class="finalStat">
-                    <span>명성</span>
-                    <strong id="finalFame">-</strong>
-                </div>
-
-            </div>
-
-            <button class="restart" id="endingRestart">
-                🔄 새로운 인생 시작
-            </button>
-
-        </div>
-
-    </section>
+<button class="primary" id="startBtn">
+새로운 인생 시작하기
+</button>
 
 </div>
 
-<div id="toast"></div>
+</div>
+</section>
+
+
+<!-- ALLOCATION -->
+<section id="allocationScreen">
+
+<div class="allocTitle">태어나기 전 마지막 선택</div>
+
+<div class="allocSub">
+당신에게는 특별한 운명 포인트가 주어졌습니다.
+어디에 투자하느냐에 따라 인생이 크게 달라질 수 있습니다.
+</div>
+
+<div class="allocLayout">
+
+<div>
+
+<div id="allocStats" class="allocStats"></div>
+
+<button class="primary" id="birthBtn">
+이 능력치로 태어나기
+</button>
+
+</div>
+
+<div class="birthPreview">
+
+<h3>🍼 출생 예정 정보</h3>
+
+<div class="previewLine">
+<span>이름</span>
+<b id="previewName">-</b>
+</div>
+
+<div class="previewLine">
+<span>남은 포인트</span>
+<b id="pointsLeft">100</b>
+</div>
+
+<div class="previewLine">
+<span>예상 성향</span>
+<b id="previewTrait">균형형</b>
+</div>
+
+<div class="previewLine">
+<span>초기 운</span>
+<b id="previewLuck">보통</b>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GAME -->
+<section id="gameScreen">
+
+<div class="gameLayout">
+
+<aside class="sidebar">
+
+<div class="profile">
+<div class="profileName" id="sideName">-</div>
+<div class="profileAge" id="sideAge">0세</div>
+
+<div class="lifeMeter">
+
+<div class="meterTitle">
+<span>현재 인생 진행도</span>
+<span id="lifePercent">0%</span>
+</div>
+
+<div class="meter">
+<div class="meterFill" id="lifeFill" style="width:0%"></div>
+</div>
+
+</div>
+</div>
+
+
+<div class="statList" id="statList"></div>
+
+
+<div class="sideNav">
+
+<button class="active" data-tab="life">🏠 인생</button>
+<button data-tab="relations">👥 인간관계</button>
+<button data-tab="career">💼 커리어</button>
+<button data-tab="assets">💰 재산</button>
+<button data-tab="record">📖 인생 기록</button>
+
+</div>
+
+
+<div class="saveButtons">
+
+<button id="saveBtn">💾 저장</button>
+<button id="loadBtn">📂 불러오기</button>
+<button id="newBtn">🔄 새 인생</button>
+
+</div>
+
+</aside>
+
+
+<main class="main">
+
+<header class="topbar">
+
+<div class="yearTitle">
+<span id="yearTitle">0세</span>
+<small id="stageTitle">유아기</small>
+</div>
+
+<div class="actionBox">
+<span class="actionText">이번 해 남은 행동</span>
+<span class="actionCount" id="actionCount">3 / 3</span>
+</div>
+
+</header>
+
+
+<div class="content">
+
+<!-- LIFE TAB -->
+
+<div id="lifeTab">
+
+<div class="dashboard">
+
+<div class="panel bigEvent">
+
+<div class="eventTag" id="eventTag">LIFE EVENT</div>
+
+<div class="eventTitle" id="eventTitle">
+인생이 시작됩니다.
+</div>
+
+<div class="eventText" id="eventText">
+아직 아무것도 결정되지 않았습니다.
+당신의 선택으로 모든 것이 달라집니다.
+</div>
+
+<div class="choiceGrid" id="choiceGrid"></div>
+
+</div>
+
+
+<div>
+
+<div class="panel">
+
+<div class="panelTitle">⚡ 지금 할 수 있는 행동</div>
+
+<div class="actionGrid" id="actionGrid"></div>
+
+</div>
+
+
+<div class="panel" style="margin-top:15px">
+
+<div class="panelTitle">📰 세상에서 일어난 일</div>
+
+<div class="newsList" id="newsList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RELATIONS -->
+
+<div id="relationsTab" style="display:none">
+
+<div class="panel">
+
+<div class="panelTitle">👥 당신의 인간관계</div>
+
+<div class="npcGrid" id="npcGrid"></div>
+
+</div>
+
+</div>
+
+
+<!-- CAREER -->
+
+<div id="careerTab" style="display:none">
+
+<div class="panel">
+
+<div class="panelTitle">💼 커리어</div>
+
+<div id="careerContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- ASSETS -->
+
+<div id="assetsTab" style="display:none">
+
+<div class="panel">
+
+<div class="panelTitle">💰 재산과 생활</div>
+
+<div id="assetContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- RECORD -->
+
+<div id="recordTab" style="display:none">
+
+<div class="panel">
+
+<div class="panelTitle">📖 당신의 인생 연대기</div>
+
+<div class="timeline" id="timeline"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</section>
+
+
+<!-- ENDING -->
+
+<section id="endingScreen">
+
+<div class="endingBox">
+
+<div class="endingTitle" id="endingTitle">
+인생 종료
+</div>
+
+<div class="endingSubtitle" id="endingSubtitle"></div>
+
+<div class="endingGrid">
+
+<div class="endingCard">
+
+<h3>📊 인생 통계</h3>
+<div id="endingStats"></div>
+
+</div>
+
+<div class="endingCard">
+
+<h3>🏆 업적</h3>
+<div id="endingAchievements"></div>
+
+</div>
+
+<div class="endingCard">
+
+<h3>💬 인간관계</h3>
+<div id="endingRelations"></div>
+
+</div>
+
+<div class="endingCard">
+
+<h3>📖 마지막 이야기</h3>
+<p id="endingStory"></p>
+
+</div>
+
+</div>
+
+<button class="primary restart" id="restartBtn">
+새로운 인생 시작하기
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- EVENT MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modalBox">
+
+<button class="closeBtn" id="closeModal">닫기</button>
+
+<div class="modalTitle" id="modalTitle"></div>
+
+<div class="modalText" id="modalText"></div>
+
+<div class="choiceGrid" id="modalChoices"></div>
+
+</div>
+
+</div>
 
 
 <script>
-"use strict";
 
 /* =========================================================
-   LIFE RPG
-   ========================================================= */
+   LIFE RPG — CORE STATE
+========================================================= */
 
-const STAT_INFO = [
-    {
-        key:"beauty",
-        name:"✨ 외모",
-        desc:"첫인상, 인기, 연예계 적성"
-    },
-    {
-        key:"intelligence",
-        name:"🧠 지능",
-        desc:"공부, 직업, 판단력"
-    },
-    {
-        key:"health",
-        name:"💪 건강",
-        desc:"체력, 수명, 컨디션"
-    },
-    {
-        key:"charm",
-        name:"💖 매력",
-        desc:"인간관계, 연애, 사회성"
-    },
-    {
-        key:"creative",
-        name:"🎨 창의력",
-        desc:"예술, 콘텐츠, 창업"
-    },
-    {
-        key:"luck",
-        name:"🍀 행운",
-        desc:"뜻밖의 기회와 사건"
-    }
-];
+const MAX_AGE = 90;
 
-let game = {
-    name:"",
-    age:0,
+let state = null;
 
-    beauty:0,
-    intelligence:0,
-    health:0,
-    charm:0,
-    creative:0,
-    luck:0,
-
-    money:10000,
-    happiness:60,
-    relationship:30,
-    fame:0,
-    stress:5,
-    education:0,
-
-    job:"",
-    married:false,
-    children:0,
-    business:false,
-    celebrity:false,
-    degree:false,
-    house:0,
-    car:0,
-
-    choices:0,
-    ending:false
+const statNames = {
+    beauty:"외모",
+    intelligence:"지능",
+    health:"건강",
+    charm:"매력",
+    creativity:"창의력",
+    luck:"운"
 };
 
-let currentChoices = [];
+const stages = [
+    [0,2,"유아기"],
+    [3,6,"아동기"],
+    [7,12,"초등학생"],
+    [13,15,"중학생"],
+    [16,18,"고등학생"],
+    [19,24,"청년기"],
+    [25,39,"사회초년기"],
+    [40,59,"중년기"],
+    [60,74,"장년기"],
+    [75,90,"노년기"]
+];
 
-const $ = id => document.getElementById(id);
-
-function showScreen(id){
-    document.querySelectorAll(".screen").forEach(s=>{
-        s.classList.remove("active");
-    });
-
-    $(id).classList.add("active");
+function getStage(age){
+    for(const s of stages){
+        if(age>=s[0] && age<=s[1]) return s[2];
+    }
+    return "인생";
 }
 
-function toast(text){
-    const el = $("toast");
-    el.textContent = text;
-    el.classList.add("show");
 
-    clearTimeout(window.toastTimer);
+/* =========================================================
+   INITIAL STATE
+========================================================= */
 
-    window.toastTimer = setTimeout(()=>{
-        el.classList.remove("show");
-    },1800);
+function createState(name){
+
+    const parents = generateParents();
+
+    return {
+        name:name,
+        age:0,
+
+        points:100,
+
+        stats:{
+            beauty:10,
+            intelligence:10,
+            health:10,
+            charm:10,
+            creativity:10,
+            luck:10
+        },
+
+        hidden:{
+            grit:random(20,70),
+            empathy:random(20,70),
+            risk:random(20,70),
+            discipline:random(20,70)
+        },
+
+        personality:"",
+
+        money:50000,
+        happiness:60,
+        stress:10,
+        fame:0,
+        education:0,
+
+        health:70,
+
+        family:{
+            parents:parents,
+            siblings:[],
+            wealth:random(1,5)
+        },
+
+        relationships:[],
+
+        career:{
+            field:"없음",
+            job:"학생",
+            level:0,
+            salary:0,
+            experience:0,
+            business:null
+        },
+
+        assets:{
+            house:"부모님 집",
+            car:"없음",
+            investments:0,
+            possessions:[]
+        },
+
+        followers:0,
+
+        children:[],
+
+        flags:{},
+
+        actionPoints:3,
+
+        currentEvent:null,
+
+        history:[],
+
+        news:[],
+
+        achievements:[],
+
+        yearStats:{
+            income:0,
+            spending:0
+        },
+
+        alive:true
+    };
 }
 
-function moneyFormat(n){
-    return "₩" + Math.max(0,Math.floor(n)).toLocaleString("ko-KR");
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function random(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function chance(percent){
+    return Math.random()*100 < percent;
 }
 
 function clamp(n,min,max){
     return Math.max(min,Math.min(max,n));
 }
 
-function addLog(text){
-    const log = $("log");
+function addHistory(text){
+    state.history.unshift({
+        age:state.age,
+        text:text
+    });
 
-    const line = document.createElement("div");
-    line.className = "logLine";
-    line.textContent = "• " + text;
-
-    log.prepend(line);
-}
-
-function changeStat(stat,value){
-    if(typeof game[stat] !== "number") return;
-
-    game[stat] += value;
-
-    if(["beauty","intelligence","health","charm","creative","luck"].includes(stat)){
-        game[stat] = clamp(game[stat],0,100);
-    }
-
-    if(["happiness","relationship","fame","stress","education"].includes(stat)){
-        game[stat] = clamp(game[stat],0,100);
+    if(state.history.length>120){
+        state.history.pop();
     }
 }
 
-function saveGame(show=true){
-    localStorage.setItem("lifeRPGSave",JSON.stringify(game));
+function addNews(text){
+    state.news.unshift({
+        age:state.age,
+        text:text
+    });
 
-    if(show){
-        toast("💾 인생 데이터가 저장됐어!");
+    if(state.news.length>30){
+        state.news.pop();
     }
 }
 
-function loadGame(){
-    const raw = localStorage.getItem("lifeRPGSave");
-
-    if(!raw){
-        toast("저장된 인생이 없어!");
-        return;
-    }
-
-    try{
-        game = JSON.parse(raw);
-
-        if(game.ending){
-            renderEnding();
-        }else{
-            showScreen("gameScreen");
-            renderGame();
-            toast("↩ 저장된 인생을 불러왔어!");
-        }
-
-    }catch(e){
-        toast("저장 데이터를 불러오지 못했어.");
-    }
+function money(n){
+    return new Intl.NumberFormat("ko-KR").format(Math.round(n))+"원";
 }
 
 
 /* =========================================================
-   START
-   ========================================================= */
+   PARENTS
+========================================================= */
 
-$("nameNextBtn").addEventListener("click",goToAllocation);
+function generateParents(){
 
-$("nameInput").addEventListener("keydown",e=>{
-    if(e.key === "Enter"){
-        goToAllocation();
-    }
-});
+    const fatherJobs=[
+        "회사원",
+        "공무원",
+        "자영업자",
+        "개발자",
+        "교사",
+        "디자이너",
+        "영업직",
+        "연구원"
+    ];
 
-function goToAllocation(){
+    const motherJobs=[
+        "회사원",
+        "교사",
+        "간호사",
+        "자영업자",
+        "디자이너",
+        "프리랜서",
+        "공무원",
+        "작가"
+    ];
 
-    const name = $("nameInput").value.trim();
+    return [
+        {
+            name:randomName(),
+            role:"아버지",
+            job:fatherJobs[random(0,fatherJobs.length-1)],
+            affection:random(50,85)
+        },
+        {
+            name:randomName(),
+            role:"어머니",
+            job:motherJobs[random(0,motherJobs.length-1)],
+            affection:random(60,90)
+        }
+    ];
+}
+
+function randomName(){
+
+    const names=[
+        "민준","서준","지훈","도윤","현우","준혁",
+        "예준","건우","시우","하준","유진","서연",
+        "지우","수빈","하은","채원","민서","윤서"
+    ];
+
+    return names[random(0,names.length-1)];
+}
+
+
+/* =========================================================
+   START FLOW
+========================================================= */
+
+document.getElementById("startBtn").addEventListener("click",()=>{
+    const name=document.getElementById("nameInput").value.trim();
 
     if(!name){
-        toast("이름을 먼저 입력해줘!");
-        $("nameInput").focus();
+        alert("이름을 입력해줘!");
         return;
     }
 
-    game = {
-        name:name,
-        age:0,
+    state=createState(name);
 
-        beauty:0,
-        intelligence:0,
-        health:0,
-        charm:0,
-        creative:0,
-        luck:0,
-
-        money:10000,
-        happiness:60,
-        relationship:30,
-        fame:0,
-        stress:5,
-        education:0,
-
-        job:"",
-        married:false,
-        children:0,
-        business:false,
-        celebrity:false,
-        degree:false,
-        house:0,
-        car:0,
-
-        choices:0,
-        ending:false
-    };
-
-    $("allocName").textContent =
-        name + "의 인생 능력치를 결정해보자.";
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("allocationScreen").style.display="block";
 
     renderAllocation();
-
-    showScreen("allocationScreen");
-}
+});
 
 
 /* =========================================================
    ALLOCATION
-   ========================================================= */
+========================================================= */
 
 function renderAllocation(){
 
-    const grid = $("statGrid");
-    grid.innerHTML = "";
+    const box=document.getElementById("allocStats");
+    box.innerHTML="";
 
-    STAT_INFO.forEach(stat=>{
+    for(const key in statNames){
 
-        const card = document.createElement("div");
-        card.className = "statCard";
+        const div=document.createElement("div");
+        div.className="allocStat";
 
-        card.innerHTML = `
-            <div class="statTop">
-                <div class="statName">${stat.name}</div>
-                <div class="statValue" id="alloc-${stat.key}">
-                    ${game[stat.key]}
-                </div>
+        div.innerHTML=`
+            <div class="allocStatTop">
+                <span class="allocStatName">${statNames[key]}</span>
+                <span class="allocValue">${state.stats[key]}</span>
             </div>
 
-            <div class="statDesc">${stat.desc}</div>
-
-            <div class="statControls">
-
-                <button data-stat="${stat.key}" data-change="-1">
-                    −
-                </button>
-
-                <div class="statValue" id="value-${stat.key}">
-                    ${game[stat.key]}
-                </div>
-
-                <button data-stat="${stat.key}" data-change="1">
-                    +
-                </button>
-
+            <div class="allocButtons">
+                <button data-stat="${key}" data-dir="-">−</button>
+                <button data-stat="${key}" data-dir="+">+</button>
             </div>
         `;
 
-        grid.appendChild(card);
-    });
+        box.appendChild(div);
+    }
 
-    grid.querySelectorAll("button").forEach(btn=>{
+    box.querySelectorAll("button").forEach(btn=>{
         btn.addEventListener("click",()=>{
 
-            const stat = btn.dataset.stat;
-            const change = Number(btn.dataset.change);
+            const key=btn.dataset.stat;
+            const dir=btn.dataset.dir;
 
-            const used =
-                game.beauty +
-                game.intelligence +
-                game.health +
-                game.charm +
-                game.creative +
-                game.luck;
-
-            if(change > 0 && used >= 100){
-                toast("포인트를 모두 사용했어!");
-                return;
+            if(dir==="+" && state.points>0){
+                state.stats[key]++;
+                state.points--;
             }
 
-            if(change < 0 && game[stat] <= 0){
-                return;
+            if(dir==="-" && state.stats[key]>1){
+                state.stats[key]--;
+                state.points++;
             }
-
-            game[stat] += change;
 
             renderAllocation();
         });
     });
 
-    const used =
-        game.beauty +
-        game.intelligence +
-        game.health +
-        game.charm +
-        game.creative +
-        game.luck;
+    document.getElementById("pointsLeft").textContent=state.points;
+    document.getElementById("previewName").textContent=state.name;
 
-    $("remainingPoints").textContent = 100 - used;
-    $("startGameBtn").disabled = used !== 100;
+    const total=Object.values(state.stats).reduce((a,b)=>a+b,0);
+
+    let trait="균형형";
+
+    if(state.stats.beauty>=30) trait="스타형";
+    else if(state.stats.intelligence>=30) trait="천재형";
+    else if(state.stats.creativity>=30) trait="창작자형";
+    else if(state.stats.health>=30) trait="체력형";
+    else if(state.stats.charm>=30) trait="사교형";
+    else if(state.stats.luck>=30) trait="행운형";
+
+    document.getElementById("previewTrait").textContent=trait;
+
+    document.getElementById("previewLuck").textContent=
+        state.stats.luck>=25?"상당히 좋음":
+        state.stats.luck>=15?"좋음":"보통";
 }
 
-$("resetStatsBtn").addEventListener("click",()=>{
 
-    STAT_INFO.forEach(stat=>{
-        game[stat.key] = 0;
-    });
+document.getElementById("birthBtn").addEventListener("click",()=>{
 
-    renderAllocation();
+    state.personality=generatePersonality();
+
+    document.getElementById("allocationScreen").style.display="none";
+    document.getElementById("gameScreen").style.display="block";
+
+    addHistory(
+        `${state.name}의 인생이 시작되었다. ${state.family.parents[0].name}과 ${state.family.parents[1].name}의 아이로 태어났다.`
+    );
+
+    addNews(`${state.name} 출생. 새로운 인생이 시작되었다.`);
+
+    showBirthEvent();
+
+    renderAll();
 });
 
-$("startGameBtn").addEventListener("click",startGame);
 
-function startGame(){
+function generatePersonality(){
 
-    game.money = 10000;
-    game.age = 0;
-    game.happiness = 60;
-    game.relationship = 30;
-    game.fame = 0;
-    game.stress = 5;
+    const list=[];
 
-    $("log").innerHTML = "";
+    if(state.stats.intelligence>25) list.push("분석적");
+    if(state.stats.charm>25) list.push("사교적");
+    if(state.stats.creativity>25) list.push("창의적");
+    if(state.stats.health>25) list.push("활동적");
+    if(state.stats.luck>25) list.push("낙천적");
 
-    addLog("👶 " + game.name + "의 인생이 시작되었다.");
-    addLog("🎲 태어날 때의 능력치가 결정되었다.");
+    if(list.length===0) list.push("평범하지만 독특한");
 
-    showScreen("gameScreen");
-
-    renderGame();
+    return list.slice(0,2).join(" · ");
 }
 
 
 /* =========================================================
-   GAME RENDER
-   ========================================================= */
+   BIRTH EVENT
+========================================================= */
 
-function renderGame(){
+function showBirthEvent(){
 
-    $("profileName").textContent = game.name;
-    $("profileAge").textContent = "AGE " + game.age;
+    setEvent(
+        "출생",
+        "당신이 태어났습니다.",
+        `${state.name}이라는 이름을 가진 한 아이가 세상에 등장했습니다.
 
-    $("headerAge").textContent = "AGE " + game.age;
+아버지는 ${state.family.parents[0].job}이고,
+어머니는 ${state.family.parents[1].job}입니다.
 
-    $("ageTitle").textContent =
-        "AGE " + game.age;
+가족의 경제 수준은 ${["매우 낮음","낮음","보통","괜찮음","높음"][state.family.wealth-1]}입니다.
 
-    $("lifeStage").textContent =
-        getLifeStage(game.age);
+하지만 아직 아무것도 결정되지 않았습니다.
 
-    $("money").textContent =
-        moneyFormat(game.money);
-
-    updateBar("happiness",game.happiness);
-    updateBar("intelligence",game.intelligence);
-    updateBar("beauty",game.beauty);
-    updateBar("health",game.health);
-
-    $("relationship").textContent = game.relationship;
-    $("fame").textContent = game.fame;
-    $("creative").textContent = game.creative;
-    $("luck").textContent = game.luck;
-    $("stress").textContent = game.stress;
-    $("education").textContent = game.education;
-
-    renderScene();
-}
-
-function updateBar(name,value){
-
-    $(name+"Value").textContent = Math.round(value);
-    $(name+"Bar").style.width =
-        clamp(value,0,100) + "%";
-}
-
-function getLifeStage(age){
-
-    if(age === 0) return "출생";
-    if(age <= 5) return "유아기";
-    if(age <= 12) return "초등학생";
-    if(age <= 15) return "중학생";
-    if(age <= 18) return "고등학생";
-    if(age <= 22) return "청년기";
-    if(age <= 29) return "사회초년생";
-    if(age <= 39) return "성인기";
-    if(age <= 49) return "전성기";
-    if(age <= 59) return "중년기";
-    if(age <= 69) return "장년기";
-    return "노년기";
+이제부터 당신의 선택이 진짜 인생을 만들어갑니다.`,
+        [
+            {
+                title:"👶 주변의 사랑을 받으며 자란다",
+                desc:"가족 관계 +10",
+                effect:()=>{
+                    state.happiness+=10;
+                    state.relationships.push({
+                        id:"mother",
+                        name:state.family.parents[1].name,
+                        role:"어머니",
+                        affinity:85,
+                        trust:80
+                    });
+                }
+            },
+            {
+                title:"🧠 혼자 관찰하는 아이가 된다",
+                desc:"지능 +3 · 창의력 +3",
+                effect:()=>{
+                    state.stats.intelligence+=3;
+                    state.stats.creativity+=3;
+                }
+            },
+            {
+                title:"🏃 유난히 활동적인 아이가 된다",
+                desc:"건강 +5",
+                effect:()=>{
+                    state.stats.health+=5;
+                    state.health+=5;
+                }
+            }
+        ]
+    );
 }
 
 
 /* =========================================================
-   SCENE DATABASE
-   ========================================================= */
+   EVENT SYSTEM
+========================================================= */
 
-function renderScene(){
+function setEvent(tag,title,text,choices){
 
-    const scene = getScene(game.age);
+    state.currentEvent={
+        tag,
+        title,
+        text,
+        choices
+    };
 
-    $("eventTag").textContent = scene.tag;
-    $("storyTitle").textContent = scene.title;
-    $("storyText").textContent = scene.text;
+    renderEvent();
+}
 
-    currentChoices = scene.choices;
+function renderEvent(){
 
-    const container = $("choices");
-    container.innerHTML = "";
+    if(!state.currentEvent) return;
 
-    currentChoices.forEach((choice,index)=>{
+    document.getElementById("eventTag").textContent=
+        state.currentEvent.tag;
 
-        const btn = document.createElement("button");
-        btn.className = "choice";
+    document.getElementById("eventTitle").textContent=
+        state.currentEvent.title;
 
-        btn.innerHTML = `
-            <span class="choiceNumber">${index+1}</span>
-            <span class="choiceText">${choice.text}</span>
-            <span class="choiceEffect">${choice.effect || ""}</span>
+    document.getElementById("eventText").textContent=
+        state.currentEvent.text;
+
+    const box=document.getElementById("choiceGrid");
+    box.innerHTML="";
+
+    state.currentEvent.choices.forEach((choice,index)=>{
+
+        const btn=document.createElement("button");
+        btn.className="choiceBtn";
+
+        btn.innerHTML=`
+            <strong>${index+1}. ${choice.title}</strong>
+            <small>${choice.desc||""}</small>
         `;
 
         btn.addEventListener("click",()=>{
-            choose(index);
+            executeChoice(choice);
         });
 
-        container.appendChild(btn);
+        box.appendChild(btn);
+    });
+}
+
+
+function executeChoice(choice){
+
+    if(typeof choice.effect==="function"){
+        choice.effect();
+    }
+
+    if(choice.result){
+        addHistory(choice.result);
+    }
+
+    renderAll();
+
+    if(choice.next){
+        choice.next();
+    }else{
+        state.currentEvent=null;
+        renderEvent();
+    }
+
+    saveGame();
+}
+
+
+/* =========================================================
+   ACTION SYSTEM
+========================================================= */
+
+function getActions(){
+
+    const age=state.age;
+    const actions=[];
+
+    if(age<7){
+
+        actions.push(
+            {
+                title:"🧸 놀기",
+                desc:"행복 +6",
+                effect:()=>{
+                    state.happiness+=6;
+                    state.stats.charm+=1;
+                }
+            },
+            {
+                title:"📚 책 보기",
+                desc:"지능 +2",
+                effect:()=>{
+                    state.stats.intelligence+=2;
+                }
+            },
+            {
+                title:"🏃 뛰어놀기",
+                desc:"건강 +3",
+                effect:()=>{
+                    state.health+=3;
+                    state.stats.health+=1;
+                }
+            }
+        );
+
+    }else if(age<=12){
+
+        actions.push(
+            {
+                title:"📚 공부하기",
+                desc:"교육 +5 · 지능 +2",
+                effect:()=>{
+                    state.education+=5;
+                    state.stats.intelligence+=2;
+                    state.stress+=3;
+                }
+            },
+            {
+                title:"⚽ 운동하기",
+                desc:"건강 +5 · 스트레스 감소",
+                effect:()=>{
+                    state.health+=5;
+                    state.stress-=4;
+                }
+            },
+            {
+                title:"👥 친구들과 놀기",
+                desc:"행복 +6 · 인간관계",
+                effect:()=>{
+                    state.happiness+=6;
+                    improveRandomRelation(6);
+                }
+            },
+            {
+                title:"🎨 창작하기",
+                desc:"창의력 +3",
+                effect:()=>{
+                    state.stats.creativity+=3;
+                }
+            }
+        );
+
+    }else if(age<=18){
+
+        actions.push(
+            {
+                title:"📚 시험 공부",
+                desc:"교육 +8 · 스트레스 +5",
+                effect:()=>{
+                    state.education+=8;
+                    state.stats.intelligence+=2;
+                    state.stress+=5;
+                }
+            },
+            {
+                title:"🎤 동아리 활동",
+                desc:"매력/창의력 상승",
+                effect:()=>{
+                    state.stats.charm+=2;
+                    state.stats.creativity+=2;
+                    state.happiness+=3;
+                }
+            },
+            {
+                title:"👥 친구 만나기",
+                desc:"관계 개선",
+                effect:()=>{
+                    improveRandomRelation(10);
+                    state.happiness+=4;
+                }
+            },
+            {
+                title:"💕 좋아하는 사람에게 다가가기",
+                desc:"특별한 관계 이벤트",
+                effect:()=>{
+                    romanceAction();
+                }
+            },
+            {
+                title:"📱 SNS 시작",
+                desc:"팔로워 + 랜덤",
+                effect:()=>{
+                    state.followers+=random(20,300);
+                }
+            }
+        );
+
+    }else{
+
+        actions.push(
+            {
+                title:"💼 일하기",
+                desc:"직업에 따라 수입 발생",
+                effect:workAction
+            },
+            {
+                title:"📚 자기계발",
+                desc:"지능/커리어 상승",
+                effect:()=>{
+                    state.education+=5;
+                    state.career.experience+=1;
+                    state.stats.intelligence+=1;
+                }
+            },
+            {
+                title:"💪 운동",
+                desc:"건강 상승 · 스트레스 감소",
+                effect:()=>{
+                    state.health+=6;
+                    state.stress-=8;
+                }
+            },
+            {
+                title:"👥 인간관계 관리",
+                desc:"누군가와 가까워진다",
+                effect:()=>{
+                    improveRandomRelation(8);
+                }
+            },
+            {
+                title:"💰 투자",
+                desc:"돈을 투자한다",
+                effect:investmentAction
+            },
+            {
+                title:"🎨 프로젝트 만들기",
+                desc:"창의력/팔로워/커리어",
+                effect:projectAction
+            },
+            {
+                title:"🌴 여행",
+                desc:"행복 상승 · 비용 발생",
+                effect:()=>{
+                    if(state.money>=300000){
+                        state.money-=300000;
+                        state.happiness+=15;
+                        state.stress-=15;
+                    }else{
+                        state.happiness-=3;
+                    }
+                }
+            },
+            {
+                title:"❤️ 데이트",
+                desc:"연애 관계가 있다면 특별 이벤트",
+                effect:dateAction
+            }
+        );
+    }
+
+    return actions;
+}
+
+
+/* =========================================================
+   ACTION RENDER
+========================================================= */
+
+function renderActions(){
+
+    const box=document.getElementById("actionGrid");
+    box.innerHTML="";
+
+    getActions().forEach(action=>{
+
+        const btn=document.createElement("button");
+        btn.className="actionCard";
+
+        btn.innerHTML=`
+            <b>${action.title}</b>
+            <span>${action.desc}</span>
+        `;
+
+        btn.addEventListener("click",()=>{
+
+            if(state.actionPoints<=0){
+                alert("이번 해의 행동을 모두 사용했어!");
+                return;
+            }
+
+            action.effect();
+
+            state.actionPoints--;
+
+            addHistory(
+                `${state.age}세: ${action.title.replace(/^[^\s]+\s/,"")} 행동을 했다.`
+            );
+
+            if(state.actionPoints<=0){
+                finishYear();
+            }else{
+                renderAll();
+            }
+
+            saveGame();
+        });
+
+        box.appendChild(btn);
     });
 }
 
 
 /* =========================================================
-   CHOICE
-   ========================================================= */
+   WORK
+========================================================= */
 
-function choose(index){
+function workAction(){
 
-    const choice = currentChoices[index];
-
-    if(!choice) return;
-
-    game.choices++;
-
-    if(choice.effectFn){
-        choice.effectFn();
-    }
-
-    if(choice.log){
-        addLog(choice.log);
-    }
-
-    if(choice.message){
-        toast(choice.message);
-    }
-
-    if(game.choices % 3 === 0){
-        randomEvent();
-    }
-
-    saveGame(false);
-
-    if(game.age >= 80){
-        finishLife();
+    if(state.age<19){
+        state.education+=3;
         return;
     }
 
-    game.age++;
+    if(state.career.job==="학생"){
+        chooseCareer();
+        return;
+    }
 
-    renderGame();
+    const income=Math.max(0,state.career.salary);
+
+    state.money+=income;
+    state.yearStats.income+=income;
+
+    state.career.experience++;
+
+    state.stress+=5;
+
+    if(chance(15)){
+        state.career.level++;
+        state.career.salary+=Math.round(state.career.salary*.18);
+
+        addNews(
+            `${state.name}, 직장에서 승진하다.`
+        );
+    }
 }
 
 
 /* =========================================================
-   RANDOM EVENTS
-   ========================================================= */
+   CAREER
+========================================================= */
 
-function randomEvent(){
+function chooseCareer(){
 
-    const events = [
-
-        ()=>{
-            changeStat("luck",2);
-            game.money += 5000;
-            addLog("🍀 길에서 뜻밖의 행운을 만났다. +₩5,000");
-        },
-
-        ()=>{
-            changeStat("happiness",5);
-            addLog("😊 오랜만에 정말 행복한 하루를 보냈다.");
-        },
-
-        ()=>{
-            changeStat("stress",8);
-            changeStat("happiness",-4);
-            addLog("😵 갑자기 일이 꼬였다. 스트레스 증가.");
-        },
-
-        ()=>{
-            changeStat("relationship",5);
-            addLog("💕 좋은 사람을 만나 인간관계가 좋아졌다.");
-        },
-
-        ()=>{
-            game.money = Math.max(0,game.money-3000);
-            addLog("💸 예상하지 못한 지출이 생겼다.");
-        }
-
+    const careers=[
+        ["💻 개발자","IT",3800000],
+        ["🎨 디자이너","디자인",3000000],
+        ["🎤 아티스트","연예",2200000],
+        ["🎥 콘텐츠 크리에이터","미디어",1800000],
+        ["⚖️ 변호사","법률",5000000],
+        ["🩺 의사","의료",6500000],
+        ["📊 회사원","경영",3000000],
+        ["👩‍🏫 교사","교육",3200000],
+        ["🔬 연구원","연구",3500000],
+        ["🏢 공무원","공공",2800000]
     ];
 
-    const event =
-        events[Math.floor(Math.random()*events.length)];
+    openModal(
+        "첫 직업을 선택하세요",
+        "당신은 이제 사회에 진입할 준비가 되었습니다.\n무엇을 선택하느냐에 따라 이후 인생의 사건이 달라집니다.",
+        careers.map(c=>({
+            title:c[0],
+            desc:`${c[1]} · 시작 월급 ${money(c[2])}`,
+            effect:()=>{
+                state.career.job=c[0].replace(/^[^\s]+\s/,"");
+                state.career.field=c[1];
+                state.career.salary=c[2];
+                state.career.level=1;
+                state.career.experience=0;
 
-    event();
+                addHistory(
+                    `${state.age}세, ${state.career.job}으로 사회생활을 시작했다.`
+                );
+
+                addNews(
+                    `${state.name}, ${state.career.job}으로 첫 출근.`
+                );
+            }
+        }))
+    );
 }
 
 
 /* =========================================================
-   SCENES
-   ========================================================= */
+   INVESTMENT
+========================================================= */
 
-function getScene(age){
+function investmentAction(){
 
-    if(age === 0){
-        return {
-            tag:"BIRTH",
-            title:"세상에 태어나다",
-            text:
-                game.name +
-                "이라는 이름을 가진 아이가 세상에 태어났다.\n\n"+
-                "아직 아무것도 정해지지 않았다.\n"+
-                "돈도, 직업도, 사랑도, 성공도.\n"+
-                "모든 것이 앞으로의 선택에 달려 있다.",
-            choices:[
-                {
-                    text:"세상을 마음껏 경험한다",
-                    effect:"+행복 +10",
-                    effectFn:()=>{
-                        changeStat("happiness",10);
-                    },
-                    log:"🌱 인생의 첫 장을 긍정적으로 시작했다."
-                },
-                {
-                    text:"공부하는 사람이 된다",
-                    effect:"+지능 +5",
-                    effectFn:()=>{
-                        changeStat("intelligence",5);
-                        game.education += 3;
-                    },
-                    log:"🧠 배움의 씨앗이 생겼다."
-                },
-                {
-                    text:"사람들과 친해진다",
-                    effect:"+관계 +10",
-                    effectFn:()=>{
-                        changeStat("relationship",10);
-                        changeStat("charm",3);
-                    },
-                    log:"💕 사람을 좋아하는 성향이 생겼다."
-                },
-                {
-                    text:"모험을 즐긴다",
-                    effect:"+행운 +5",
-                    effectFn:()=>{
-                        changeStat("luck",5);
-                        changeStat("happiness",5);
-                    },
-                    log:"🍀 모험심이 강한 아이로 자랐다."
-                }
-            ]
-        };
+    if(state.money<100000){
+        state.stress+=2;
+        return;
     }
 
+    const amount=Math.min(
+        1000000,
+        Math.floor(state.money*.2)
+    );
 
-    if(age <= 5){
-        return {
-            tag:"CHILDHOOD",
-            title:"작은 세계의 모험",
-            text:
-                "어린 시절은 이상하게 빠르게 지나간다.\n\n"+
-                "장난감 하나에도 하루 종일 행복하고,\n"+
-                "별것 아닌 일에도 엄청난 모험을 하는 시기다.\n\n"+
-                "오늘은 무엇을 할까?",
-            choices:[
-                {
-                    text:"밖에서 신나게 논다",
-                    effect:"+건강 +3 +행복",
-                    effectFn:()=>{
-                        changeStat("health",3);
-                        changeStat("happiness",5);
-                    },
-                    log:"🏃 신나게 뛰어놀았다."
-                },
-                {
-                    text:"책을 읽는다",
-                    effect:"+지능 +4",
-                    effectFn:()=>{
-                        changeStat("intelligence",4);
-                        game.education += 2;
-                    },
-                    log:"📚 책과 친해졌다."
-                },
-                {
-                    text:"그림과 만들기를 한다",
-                    effect:"+창의력 +5",
-                    effectFn:()=>{
-                        changeStat("creative",5);
-                    },
-                    log:"🎨 창의력이 자라났다."
-                },
-                {
-                    text:"친구들과 놀러 간다",
-                    effect:"+관계 +6",
-                    effectFn:()=>{
-                        changeStat("relationship",6);
-                        changeStat("charm",2);
-                    },
-                    log:"🧸 친구가 생겼다."
-                }
-            ]
+    state.money-=amount;
+    state.assets.investments+=amount;
+
+    const result=random(1,100);
+
+    if(result<=45){
+        const loss=Math.floor(amount*.25);
+        state.assets.investments-=loss;
+        addNews(`${state.name}, 투자에서 손실을 기록했다.`);
+    }else if(result<=85){
+        const profit=Math.floor(amount*.25);
+        state.assets.investments+=profit;
+        addNews(`${state.name}, 투자 수익을 얻었다.`);
+    }else{
+        const profit=Math.floor(amount*1.2);
+        state.assets.investments+=profit;
+        addNews(`${state.name}, 투자 대박으로 큰 수익을 얻었다!`);
+    }
+}
+
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+function projectAction(){
+
+    state.stats.creativity+=2;
+
+    const chanceValue=
+        state.stats.creativity+
+        state.stats.charm+
+        state.stats.luck;
+
+    if(chanceValue>80 && chance(50)){
+
+        const gain=random(1000,10000);
+
+        state.followers+=gain;
+        state.fame+=random(2,8);
+        state.money+=random(100000,800000);
+
+        addNews(
+            `${state.name}의 프로젝트가 온라인에서 화제가 되었다.`
+        );
+
+    }else{
+
+        state.followers+=random(10,100);
+
+    }
+}
+
+
+/* =========================================================
+   ROMANCE
+========================================================= */
+
+function romanceAction(){
+
+    let romance=state.relationships.find(
+        r=>r.type==="romance"
+    );
+
+    if(!romance){
+
+        const names=[
+            "도윤","하린","서우","지민","유나","현준","채린","지호"
+        ];
+
+        romance={
+            id:"romance",
+            name:names[random(0,names.length-1)],
+            role:"호감 상대",
+            type:"romance",
+            affinity:random(20,45),
+            trust:20
         };
+
+        state.relationships.push(romance);
+
+        addHistory(
+            `${state.age}세, ${romance.name}이라는 사람을 알게 되었다.`
+        );
+
+    }else{
+
+        romance.affinity+=random(3,10);
+        romance.trust+=random(1,5);
+
+        if(romance.affinity>=70 && romance.role==="호감 상대"){
+
+            romance.role="연인";
+
+            state.happiness+=20;
+
+            addNews(
+                `${state.name}과(와) ${romance.name}이(가) 연애를 시작했다.`
+            );
+
+            addHistory(
+                `${state.age}세, ${romance.name}과 연인이 되었다.`
+            );
+        }
+    }
+}
+
+
+function dateAction(){
+
+    const romance=state.relationships.find(
+        r=>r.type==="romance"
+    );
+
+    if(!romance){
+        romanceAction();
+        return;
     }
 
-
-    if(age <= 12){
-        return {
-            tag:"ELEMENTARY SCHOOL",
-            title:"학교라는 새로운 세계",
-            text:
-                "학교에 들어왔다.\n\n"+
-                "숙제, 시험, 친구, 선생님,\n"+
-                "그리고 쉬는 시간의 엄청난 자유.\n\n"+
-                "여기서 어떤 학생이 될 것인가?",
-            choices:[
-                {
-                    text:"공부를 열심히 한다",
-                    effect:"+지능 +6 +교육",
-                    effectFn:()=>{
-                        changeStat("intelligence",6);
-                        game.education += 6;
-                        changeStat("stress",2);
-                    },
-                    log:"📚 공부에 집중했다."
-                },
-                {
-                    text:"친구를 많이 사귄다",
-                    effect:"+관계 +8 +매력",
-                    effectFn:()=>{
-                        changeStat("relationship",8);
-                        changeStat("charm",4);
-                    },
-                    log:"🤝 친구가 점점 많아졌다."
-                },
-                {
-                    text:"예체능에 빠진다",
-                    effect:"+창의력 +6",
-                    effectFn:()=>{
-                        changeStat("creative",6);
-                        changeStat("happiness",4);
-                    },
-                    log:"🎨 예체능에 재능을 보이기 시작했다."
-                },
-                {
-                    text:"그냥 즐긴다",
-                    effect:"+행복 +10",
-                    effectFn:()=>{
-                        changeStat("happiness",10);
-                        changeStat("stress",-3);
-                    },
-                    log:"😎 학교생활을 즐겼다."
-                }
-            ]
-        };
+    if(state.money<50000){
+        state.stress+=3;
+        return;
     }
 
+    state.money-=50000;
 
-    if(age <= 15){
-        return {
-            tag:"MIDDLE SCHOOL",
-            title:"조금씩 달라지는 나",
-            text:
-                "중학생이 되었다.\n\n"+
-                "친구 관계도 복잡해지고,\n"+
-                "성적도 신경 쓰이기 시작한다.\n\n"+
-                "그리고 어느 순간부터 사람들은\n"+
-                "자신만의 길을 찾기 시작한다.",
-            choices:[
-                {
-                    text:"성적을 올린다",
-                    effect:"+지능 +7 +교육",
-                    effectFn:()=>{
-                        changeStat("intelligence",7);
-                        game.education += 8;
-                        changeStat("stress",4);
-                    },
-                    log:"🧠 성적이 올랐다."
-                },
-                {
-                    text:"운동에 몰두한다",
-                    effect:"+건강 +7",
-                    effectFn:()=>{
-                        changeStat("health",7);
-                        changeStat("stress",-3);
-                    },
-                    log:"💪 체력이 좋아졌다."
-                },
-                {
-                    text:"SNS와 콘텐츠를 시작한다",
-                    effect:"+명성 +5 +창의력",
-                    effectFn:()=>{
-                        changeStat("fame",5);
-                        changeStat("creative",5);
-                    },
-                    log:"📱 콘텐츠를 만들기 시작했다."
-                },
-                {
-                    text:"친구들과 추억을 만든다",
-                    effect:"+행복 +8 +관계",
-                    effectFn:()=>{
-                        changeStat("happiness",8);
-                        changeStat("relationship",7);
-                    },
-                    log:"📸 잊지 못할 추억이 생겼다."
-                }
-            ]
-        };
+    romance.affinity+=random(5,15);
+    romance.trust+=random(3,8);
+    state.happiness+=10;
+
+    if(romance.affinity>95){
+        romance.affinity=95;
+    }
+}
+
+
+/* =========================================================
+   RELATIONSHIP
+========================================================= */
+
+function improveRandomRelation(amount){
+
+    if(state.relationships.length===0){
+
+        if(state.age>=7){
+
+            const friend={
+                id:"friend",
+                name:randomName(),
+                role:"친구",
+                affinity:random(40,65),
+                trust:random(30,60)
+            };
+
+            state.relationships.push(friend);
+
+            addHistory(
+                `${state.age}세, ${friend.name}과 친해졌다.`
+            );
+
+        }
+
+        return;
     }
 
+    const relation=
+        state.relationships[
+            random(0,state.relationships.length-1)
+        ];
 
-    if(age <= 18){
-        return {
-            tag:"HIGH SCHOOL",
-            title:"진로를 결정해야 한다",
-            text:
-                "고등학생이 되었다.\n\n"+
-                "주변에서 끊임없이 묻는다.\n"+
-                "\"그래서 너는 나중에 뭐 할 거야?\"\n\n"+
-                "아직 답을 몰라도 괜찮다.\n"+
-                "하지만 선택은 점점 중요해진다.",
-            choices:[
-                {
-                    text:"명문대 진학을 준비한다",
-                    effect:"+지능 +8 +교육",
-                    effectFn:()=>{
-                        changeStat("intelligence",8);
-                        game.education += 12;
-                        changeStat("stress",7);
-                    },
-                    log:"🎓 대학 입시를 준비했다."
-                },
-                {
-                    text:"예술가를 꿈꾼다",
-                    effect:"+창의력 +8",
-                    effectFn:()=>{
-                        changeStat("creative",8);
-                        changeStat("happiness",5);
-                    },
-                    log:"🎨 자신의 꿈을 좇기 시작했다."
-                },
-                {
-                    text:"연예인이 되어보려 한다",
-                    effect:"+명성 +10",
-                    effectFn:()=>{
-                        changeStat("fame",10);
-                        changeStat("charm",4);
-                        game.celebrity = true;
-                    },
-                    log:"🎤 연예계의 문을 두드렸다."
-                },
-                {
-                    text:"일단 놀 수 있을 때 논다",
-                    effect:"+행복 +12 +관계",
-                    effectFn:()=>{
-                        changeStat("happiness",12);
-                        changeStat("relationship",8);
-                    },
-                    log:"🎉 청춘을 제대로 즐겼다."
-                }
-            ]
-        };
+    relation.affinity+=amount;
+    relation.trust+=Math.floor(amount/2);
+
+    relation.affinity=clamp(relation.affinity,0,100);
+    relation.trust=clamp(relation.trust,0,100);
+}
+
+
+/* =========================================================
+   YEAR END
+========================================================= */
+
+function finishYear(){
+
+    state.actionPoints=3;
+
+    yearlyEconomy();
+
+    yearlyEvent();
+
+    state.age++;
+
+    if(state.age>MAX_AGE){
+
+        finishGame("자연스러운 인생의 끝");
+
+        return;
     }
 
+    state.stress-=random(2,6);
 
-    if(age <= 22){
-        return {
-            tag:"YOUNG ADULT",
-            title:"성인이 되다",
-            text:
-                "성인이 되었다.\n\n"+
-                "이제 아무도 정답을 알려주지 않는다.\n"+
-                "학교 시간표도 없고,\n"+
-                "인생의 선택지는 오히려 더 많아졌다.\n\n"+
-                "첫 번째 진짜 선택이다.",
-            choices:[
-                {
-                    text:"대학에 진학한다",
-                    effect:"+교육 +15 +지능",
-                    effectFn:()=>{
-                        game.education += 15;
-                        changeStat("intelligence",5);
-                        game.degree = true;
-                        changeStat("stress",3);
-                    },
-                    log:"🎓 대학생활을 시작했다."
-                },
-                {
-                    text:"바로 취업한다",
-                    effect:"+돈 +₩500,000",
-                    effectFn:()=>{
-                        game.money += 500000;
-                        game.job = "회사원";
-                        game.education += 3;
-                    },
-                    log:"💼 첫 직장을 얻었다."
-                },
-                {
-                    text:"창업한다",
-                    effect:"+창의력 +명성",
-                    effectFn:()=>{
-                        game.business = true;
-                        changeStat("creative",5);
-                        changeStat("fame",3);
-                        game.money -= 50000;
-                    },
-                    log:"🚀 첫 사업을 시작했다."
-                },
-                {
-                    text:"여행하며 나를 찾는다",
-                    effect:"행복 +15",
-                    effectFn:()=>{
-                        game.money -= 100000;
-                        changeStat("happiness",15);
-                        changeStat("stress",-8);
-                    },
-                    log:"✈️ 여행을 떠났다."
-                }
-            ]
-        };
+    state.health-=Math.max(
+        0,
+        Math.floor(state.age/15)-Math.floor(state.stats.health/20)
+    );
+
+    state.happiness=clamp(state.happiness,0,100);
+    state.stress=clamp(state.stress,0,100);
+    state.health=clamp(state.health,0,100);
+
+    addHistory(
+        `${state.age}세가 되었다.`
+    );
+
+    milestoneEvent();
+
+    renderAll();
+
+    saveGame();
+}
+
+
+/* =========================================================
+   ECONOMY
+========================================================= */
+
+function yearlyEconomy(){
+
+    if(state.age>=19 && state.career.salary>0){
+
+        const annual=state.career.salary*10;
+
+        state.money+=annual;
+
+        state.yearStats.income+=annual;
+
+        const living=
+            500000+
+            state.age*15000+
+            state.children.length*180000;
+
+        state.money-=living;
+
+        state.yearStats.spending+=living;
     }
 
+    if(state.assets.investments>0){
 
-    if(age <= 29){
-        return {
-            tag:"CAREER",
-            title:"첫 번째 커리어",
-            text:
-                "20대가 되었다.\n\n"+
-                "주변 친구들은 하나둘 취업하고,\n"+
-                "누군가는 창업하고,\n"+
-                "누군가는 아직 자신의 길을 찾고 있다.\n\n"+
-                "당신의 선택은?",
-            choices:[
-                {
-                    text:"대기업 취업",
-                    effect:"돈 +₩2,000,000",
-                    effectFn:()=>{
-                        game.job = "대기업 직장인";
-                        game.money += 2000000;
-                        game.education += 4;
-                        changeStat("fame",3);
-                        changeStat("stress",8);
-                    },
-                    log:"🏢 대기업에 취업했다."
-                },
-                {
-                    text:"전문직 준비",
-                    effect:"지능 +7",
-                    effectFn:()=>{
-                        changeStat("intelligence",7);
-                        game.education += 10;
-                        changeStat("stress",6);
-                    },
-                    log:"📖 전문직 시험을 준비했다."
-                },
-                {
-                    text:"콘텐츠 크리에이터",
-                    effect:"명성 +15",
-                    effectFn:()=>{
-                        game.job = "크리에이터";
-                        changeStat("fame",15);
-                        changeStat("creative",6);
-                        game.money += game.fame * 10000;
-                    },
-                    log:"📹 콘텐츠가 조금씩 유명해졌다."
-                },
-                {
-                    text:"사업을 키운다",
-                    effect:"사업 성장",
-                    effectFn:()=>{
-                        game.business = true;
-                        game.money += 1000000 + game.creative*10000;
-                        changeStat("fame",5);
-                    },
-                    log:"📈 사업이 성장하기 시작했다."
-                }
-            ]
-        };
+        const change=
+            Math.floor(
+                state.assets.investments*
+                ((random(-12,18))/100)
+            );
+
+        state.assets.investments+=change;
+
+        if(state.assets.investments<0){
+            state.assets.investments=0;
+        }
     }
 
+    state.yearStats.income=0;
+    state.yearStats.spending=0;
+}
 
-    if(age <= 39){
-        return {
-            tag:"ADULT",
-            title:"인생의 전성기가 시작된다",
-            text:
-                "30대.\n\n"+
-                "이제는 단순히 꿈만 꾸는 나이가 아니다.\n"+
-                "직접 무언가를 만들고,\n"+
-                "사람을 만나고,\n"+
-                "돈을 벌고,\n"+
-                "때로는 실패해야 한다.\n\n"+
-                "이번 선택은 앞으로의 인생에 큰 영향을 준다.",
-            choices:[
+
+/* =========================================================
+   MILESTONE EVENTS
+========================================================= */
+
+function milestoneEvent(){
+
+    const age=state.age;
+
+    if(age===3){
+        setEvent(
+            "유아기",
+            "세상을 발견하다",
+            `${state.name}은(는) 이제 세상을 조금씩 이해하기 시작합니다.`,
+            [
                 {
-                    text:"커리어에 올인한다",
-                    effect:"돈 +₩3,000,000",
-                    effectFn:()=>{
-                        game.money += 3000000 + game.intelligence*20000;
-                        changeStat("fame",4);
-                        changeStat("stress",8);
-                    },
-                    log:"💼 커리어에 모든 것을 투자했다."
+                    title:"🔍 모든 것을 관찰한다",
+                    desc:"지능 +3",
+                    effect:()=>{
+                        state.stats.intelligence+=3;
+                    }
                 },
                 {
-                    text:"사랑을 찾는다",
-                    effect:"관계 +15 행복 +10",
-                    effectFn:()=>{
-                        changeStat("relationship",15);
-                        changeStat("happiness",10);
-                    },
-                    log:"💕 사랑하는 사람을 만날 가능성이 높아졌다."
+                    title:"🎨 상상 속 세계에 빠진다",
+                    desc:"창의력 +4",
+                    effect:()=>{
+                        state.stats.creativity+=4;
+                    }
+                }
+            ]
+        );
+    }
+
+    if(age===7){
+
+        ensureFriend();
+
+        setEvent(
+            "학교",
+            "첫 등교",
+            `처음으로 학교라는 곳에 들어왔습니다.
+
+수많은 아이들이 있고,
+새로운 선생님도 있습니다.
+
+이곳에서 당신은 어떤 학생이 될까요?`,
+            [
+                {
+                    title:"📚 공부 잘하는 학생",
+                    desc:"교육 +10",
+                    effect:()=>{
+                        state.education+=10;
+                        state.stats.intelligence+=3;
+                    }
                 },
                 {
-                    text:"집을 산다",
-                    effect:"집 +1 돈 -₩5,000,000",
-                    effectFn:()=>{
-                        if(game.money >= 5000000){
-                            game.money -= 5000000;
-                            game.house++;
-                            changeStat("happiness",7);
-                            addLog("🏠 내 집이 생겼다!");
-                        }else{
-                            changeStat("stress",5);
-                            addLog("🏠 집을 사고 싶었지만 돈이 부족했다.");
+                    title:"😎 친구 많은 학생",
+                    desc:"매력 +3 · 인간관계",
+                    effect:()=>{
+                        state.stats.charm+=3;
+                        improveRandomRelation(15);
+                    }
+                },
+                {
+                    title:"🎨 특이한 학생",
+                    desc:"창의력 +5",
+                    effect:()=>{
+                        state.stats.creativity+=5;
+                    }
+                }
+            ]
+        );
+    }
+
+    if(age===13){
+
+        ensureRival();
+
+        setEvent(
+            "중학교",
+            "새로운 경쟁자",
+            `${state.name}은(는) 자신과 비슷한 능력을 가진 학생을 발견했습니다.
+
+그 아이는 이상하게도 당신이 하는 것마다 한 발 먼저 움직입니다.
+
+이 사람은 앞으로 당신 인생에 계속 등장할 수도 있습니다.`,
+            [
+                {
+                    title:"🔥 경쟁한다",
+                    desc:"지능 +3 · 스트레스 +5",
+                    effect:()=>{
+                        state.stats.intelligence+=3;
+                        state.stress+=5;
+                    }
+                },
+                {
+                    title:"🤝 친구가 되어본다",
+                    desc:"라이벌 관계 변화",
+                    effect:()=>{
+                        const r=state.relationships.find(x=>x.role==="라이벌");
+                        if(r){
+                            r.affinity+=15;
+                            r.trust+=10;
                         }
-                    },
-                    log:"🏠 내 집 마련을 시도했다."
+                    }
                 },
                 {
-                    text:"세계여행을 떠난다",
-                    effect:"행복 +15",
-                    effectFn:()=>{
-                        game.money = Math.max(0,game.money-1000000);
-                        changeStat("happiness",15);
-                        changeStat("stress",-10);
-                    },
-                    log:"🌍 세계 곳곳을 여행했다."
+                    title:"😌 신경 쓰지 않는다",
+                    desc:"스트레스 감소",
+                    effect:()=>{
+                        state.stress-=10;
+                    }
                 }
             ]
-        };
+        );
     }
 
+    if(age===16){
 
-    if(age <= 49){
-        return {
-            tag:"PRIME",
-            title:"가장 빛나는 시기",
-            text:
-                "40대.\n\n"+
-                "지금까지의 선택이 결과로 나타나기 시작한다.\n\n"+
-                "당신은 이미 꽤 많은 경험을 쌓았다.\n"+
-                "하지만 아직 새로운 인생을 시작하기에도 늦지 않았다.",
-            choices:[
+        setEvent(
+            "고등학교",
+            "진로를 생각해야 하는 순간",
+            `주변에서 계속 묻습니다.
+
+"너 나중에 뭐 할 거야?"
+
+하지만 아직 아무것도 정해지지 않았습니다.`,
+            [
                 {
-                    text:"사업을 확장한다",
-                    effect:"큰돈",
-                    effectFn:()=>{
-                        if(game.business){
-                            game.money += 5000000 + game.creative*30000;
-                            changeStat("fame",8);
-                        }else{
-                            game.business = true;
-                            game.money -= 500000;
-                        }
-                    },
-                    log:"🏢 사업 규모를 확장했다."
+                    title:"📚 명문대 진학을 목표로 한다",
+                    desc:"교육 +15 · 스트레스 +8",
+                    effect:()=>{
+                        state.education+=15;
+                        state.stress+=8;
+                    }
                 },
                 {
-                    text:"가족과 시간을 보낸다",
-                    effect:"행복 +15 관계 +10",
-                    effectFn:()=>{
-                        changeStat("happiness",15);
-                        changeStat("relationship",10);
-                        changeStat("stress",-8);
-                    },
-                    log:"👨‍👩‍👧 가족과 소중한 시간을 보냈다."
+                    title:"🎤 하고 싶은 걸 해본다",
+                    desc:"창의력 +5 · 매력 +3",
+                    effect:()=>{
+                        state.stats.creativity+=5;
+                        state.stats.charm+=3;
+                    }
                 },
                 {
-                    text:"새로운 공부를 시작한다",
-                    effect:"지능 +6 교육 +10",
-                    effectFn:()=>{
-                        changeStat("intelligence",6);
-                        game.education += 10;
-                    },
-                    log:"📚 새로운 분야를 공부했다."
-                },
-                {
-                    text:"유명해진다",
-                    effect:"명성 +20",
-                    effectFn:()=>{
-                        changeStat("fame",20);
-                        changeStat("happiness",5);
-                    },
-                    log:"⭐ 이름이 널리 알려졌다."
+                    title:"💰 돈을 빨리 벌고 싶다",
+                    desc:"현실 감각 상승",
+                    effect:()=>{
+                        state.hidden.risk+=8;
+                    }
                 }
             ]
-        };
+        );
     }
 
+    if(age===18){
 
-    if(age <= 59){
-        return {
-            tag:"MIDLIFE",
-            title:"인생의 두 번째 챕터",
-            text:
-                "50대.\n\n"+
-                "예전보다 시간이 빠르게 흐르는 것 같다.\n\n"+
-                "그래도 아직 하고 싶은 것은 많다.\n"+
-                "지금부터 무엇을 선택하느냐가\n"+
-                "노후의 모습을 바꾼다.",
-            choices:[
+        universityEvent();
+    }
+
+    if(age===25){
+
+        setEvent(
+            "사회생활",
+            "첫 번째 큰 선택",
+            `이제부터는 학교가 아니라 현실이 당신에게 선택을 요구합니다.
+
+안정적인 직업을 선택할 수도 있고,
+위험하지만 큰 꿈을 선택할 수도 있습니다.`,
+            [
                 {
-                    text:"재산을 지킨다",
-                    effect:"돈 증가",
-                    effectFn:()=>{
-                        game.money += 2000000;
-                        changeStat("stress",-3);
-                    },
-                    log:"💰 안정적인 재산 관리를 했다."
+                    title:"🏢 안정적인 직장",
+                    desc:"안정성 상승",
+                    effect:()=>{
+                        state.happiness+=5;
+                    }
                 },
                 {
-                    text:"봉사활동을 한다",
-                    effect:"행복 +12 관계 +8",
-                    effectFn:()=>{
-                        changeStat("happiness",12);
-                        changeStat("relationship",8);
-                    },
-                    log:"🤝 다른 사람들을 돕기 시작했다."
+                    title:"🚀 내 것을 시작한다",
+                    desc:"창업 가능성 상승",
+                    effect:()=>{
+                        state.flags.entrepreneur=true;
+                        state.hidden.risk+=15;
+                    }
                 },
                 {
-                    text:"취미를 시작한다",
-                    effect:"행복 +15 창의력 +5",
-                    effectFn:()=>{
-                        changeStat("happiness",15);
-                        changeStat("creative",5);
-                    },
-                    log:"🎸 새로운 취미가 생겼다."
-                },
-                {
-                    text:"다시 사업한다",
-                    effect:"큰돈 또는 큰 스트레스",
-                    effectFn:()=>{
-                        if(game.luck + game.intelligence > 100){
-                            game.money += 7000000;
-                            addLog("🍀 사업이 대박났다!");
-                        }else{
-                            game.money = Math.max(0,game.money-1500000);
-                            changeStat("stress",12);
-                            addLog("📉 사업에서 손실을 봤다.");
-                        }
-                    },
-                    log:"📊 새로운 사업에 도전했다."
+                    title:"🌍 완전히 다른 삶을 산다",
+                    desc:"운명 변화",
+                    effect:()=>{
+                        state.flags.freeSpirit=true;
+                        state.happiness+=10;
+                    }
                 }
             ]
-        };
+        );
     }
 
+    if(age===40){
 
-    if(age <= 69){
-        return {
-            tag:"LATER LIFE",
-            title:"천천히 돌아보는 인생",
-            text:
-                "60대.\n\n"+
-                "이제는 무엇을 얼마나 가졌는지보다\n"+
-                "어떤 기억을 남겼는지가 중요해진다.\n\n"+
-                "당신은 지금까지의 인생을 어떻게 바라보고 있을까?",
-            choices:[
+        midlifeEvent();
+    }
+
+    if(age===60){
+
+        retirementEvent();
+    }
+}
+
+
+/* =========================================================
+   FRIEND / RIVAL
+========================================================= */
+
+function ensureFriend(){
+
+    if(!state.relationships.some(r=>r.role==="친구")){
+
+        state.relationships.push({
+            id:"friend",
+            name:randomName(),
+            role:"친구",
+            affinity:65,
+            trust:60
+        });
+
+    }
+}
+
+
+function ensureRival(){
+
+    state.relationships.push({
+        id:"rival",
+        name:randomName(),
+        role:"라이벌",
+        affinity:35,
+        trust:20
+    });
+}
+
+
+/* =========================================================
+   UNIVERSITY
+========================================================= */
+
+function universityEvent(){
+
+    const score=
+        state.education+
+        state.stats.intelligence*2;
+
+    if(score>=100){
+
+        setEvent(
+            "입시 결과",
+            "합격 통지서",
+            `긴장되는 순간.
+
+화면에 결과가 나타났습니다.
+
+당신은 좋은 결과를 얻었습니다.`,
+            [
                 {
-                    text:"여행을 다닌다",
-                    effect:"행복 +15",
-                    effectFn:()=>{
-                        game.money = Math.max(0,game.money-500000);
-                        changeStat("happiness",15);
-                    },
-                    log:"✈️ 다시 여행을 시작했다."
+                    title:"🎓 진학한다",
+                    desc:"교육 +20",
+                    effect:()=>{
+                        state.education+=20;
+                        state.happiness+=10;
+                    }
                 },
                 {
-                    text:"가족과 시간을 보낸다",
-                    effect:"관계 +15 행복 +10",
-                    effectFn:()=>{
-                        changeStat("relationship",15);
-                        changeStat("happiness",10);
-                    },
-                    log:"👨‍👩‍👧 가족과 시간을 보냈다."
-                },
-                {
-                    text:"내 이야기를 책으로 남긴다",
-                    effect:"창의력 +10 명성 +10",
-                    effectFn:()=>{
-                        changeStat("creative",10);
-                        changeStat("fame",10);
-                    },
-                    log:"📖 자신의 이야기를 기록했다."
-                },
-                {
-                    text:"조용히 살아간다",
-                    effect:"스트레스 감소 행복 증가",
-                    effectFn:()=>{
-                        changeStat("stress",-15);
-                        changeStat("happiness",10);
-                    },
-                    log:"🌿 평온한 삶을 선택했다."
+                    title:"💼 바로 사회로 나간다",
+                    desc:"경험 +10",
+                    effect:()=>{
+                        state.career.experience+=10;
+                        state.money+=500000;
+                    }
                 }
             ]
-        };
+        );
+
+    }else{
+
+        setEvent(
+            "입시 결과",
+            "예상과 다른 결과",
+            `원했던 결과와는 조금 달랐습니다.
+
+하지만 인생은 여기서 끝나지 않습니다.`,
+            [
+                {
+                    title:"🔥 다시 도전한다",
+                    desc:"교육 +10 · 스트레스 +5",
+                    effect:()=>{
+                        state.education+=10;
+                        state.stress+=5;
+                    }
+                },
+                {
+                    title:"🛤️ 다른 길을 선택한다",
+                    desc:"행복 +5",
+                    effect:()=>{
+                        state.happiness+=5;
+                    }
+                }
+            ]
+        );
     }
+}
 
 
-    return {
-        tag:"RETIREMENT",
-        title:"인생의 마지막 페이지",
-        text:
-            "70대가 되었다.\n\n"+
-            "수많은 선택과 우연이 모여\n"+
-            "지금의 당신을 만들었다.\n\n"+
-            "남은 시간 동안 무엇을 할 것인가?",
-        choices:[
+/* =========================================================
+   MIDLIFE
+========================================================= */
+
+function midlifeEvent(){
+
+    setEvent(
+        "인생의 전환점",
+        "마흔 살",
+        `어느 순간 문득 깨닫습니다.
+
+"내 인생은 지금 어디쯤 와 있을까?"
+
+지금까지의 선택을 돌아보게 됩니다.`,
+        [
             {
-                text:"가족들과 함께한다",
-                effect:"행복 +20",
-                effectFn:()=>{
-                    changeStat("happiness",20);
-                    changeStat("relationship",15);
-                },
-                log:"❤️ 가족들과 마지막까지 함께했다."
+                title:"🚀 더 크게 도전한다",
+                desc:"리스크 +15 · 행복 +10",
+                effect:()=>{
+                    state.hidden.risk+=15;
+                    state.happiness+=10;
+                }
             },
             {
-                text:"평생의 꿈을 완성한다",
-                effect:"창의력 +10",
-                effectFn:()=>{
-                    changeStat("creative",10);
-                    changeStat("happiness",15);
-                },
-                log:"🌟 평생 꿈꿔온 일을 완성했다."
+                title:"🏡 가족과 시간을 보낸다",
+                desc:"행복 +15",
+                effect:()=>{
+                    state.happiness+=15;
+                    improveRandomRelation(20);
+                }
             },
             {
-                text:"사회에 모든 것을 돌려준다",
-                effect:"관계 +20 명성 +15",
-                effectFn:()=>{
-                    changeStat("relationship",20);
-                    changeStat("fame",15);
-                    game.money = Math.floor(game.money*0.5);
-                },
-                log:"🤝 가진 것을 사회에 나누었다."
-            },
-            {
-                text:"그냥 행복하게 산다",
-                effect:"행복 +25",
-                effectFn:()=>{
-                    changeStat("happiness",25);
-                    changeStat("stress",-20);
-                },
-                log:"😊 마지막까지 행복을 선택했다."
+                title:"💰 재산을 지키는 데 집중한다",
+                desc:"돈 +500만원",
+                effect:()=>{
+                    state.money+=5000000;
+                }
             }
         ]
+    );
+}
+
+
+/* =========================================================
+   RETIREMENT
+========================================================= */
+
+function retirementEvent(){
+
+    setEvent(
+        "은퇴",
+        "새로운 장이 열린다",
+        `긴 직장 생활을 지나 이제 선택할 수 있는 시간이 늘어났습니다.
+
+하지만 은퇴는 끝이 아닙니다.`,
+        [
+            {
+                title:"🌍 여행하며 산다",
+                desc:"행복 +20",
+                effect:()=>{
+                    state.happiness+=20;
+                }
+            },
+            {
+                title:"👨‍👩‍👧 가족과 시간을 보낸다",
+                desc:"관계 +20",
+                effect:()=>{
+                    improveRandomRelation(20);
+                    state.happiness+=10;
+                }
+            },
+            {
+                title:"📖 내 이야기를 남긴다",
+                desc:"창의력 +5 · 명성 상승",
+                effect:()=>{
+                    state.stats.creativity+=5;
+                    state.fame+=10;
+                }
+            }
+        ]
+    );
+}
+
+
+/* =========================================================
+   YEARLY RANDOM EVENTS
+========================================================= */
+
+function yearlyEvent(){
+
+    if(state.age<5) return;
+
+    if(chance(30)){
+
+        const events=[
+            {
+                title:"갑작스러운 행운",
+                text:"우연히 좋은 기회를 얻었습니다.",
+                effect:()=>{
+                    state.money+=random(50000,1000000);
+                    state.luck+=1;
+                }
+            },
+            {
+                title:"뜻밖의 인간관계",
+                text:"새로운 사람이 인생에 들어왔습니다.",
+                effect:()=>{
+                    state.charm+=1;
+                    improveRandomRelation(12);
+                }
+            },
+            {
+                title:"번아웃",
+                text:"너무 많은 일을 한 탓에 지쳤습니다.",
+                effect:()=>{
+                    state.stress+=15;
+                    state.happiness-=5;
+                }
+            },
+            {
+                title:"작은 성공",
+                text:"최근의 노력이 좋은 결과를 만들었습니다.",
+                effect:()=>{
+                    state.happiness+=8;
+                    state.fame+=1;
+                }
+            }
+        ];
+
+        const e=events[random(0,events.length-1)];
+
+        addNews(`${state.age}세: ${e.title}`);
+
+        setEvent(
+            "랜덤 이벤트",
+            e.title,
+            e.text,
+            [
+                {
+                    title:"받아들인다",
+                    desc:"현재 상황을 경험한다.",
+                    effect:e.effect
+                }
+            ]
+        );
+    }
+}
+
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+    if(!state) return;
+
+    document.getElementById("sideName").textContent=state.name;
+    document.getElementById("sideAge").textContent=
+        `${state.age}세 · ${getStage(state.age)}`;
+
+    document.getElementById("yearTitle").textContent=
+        `${state.age}세`;
+
+    document.getElementById("stageTitle").textContent=
+        getStage(state.age);
+
+    const percent=Math.round(
+        (state.age/MAX_AGE)*100
+    );
+
+    document.getElementById("lifePercent").textContent=
+        percent+"%";
+
+    document.getElementById("lifeFill").style.width=
+        percent+"%";
+
+    document.getElementById("actionCount").textContent=
+        `${state.actionPoints} / 3`;
+
+    renderStats();
+    renderActions();
+    renderNews();
+    renderRelations();
+    renderCareer();
+    renderAssets();
+    renderTimeline();
+    renderEvent();
+}
+
+
+function renderStats(){
+
+    const box=document.getElementById("statList");
+
+    box.innerHTML=`
+
+        <div class="statRow">
+            <span>💰 돈</span>
+            <b>${money(state.money)}</b>
+        </div>
+
+        <div class="statRow">
+            <span>❤️ 건강</span>
+            <b>${state.health}</b>
+        </div>
+
+        <div class="statRow">
+            <span>😊 행복</span>
+            <b>${state.happiness}</b>
+        </div>
+
+        <div class="statRow">
+            <span>😵 스트레스</span>
+            <b>${state.stress}</b>
+        </div>
+
+        <div class="statRow">
+            <span>⭐ 명성</span>
+            <b>${state.fame}</b>
+        </div>
+
+        <div class="statRow">
+            <span>📚 교육</span>
+            <b>${state.education}</b>
+        </div>
+
+        <div class="statRow">
+            <span>📱 팔로워</span>
+            <b>${state.followers.toLocaleString()}</b>
+        </div>
+
+        <div class="statRow">
+            <span>🧠 성격</span>
+            <b>${state.personality}</b>
+        </div>
+
+        <br>
+
+        ${Object.entries(statNames).map(([key,name])=>`
+            <div class="statRow">
+                <span>${name}</span>
+                <b>${state.stats[key]}</b>
+            </div>
+        `).join("")}
+    `;
+}
+
+
+function renderEvent(){
+    if(!state.currentEvent){
+        document.getElementById("eventTag").textContent="LIFE";
+        document.getElementById("eventTitle").textContent=
+            "무엇을 할까?";
+        document.getElementById("eventText").textContent=
+            "오른쪽 행동을 선택해 이번 해의 인생을 만들어보세요.";
+        document.getElementById("choiceGrid").innerHTML="";
+        return;
+    }
+
+    document.getElementById("eventTag").textContent=
+        state.currentEvent.tag;
+
+    document.getElementById("eventTitle").textContent=
+        state.currentEvent.title;
+
+    document.getElementById("eventText").textContent=
+        state.currentEvent.text;
+
+    const box=document.getElementById("choiceGrid");
+    box.innerHTML="";
+
+    state.currentEvent.choices.forEach((choice,index)=>{
+
+        const btn=document.createElement("button");
+
+        btn.className="choiceBtn";
+
+        btn.innerHTML=`
+            <strong>${index+1}. ${choice.title}</strong>
+            <small>${choice.desc||""}</small>
+        `;
+
+        btn.onclick=()=>{
+            executeChoice(choice);
+        };
+
+        box.appendChild(btn);
+    });
+}
+
+
+function renderNews(){
+
+    const box=document.getElementById("newsList");
+
+    if(state.news.length===0){
+        box.innerHTML="<div style='color:#747e8e'>아직 뉴스가 없습니다.</div>";
+        return;
+    }
+
+    box.innerHTML=state.news.slice(0,12).map(n=>`
+        <div class="newsItem">
+            <small>${n.age}세</small>
+            <div>${n.text}</div>
+        </div>
+    `).join("");
+}
+
+
+/* =========================================================
+   RELATIONS
+========================================================= */
+
+function renderRelations(){
+
+    const box=document.getElementById("npcGrid");
+
+    if(state.relationships.length===0){
+
+        box.innerHTML=`
+            <div style="color:#7f8999">
+                아직 특별한 인간관계가 없습니다.
+                사람들과 상호작용하면 새로운 인연이 생깁니다.
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML=state.relationships.map(r=>`
+
+        <div class="npcCard">
+
+            <div class="npcHeader">
+
+                <div>
+                    <div class="npcName">${r.name}</div>
+                    <div class="npcRole">${r.role}</div>
+                </div>
+
+                <div>❤️ ${r.affinity}</div>
+
+            </div>
+
+            <div style="font-size:12px;color:#737d8d;margin-top:10px">
+                신뢰도 ${r.trust}
+            </div>
+
+            <div class="relationshipBar">
+                <div
+                    class="relationshipFill"
+                    style="width:${r.affinity}%"
+                ></div>
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+
+/* =========================================================
+   CAREER
+========================================================= */
+
+function renderCareer(){
+
+    const c=state.career;
+
+    document.getElementById("careerContent").innerHTML=`
+
+        <div class="statRow">
+            <span>현재 직업</span>
+            <b>${c.job}</b>
+        </div>
+
+        <div class="statRow">
+            <span>분야</span>
+            <b>${c.field||"없음"}</b>
+        </div>
+
+        <div class="statRow">
+            <span>직급</span>
+            <b>${c.level}</b>
+        </div>
+
+        <div class="statRow">
+            <span>월급</span>
+            <b>${money(c.salary)}</b>
+        </div>
+
+        <div class="statRow">
+            <span>경력</span>
+            <b>${c.experience}년</b>
+        </div>
+
+        <br>
+
+        <p style="color:#929baa;line-height:1.7">
+            커리어는 단순히 돈을 버는 시스템이 아닙니다.
+            경험, 스트레스, 명성, 인간관계, 행복에 모두 영향을 줍니다.
+        </p>
+
+    `;
+}
+
+
+/* =========================================================
+   ASSETS
+========================================================= */
+
+function renderAssets(){
+
+    document.getElementById("assetContent").innerHTML=`
+
+        <div class="statRow">
+            <span>현금</span>
+            <b>${money(state.money)}</b>
+        </div>
+
+        <div class="statRow">
+            <span>투자금</span>
+            <b>${money(state.assets.investments)}</b>
+        </div>
+
+        <div class="statRow">
+            <span>주거</span>
+            <b>${state.assets.house}</b>
+        </div>
+
+        <div class="statRow">
+            <span>차량</span>
+            <b>${state.assets.car}</b>
+        </div>
+
+        <div class="statRow">
+            <span>자녀</span>
+            <b>${state.children.length}명</b>
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+function renderTimeline(){
+
+    const box=document.getElementById("timeline");
+
+    box.innerHTML=state.history.map(h=>`
+
+        <div class="timelineItem">
+
+            <div class="timelineYear">
+                ${h.age}세
+            </div>
+
+            <div class="timelineText">
+                ${h.text}
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(title,text,choices){
+
+    const modal=document.getElementById("modal");
+
+    document.getElementById("modalTitle").textContent=title;
+    document.getElementById("modalText").textContent=text;
+
+    const box=document.getElementById("modalChoices");
+
+    box.innerHTML="";
+
+    choices.forEach(choice=>{
+
+        const btn=document.createElement("button");
+
+        btn.className="choiceBtn";
+
+        btn.innerHTML=`
+            <strong>${choice.title}</strong>
+            <small>${choice.desc||""}</small>
+        `;
+
+        btn.onclick=()=>{
+
+            if(choice.effect){
+                choice.effect();
+            }
+
+            closeModal();
+            renderAll();
+            saveGame();
+        };
+
+        box.appendChild(btn);
+    });
+
+    modal.style.display="flex";
+}
+
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+document.getElementById("closeModal")
+    .addEventListener("click",closeModal);
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+document.querySelectorAll(".sideNav button")
+.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        document.querySelectorAll(".sideNav button")
+        .forEach(x=>x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        const tab=btn.dataset.tab;
+
+        ["life","relations","career","assets","record"]
+        .forEach(id=>{
+            document.getElementById(id+"Tab").style.display=
+                id===tab?"block":"none";
+        });
+    });
+
+});
+
+
+/* =========================================================
+   SAVE / LOAD
+========================================================= */
+
+function saveGame(){
+
+    if(!state) return;
+
+    localStorage.setItem(
+        "life_rpg_save",
+        JSON.stringify(state)
+    );
+}
+
+document.getElementById("saveBtn")
+.addEventListener("click",()=>{
+
+    saveGame();
+
+    alert("인생이 저장되었습니다 💾");
+});
+
+
+document.getElementById("loadBtn")
+.addEventListener("click",()=>{
+
+    const saved=localStorage.getItem("life_rpg_save");
+
+    if(!saved){
+        alert("저장된 인생이 없습니다.");
+        return;
+    }
+
+    try{
+
+        state=JSON.parse(saved);
+
+        document.getElementById("startScreen").style.display="none";
+        document.getElementById("allocationScreen").style.display="none";
+        document.getElementById("endingScreen").style.display="none";
+        document.getElementById("gameScreen").style.display="block";
+
+        renderAll();
+
+    }catch(e){
+
+        alert("저장 데이터를 불러오는 데 실패했습니다.");
+
+    }
+});
+
+
+document.getElementById("newBtn")
+.addEventListener("click",()=>{
+
+    if(confirm("현재 인생을 끝내고 새로운 인생을 시작할까요?")){
+
+        localStorage.removeItem("life_rpg_save");
+
+        location.reload();
+    }
+});
+
+
+/* =========================================================
+   ENDINGS
+========================================================= */
+
+function getEnding(){
+
+    const moneyValue=
+        state.money+
+        state.assets.investments;
+
+    const avg=
+        Object.values(state.stats)
+        .reduce((a,b)=>a+b,0)/6;
+
+    const relations=
+        state.relationships
+        .filter(r=>r.affinity>=70).length;
+
+    if(moneyValue>=10000000000){
+        return {
+            title:"💎 전설적인 자산가",
+            sub:"돈이 돈을 부르는 인생",
+            story:`수많은 선택 끝에 엄청난 재산을 만들어냈습니다.
+
+하지만 당신의 인생은 단순히 돈만으로 설명할 수 없습니다.
+
+수많은 위험을 감수했고,
+몇 번이나 실패했으며,
+결국 자신만의 길을 만들었습니다.`
+        };
+    }
+
+    if(state.followers>=1000000 && state.fame>=50){
+        return {
+            title:"🌟 국민 스타",
+            sub:"당신의 이름이 세상에 알려졌다.",
+            story:`당신이 만드는 모든 것이 사람들의 관심을 받았습니다.
+
+당신은 수많은 사람들에게 기억되는 사람이 되었습니다.`
+        };
+    }
+
+    if(state.career.field==="IT" && state.career.level>=5){
+        return {
+            title:"💻 업계의 전설",
+            sub:"코드로 자신의 길을 만들었다.",
+            story:`작은 프로젝트에서 시작했던 일이
+결국 하나의 커리어가 되었습니다.
+
+당신은 자신의 분야에서 이름을 남겼습니다.`
+        };
+    }
+
+    if(state.children.length>=2 && state.happiness>=75){
+        return {
+            title:"🏡 따뜻한 가족의 삶",
+            sub:"가장 가까운 사람들과 함께한 인생",
+            story:`엄청난 부나 명성이 있었던 것은 아니지만,
+당신에게는 언제나 돌아갈 곳이 있었습니다.
+
+그리고 그것만으로 충분했습니다.`
+        };
+    }
+
+    if(state.career.level>=7 && state.happiness<40){
+        return {
+            title:"🏢 성공했지만 외로웠던 사람",
+            sub:"커리어는 완벽했지만 삶은 복잡했다.",
+            story:`당신은 사회적으로 상당한 성공을 거두었습니다.
+
+하지만 어느 순간부터
+성공과 행복이 같은 것이 아니라는 사실을 알게 되었습니다.`
+        };
+    }
+
+    if(avg>=55 && state.happiness>=75){
+        return {
+            title:"🌿 균형 잡힌 인생",
+            sub:"특별하지 않아서 더 특별했던 삶",
+            story:`엄청난 사건만으로 가득한 인생은 아니었습니다.
+
+하지만 당신은 자신에게 중요한 것들을 놓치지 않았습니다.
+
+결국 인생의 만족도는
+남들이 정해주는 것이 아니라는 것을 알게 되었습니다.`
+        };
+    }
+
+    if(state.stats.creativity>=60 && state.fame>=20){
+        return {
+            title:"🎨 창작자로 남다",
+            sub:"상상했던 것을 현실로 만들었다.",
+            story:`머릿속에만 존재했던 수많은 아이디어를
+당신은 세상 밖으로 꺼냈습니다.
+
+당신이 만든 것들은 오랫동안 사람들에게 남았습니다.`
+        };
+    }
+
+    if(state.health>=80 && state.age>=70){
+        return {
+            title:"🏃 건강한 장수",
+            sub:"끝까지 자신의 몸과 함께한 삶",
+            story:`수많은 세월이 흘렀지만
+당신은 자신을 잘 돌보았습니다.
+
+인생의 마지막까지
+자신의 속도로 걸어갈 수 있었습니다.`
+        };
+    }
+
+    if(relations>=4){
+        return {
+            title:"👥 사람을 남긴 인생",
+            sub:"당신에게는 함께 걸었던 사람들이 있었다.",
+            story:`시간이 지나면서 많은 것들이 사라졌지만
+사람과 사람이 나눈 기억은 남았습니다.
+
+당신의 인생에는
+당신을 기억하는 사람들이 있었습니다.`
+        };
+    }
+
+    if(state.stress>=85){
+        return {
+            title:"🌧️ 너무 많은 것을 짊어진 삶",
+            sub:"잠시 멈춰도 괜찮았던 인생",
+            story:`당신은 너무 많은 것을 혼자 해결하려 했습니다.
+
+성공도 있었고 실패도 있었습니다.
+
+하지만 모든 것을 완벽하게 해낼 필요는 없었다는 것을
+마지막에야 깨닫게 되었습니다.`
+        };
+    }
+
+    return {
+        title:"📖 평범하지만 유일한 인생",
+        sub:"누구와도 같지 않은 한 사람의 이야기",
+        story:`당신의 인생은 완벽하지 않았습니다.
+
+실수도 있었고,
+후회도 있었고,
+뜻밖의 행운도 있었습니다.
+
+하지만 그 모든 순간이 모여
+오직 하나뿐인 당신의 인생이 되었습니다.`
     };
 }
 
 
 /* =========================================================
-   ENDINGS
-   ========================================================= */
+   END GAME
+========================================================= */
 
-function getEnding(){
+function finishGame(reason){
 
-    const g = game;
+    state.alive=false;
 
-    /*
-       35개의 엔딩
-       우선순위에 따라 하나가 결정됨.
-    */
+    const ending=getEnding();
 
-    if(g.money >= 50000000 && g.business && g.fame >= 70){
-        return [
-            "👑 전설의 기업가",
-            "작은 선택으로 시작한 인생은 거대한 기업을 만들어냈다. 당신의 이름은 하나의 브랜드가 되었다."
-        ];
-    }
+    document.getElementById("gameScreen").style.display="none";
+    document.getElementById("endingScreen").style.display="block";
 
-    if(g.money >= 100000000){
-        return [
-            "💰 억만장자 인생",
-            "돈을 버는 능력이 남달랐다. 수많은 선택과 기회를 통해 막대한 자산을 만들었다."
-        ];
-    }
+    document.getElementById("endingTitle").textContent=
+        ending.title;
 
-    if(g.celebrity && g.fame >= 80){
-        return [
-            "🌟 국민 스타",
-            "무대와 카메라 앞에서 시작한 도전은 결국 수많은 사람들에게 기억되는 커리어가 되었다."
-        ];
-    }
+    document.getElementById("endingSubtitle").textContent=
+        ending.sub;
 
-    if(g.business && g.money >= 20000000){
-        return [
-            "🚀 성공한 창업가",
-            "아이디어 하나에서 시작한 사업이 커졌고, 결국 자신만의 회사를 만들었다."
-        ];
-    }
+    document.getElementById("endingStory").textContent=
+        ending.story;
 
-    if(g.degree && g.intelligence >= 85 && g.education >= 60){
-        return [
-            "🎓 학문의 거장",
-            "배움을 멈추지 않았던 당신은 지식과 연구로 자신만의 길을 만들어냈다."
-        ];
-    }
+    document.getElementById("endingStats").innerHTML=`
 
-    if(g.beauty >= 90 && g.charm >= 85 && g.fame >= 50){
-        return [
-            "✨ 시대의 아이콘",
-            "사람을 끌어당기는 매력과 강렬한 존재감으로 많은 사람들의 기억에 남았다."
-        ];
-    }
+        <div class="statRow">
+            <span>살아온 시간</span>
+            <b>${state.age}년</b>
+        </div>
 
-    if(g.creative >= 90 && g.fame >= 50){
-        return [
-            "🎨 천재 아티스트",
-            "남들과 다른 시선으로 세상을 바라본 당신은 자신만의 작품 세계를 완성했다."
-        ];
-    }
+        <div class="statRow">
+            <span>최종 재산</span>
+            <b>${money(state.money+state.assets.investments)}</b>
+        </div>
 
-    if(g.happiness >= 90 && g.relationship >= 80){
-        return [
-            "❤️ 행복한 사람",
-            "엄청난 부나 명성보다 사랑하는 사람들과의 시간을 선택했다. 그리고 그것으로 충분했다."
-        ];
-    }
+        <div class="statRow">
+            <span>최종 행복</span>
+            <b>${state.happiness}</b>
+        </div>
 
-    if(g.health >= 90 && g.happiness >= 75){
-        return [
-            "🌿 건강한 장수",
-            "몸과 마음을 잘 돌본 덕분에 오랫동안 활기찬 삶을 살아냈다."
-        ];
-    }
+        <div class="statRow">
+            <span>최종 건강</span>
+            <b>${state.health}</b>
+        </div>
 
-    if(g.relationship >= 90){
-        return [
-            "🤝 모두의 친구",
-            "당신 주변에는 언제나 사람이 있었다. 인생에서 가장 큰 재산은 사람이었다."
-        ];
-    }
+        <div class="statRow">
+            <span>팔로워</span>
+            <b>${state.followers.toLocaleString()}</b>
+        </div>
 
-    if(g.fame >= 90){
-        return [
-            "📸 역사에 남은 유명인",
-            "당신의 이름은 수많은 사람들에게 알려졌고, 오랫동안 기억되었다."
-        ];
-    }
+    `;
 
-    if(g.money >= 30000000 && g.happiness < 50){
-        return [
-            "💸 돈은 많지만...",
-            "경제적으로는 성공했지만 행복을 챙길 시간이 부족했다."
-        ];
-    }
+    document.getElementById("endingAchievements").innerHTML=
+        `
+        <p>🏆 총 기록 ${state.history.length}개</p>
+        <p>👥 주요 관계 ${state.relationships.length}명</p>
+        <p>📰 뉴스 ${state.news.length}개</p>
+        <p>💼 커리어 경력 ${state.career.experience}년</p>
+        `;
 
-    if(g.money >= 10000000 && g.happiness >= 60){
-        return [
-            "🏡 안정적인 성공",
-            "엄청난 부자는 아니지만 충분한 자산과 평온한 삶을 만들어냈다."
-        ];
-    }
+    document.getElementById("endingRelations").innerHTML=
+        state.relationships.length
+        ? state.relationships.map(r=>
+            `<p>❤️ ${r.name} — ${r.role} / ${r.affinity}</p>`
+          ).join("")
+        : "<p>특별한 관계가 없습니다.</p>";
 
-    if(g.job === "대기업 직장인" && g.education >= 50){
-        return [
-            "🏢 커리어 엘리트",
-            "꾸준한 노력으로 안정적인 커리어를 완성했다."
-        ];
-    }
-
-    if(g.job === "크리에이터" && g.fame >= 40){
-        return [
-            "📹 크리에이터 인생",
-            "자신의 생각과 콘텐츠를 세상에 공유하며 살아갔다."
-        ];
-    }
-
-    if(g.business){
-        return [
-            "📊 사업가의 길",
-            "크게 성공하지 않았더라도 자신의 아이디어를 현실로 만들었다."
-        ];
-    }
-
-    if(g.happiness >= 85){
-        return [
-            "😊 행복 최우선",
-            "당신은 남들의 기준보다 자신의 행복을 중요하게 생각했다."
-        ];
-    }
-
-    if(g.stress <= 20 && g.happiness >= 70){
-        return [
-            "🌿 평온한 인생",
-            "크게 흔들리지 않고 자신만의 속도로 인생을 살아갔다."
-        ];
-    }
-
-    if(g.intelligence >= 85){
-        return [
-            "🧠 지적인 삶",
-            "끊임없이 배우고 생각하며 자신만의 답을 찾아갔다."
-        ];
-    }
-
-    if(g.creative >= 80){
-        return [
-            "🎨 창작자의 삶",
-            "무언가를 만들어내는 기쁨을 평생 놓지 않았다."
-        ];
-    }
-
-    if(g.charm >= 85){
-        return [
-            "💖 사랑받는 사람",
-            "어디에 가든 사람들의 마음을 움직이는 힘이 있었다."
-        ];
-    }
-
-    if(g.luck >= 85){
-        return [
-            "🍀 행운의 주인공",
-            "이상하게도 중요한 순간마다 기회가 찾아왔다."
-        ];
-    }
-
-    if(g.health >= 85){
-        return [
-            "💪 강철 체력",
-            "힘든 순간에도 쉽게 무너지지 않는 강한 삶을 살았다."
-        ];
-    }
-
-    if(g.money <= 10000 && g.happiness >= 70){
-        return [
-            "🪙 가난하지만 행복하게",
-            "돈은 많지 않았지만 웃을 이유는 충분했다."
-        ];
-    }
-
-    if(g.relationship <= 20 && g.fame >= 70){
-        return [
-            "🌃 외로운 유명인",
-            "많은 사람들이 당신을 알았지만 정작 가까운 사람은 많지 않았다."
-        ];
-    }
-
-    if(g.stress >= 85){
-        return [
-            "🔥 번아웃",
-            "너무 많은 것을 짊어지고 달려온 끝에 결국 잠시 멈춰야 했다."
-        ];
-    }
-
-    if(g.happiness <= 20){
-        return [
-            "🌧️ 다시 시작하고 싶은 인생",
-            "만족스럽지 않은 순간들이 많았다. 하지만 인생은 언제든 다시 시작할 수 있다."
-        ];
-    }
-
-    if(g.relationship >= 60 && g.money >= 5000000){
-        return [
-            "🏠 평범한 성공",
-            "엄청난 전설은 아니지만 사랑하는 사람들과 안정적인 삶을 만들어냈다."
-        ];
-    }
-
-    if(g.education >= 80){
-        return [
-            "📚 평생 공부한 사람",
-            "학교를 졸업한 뒤에도 배움을 멈추지 않았다."
-        ];
-    }
-
-    if(g.fame >= 60){
-        return [
-            "⭐ 유명한 인생",
-            "당신의 이야기를 아는 사람들이 꽤 많았다."
-        ];
-    }
-
-    if(g.money >= 5000000){
-        return [
-            "💰 경제적 안정",
-            "큰 부자는 아니었지만 생활에 대한 걱정은 많이 줄일 수 있었다."
-        ];
-    }
-
-    if(g.relationship >= 70){
-        return [
-            "👨‍👩‍👧 사람과 함께한 삶",
-            "사람들과 함께 울고 웃으며 살아온 인생이었다."
-        ];
-    }
-
-    if(g.happiness >= 70){
-        return [
-            "☀️ 괜찮은 인생",
-            "완벽하지는 않았지만 돌아봤을 때 웃을 수 있는 순간들이 충분했다."
-        ];
-    }
-
-    if(g.health >= 70){
-        return [
-            "🌱 꾸준한 삶",
-            "큰 변화보다는 꾸준함을 선택했고 그 결과 안정적인 삶을 살았다."
-        ];
-    }
-
-    if(g.luck >= 60){
-        return [
-            "🎲 운이 따라준 인생",
-            "결정적인 순간마다 작은 행운들이 찾아왔다."
-        ];
-    }
-
-    return [
-        "📖 평범하지만 특별한 인생",
-        "엄청난 사건도, 전설적인 성공도 없었다. 하지만 이것은 오직 당신만이 살아온 하나의 인생이었다."
-    ];
+    localStorage.removeItem("life_rpg_save");
 }
 
 
-/* =========================================================
-   ENDING
-   ========================================================= */
-
-function finishLife(){
-
-    game.ending = true;
-
-    const ending = getEnding();
-
-    $("endingTitle").textContent = ending[0];
-    $("endingDesc").textContent = ending[1];
-
-    $("finalAge").textContent =
-        game.age + "세";
-
-    $("finalMoney").textContent =
-        moneyFormat(game.money);
-
-    $("finalHappy").textContent =
-        Math.round(game.happiness);
-
-    $("finalFame").textContent =
-        Math.round(game.fame);
-
-    showScreen("endingScreen");
-
-    saveGame(false);
-}
-
-function renderEnding(){
-    const ending = getEnding();
-
-    $("endingTitle").textContent = ending[0];
-    $("endingDesc").textContent = ending[1];
-
-    $("finalAge").textContent =
-        game.age + "세";
-
-    $("finalMoney").textContent =
-        moneyFormat(game.money);
-
-    $("finalHappy").textContent =
-        Math.round(game.happiness);
-
-    $("finalFame").textContent =
-        Math.round(game.fame);
-
-    showScreen("endingScreen");
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-$("saveBtn").addEventListener("click",()=>{
-    saveGame(true);
-});
-
-$("loadBtn").addEventListener("click",loadGame);
-
-$("restartBtn").addEventListener("click",()=>{
-    if(confirm("현재 인생을 버리고 새로운 인생을 시작할까?")){
-        localStorage.removeItem("lifeRPGSave");
-        location.reload();
-    }
-});
-
-$("endingRestart").addEventListener("click",()=>{
-    localStorage.removeItem("lifeRPGSave");
+document.getElementById("restartBtn")
+.addEventListener("click",()=>{
     location.reload();
 });
 
 
 /* =========================================================
    KEYBOARD
-   ========================================================= */
+========================================================= */
 
 document.addEventListener("keydown",e=>{
 
-    if(!$("gameScreen").classList.contains("active")){
-        return;
-    }
+    if(!state || !state.currentEvent) return;
 
-    if(["1","2","3","4"].includes(e.key)){
+    const n=parseInt(e.key);
 
-        const index = Number(e.key)-1;
+    if(!isNaN(n)){
 
-        if(currentChoices[index]){
-            choose(index);
+        const choice=
+            state.currentEvent.choices[n-1];
+
+        if(choice){
+            executeChoice(choice);
         }
     }
 });
@@ -2584,22 +3308,15 @@ document.addEventListener("keydown",e=>{
 
 /* =========================================================
    AUTO SAVE
-   ========================================================= */
+========================================================= */
 
 setInterval(()=>{
 
-    if(game.name && !game.ending){
-        saveGame(false);
+    if(state && state.alive){
+        saveGame();
     }
 
 },15000);
-
-
-/* =========================================================
-   INIT
-   ========================================================= */
-
-$("nameInput").focus();
 
 </script>
 
